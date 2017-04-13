@@ -95,7 +95,27 @@
             collisionData: [],
             crashData: [] //总的crash 数据
         }
+        //器官种类
+        //$scope.organTypes = ["心","肝","费"];
+        // $scope.getOrganTypes = function () {
+        Http.get(Config.apiPath.transfersOrganType, "").then(function (data) {
 
+            //$scope.openToast('warning', '温馨提示', 'data:'+data);
+            $scope.organTypes = data;
+        }, function (msg) {
+            $scope.organTypes = ['肝', '心', '肺'];
+        });
+        //}
+        //转运目的地
+        Http.get(Config.apiPath.hospitalName, "").then(function (data) {
+
+            //$scope.openToast('warning', '温馨提示', 'data:'+data);
+            $scope.hospitalNames = data;
+        }, function (msg) {
+            $scope.openToast('warning', '温馨提示', '查询医院名称错误');
+        });
+        $scope.data.searchOptions.organType = '0';
+        $scope.data.searchOptions.toHospitalName = '0';
         $scope.toggleBeginDatepicker = function() {
             $scope.data.beginDate.isOpen = !$scope.data.beginDate.isOpen;
         }
@@ -224,8 +244,30 @@
         /* ================= create a new box begin  ================= */
         $scope.pickTransfer = function(transfer) {
             var params = {
+                transferId:transfer.transferid,
                 organSegNumber: transfer.organInfo.segNumber,
-                transferNumber: transfer.transferNumber
+                //transferNumber: transfer.transferNumber,
+                deviceId: transfer.boxInfo.deviceId,
+                segNumber: transfer.organInfo.segNumber,
+                type: transfer.organInfo.type,
+                organCount: transfer.organCount,
+                bloodType: transfer.organInfo.bloodType,
+                bloodSampleCount: transfer.organInfo.bloodSampleCount,
+                organizationSampleCount: transfer.organInfo.organizationSampleCount,
+                getOrganAt: transfer.getOrganAt,
+                transferNumber: transfer.transferNumber,
+                fromCity: transfer.fromCity,
+                h_name: transfer.toHospitalInfo.name,
+                tracfficType: transfer.tracfficType,
+                tracfficNumber: transfer.tracfficNumber,
+                tp_name: transfer.transferPersonInfo.name,
+                phone: transfer.transferPersonInfo.phone,
+                o_name: transfer.opoInfo.name,
+                contactPerson: transfer.opoInfo.contactPerson,
+                contactPhone: transfer.opoInfo.contactPhone,
+                boxPin:transfer.boxPin
+                //organSegNumber:"1354",
+
             };
             // Http.get('/transferInfo', params).then(function(data) {
             //     $scope.data.selectedTransfer = data;
@@ -506,19 +548,34 @@
 
     // modal controller
     function TransferingModalCtrl($scope, Http, params, Common,$interval,$timeout) {
-        $timeout(function () {
-            // 根据传过来的参数 获取记录
-            Http.get('/transferInfo', params.name).then(
-                function (data) {
-                    $scope.info = data;
-                    if ($scope.info) {
-                        $scope.initData();
-                    }
-                    $scope.beginTimer(); // start timer
-                }, function (msg) {
+        var params1 = {
+            organSegNumber: params.name.segNumber,
+            transferNumber: params.name.transferNumber,
+            transferId:params.name.transferId
+        }
+        var transferId =params.name.transferId;
+        //$timeout(function () {
+        // 根据传过来的参数 获取记录
+        Http.get('/transferInfo', params1).then(
+            function (data) {
+                $scope.infoBase = data[0][0];
+                $scope.infoRecord = data[1];
+                if($scope.infoBase.avgHumidity){
+                    $scope.infoBase.avgHumidity = $scope.infoBase.avgHumidity.toFixed(1)
+                }
 
-                });
-        }, 1000);
+                // if ($scope.infoBase) {
+                //  console.log("init  data");
+                $scope.initData();
+                // }
+                // $scope.beginTimer(); // start timer
+            }, function (msg) {
+
+            });
+
+        //  }, 0);
+        //历史的基本信息
+        $scope.transferInfo = params.name;
 
         $scope.data = {
             modalPageIndex: 0,
@@ -542,13 +599,14 @@
             var h = date.getHours();
             var minute = date.getMinutes();
             minute = minute < 10 ? ('0' + minute) : minute;
+
             return m + '-' + d + ' ' + h + ':' + minute;
         };
 
-        // page data
+        // page data 开箱
         $scope.getCrashInfo = function () {
             var p1 = {
-                transferid: $scope.info.transferid,
+                transferid: transferId,
                 type: "open"
             };
 
@@ -561,9 +619,10 @@
 
 
         };
+        //碰撞
         $scope.getCollisionData = function () {
             var p2 = {
-                transferid: $scope.info.transferid,
+                transferid: transferId,
                 type: "collision"
             };
 
@@ -596,54 +655,83 @@
         $scope.initData = function () {
             // $scope.info = Config.baseInfo;
 
-            if ($scope.info.records.length < 1) {
-                return;
-            }
+            // if ($scope.info.records.length < 1) {
+            //     return;
+            // }
 
             $scope.getCrashInfo();
-
+            console.log("two");
             // 湿度
-            var data = [];
+            var dataX = [];
+            var dataY = [];
             var humidity = [];
-            for (var i = 0; i < $scope.info.records.length; i++) {
-                var temp = $scope.info.records[i];
-                if (temp.humidity) {
-                    humidity.push(parseInt(temp.humidity));
-                    data.push({
-                        y: temp.recordAt,
-                        a: temp.humidity
-                    })
+            var count  = $scope.infoBase.count;
+            var lineSize = 40;
+            var sizeInt =1;
+            if(count<=lineSize){
+
+            }else{
+                sizeInt = parseInt(count/lineSize)
+            }
+
+            for (var i = 0; i < $scope.infoRecord.length; i++) {
+                if(i%sizeInt==0) {
+                    var temp = $scope.infoRecord[i];
+                    if (temp.humidity) {
+                        humidity.push(parseInt(temp.humidity));
+
+                        dataX.push(temp.recordAt1);
+                        dataY.push(temp.humidity);
+                    }
                 }
             }
-            $scope.lineModerationData = data;
-            if (humidity.length>0) {
-                $scope.data.humidity.max = Common.arrMaxNum2(humidity) + "%";
-                $scope.data.humidity.min = Common.arrMinNum2(humidity) + "%";
-                $scope.data.humidity.avg = Common.arrAverageNum2(humidity) + "%";
-            }
+            $scope.dataX = dataX;
+            $scope.dataY = dataY;
+
+            // if (humidity.length > 0) {
+            //     $scope.data.humidity.max = Common.arrMaxNum2(humidity) + "%";
+            //     $scope.data.humidity.min = Common.arrMinNum2(humidity) + "%";
+            //     $scope.data.humidity.avg = Common.arrAverageNum2(humidity) + "%";
+            // }
 
             // 温度
-            var tData = [];
+            var tDataX = [];
+            var tDataY = [];
             var temperature = [];
-            for (var j = 0; j < $scope.info.records.length; j++) {
-                var item = $scope.info.records[j];
+            var unTemperature = 0;
+            var temperatureTotal = 0;
+            for (var j = 0; j < $scope.infoRecord.length; j++) {
+                var item = $scope.infoRecord[j];
                 // if (item.temperature && item.avgTemperature) {
-                if (item.temperature) {
+                if(item.temperature<0||item.temperature>6){
                     temperature.push(parseFloat(item.temperature));
-                    // tData.push({y: item.recordAt, a: item.temperature, b: item.avgTemperature})
-                    tData.push({y: item.recordAt, a: item.temperature})
+                    tDataX.push(item.recordAt1);
+                    tDataY.push(item.temperature);
+                    unTemperature++;
+                    temperatureTotal++;
+                }else if(item.temperature&&j%sizeInt==0)
+                {
+                    temperature.push(parseFloat(item.temperature));
+                    tDataX.push(item.recordAt1);
+                    tDataY.push(item.temperature);
+                    temperatureTotal++;
+                    //tData.push({y: item.recordAt, x: item.temperature,lineColor: "red", markerType: "circle" })
                 }
             }
-            $scope.lineData = tData;
-            if (temperature.length>0) {
-                $scope.data.temperature.max = Common.arrMaxNum2(temperature) + "℃";
-                $scope.data.temperature.min = Common.arrMinNum2(temperature) + "℃";
-            }
+            console.log("four");
+            $scope.tDataX = tDataX;
+            $scope.tDataY = tDataY;
+            $scope.unTemperature = unTemperature;
+            $scope.temperatureTotal = temperatureTotal;
+            // if (temperature.length > 0) {
+            //     $scope.data.temperature.max = Common.arrMaxNum2(temperature) + "℃";
+            //     $scope.data.temperature.min = Common.arrMinNum2(temperature) + "℃";
+            // }
 
-            // 开始时间
-            $scope.info.startAtShow = moment($scope.info.startAt).format('MM-DD HH:mm');
-            // 获取器官时间
-            $scope.info.getOrganAtShow = moment($scope.info.getOrganAt).format('YYYY-MM-DD HH:mm');
+            // // 开始时间
+            // $scope.info.startAtShow = moment($scope.info.startAt).format('MM-DD HH:mm');
+            // // 获取器官时间
+            // $scope.info.getOrganAtShow = moment($scope.info.getOrganAt).format('YYYY-MM-DD HH:mm');
 
         };
         // $scope.initData();
@@ -662,11 +750,14 @@
             navigationPosition: 'right',
             scrollingSpeed: 1000
         };
-
+        console.log("five");
         // diff
         var script = document.createElement('script');
         script.src = "http://webapi.amap.com/maps?v=1.3&key=6178b4ecd30a43f661ad2abf15f35595";
         document.head.appendChild(script);
+        var script1 = document.createElement('script');
+        script1.src = "https://img.hcharts.cn/highcharts/highcharts.js";
+        document.head.appendChild(script1);
 
         $scope.modalCheckBasicInfo = function () {
             if ($scope.data.modalPageIndex != 0) {

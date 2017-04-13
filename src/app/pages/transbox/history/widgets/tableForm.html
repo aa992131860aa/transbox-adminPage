@@ -6,7 +6,11 @@
     <input ng-model="data.searchOptions.organSegNumber" type="text" class="form-control" id="exampleInputName2" placeholder="器官段号">
   </div>
   <div class="form-group col-sm-3 col-md-3 col-lg-3" style="margin-bottom: 10px;">
-    <input ng-model="data.searchOptions.organType" type="text" class="form-control" id="exampleInputName2" placeholder="器官种类">
+    <select style="width: 100%"  ng-model="data.searchOptions.organType" type="text" class="form-control" id="exampleInputName2" placeholder="器官种类" >
+      <option style="color: darkgray;" value="0">器官种类</option>
+      <option ng-repeat="cat in organTypes" value={{cat.type}}>{{cat.type}}</option>
+
+    </select>
   </div>
   <div class="form-group col-sm-3 col-md-3 col-lg-3" style="margin-bottom: 10px;">
     <input ng-model="data.searchOptions.transferPersonName" type="text" class="form-control" id="exampleInputName2" placeholder="转运人">
@@ -15,7 +19,11 @@
     <input ng-model="data.searchOptions.fromCity" type="text" class="form-control" id="exampleInputName2" placeholder="转运起始地">
   </div>
   <div class="form-group col-sm-3 col-md-3 col-lg-3" style="margin-bottom: 10px;">
-    <input ng-model="data.searchOptions.toHospitalName" type="text" class="form-control" id="exampleInputName2" placeholder="转运目的地">
+    <select style="width: 100%"  ng-model="data.searchOptions.toHospitalName" type="text" class="form-control" id="exampleInputName2" placeholder="转运目的地" >
+      <option  value="0">转运目的地</option>
+      <option ng-repeat="cat in hospitalNames" value={{cat.name}}>{{cat.name}}</option>
+
+    </select>
   </div>
   <div class="form-group col-sm-3 col-md-3 col-lg-3" style="margin-bottom: 10px;">
     <input ng-click="toggleBeginDatepicker()" 

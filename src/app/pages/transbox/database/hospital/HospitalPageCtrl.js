@@ -438,7 +438,8 @@
                 register: $scope.data.newHospital.register,
                 district: $scope.data.newHospital.district,
                 address: $scope.data.newHospital.address,
-                username: $scope.data.newHospital.username
+                username: $scope.data.newHospital.username,
+                electricStatus:$scope.data.selectedHospital.electricStatus==true?1:0
             }
 
             var boxIds = [];
@@ -487,6 +488,7 @@
             Http.get(Config.apiPath.hospital + '/' + hospitalid, {}).then(function(data) {
                 if ($.isFunction(next)) {
                     next(null, data);
+
                 }
 
             }, function(msg) {
@@ -630,6 +632,11 @@
                 }
 
                 $scope.data.selectedHospital = data;
+                if($scope.data.selectedHospital.electricStatus=="1"){
+                    $scope.data.selectedHospital.electricStatus=true;
+                }else{
+                    $scope.data.selectedHospital.electricStatus=false;
+                }
                 $scope.openDetailModal();
             });
         }
@@ -695,7 +702,7 @@
                     $scope.openToast('warning', '温馨提示', '请正确填写所有医院信息');
                     return;
                 }
-
+                i
                 var hospitalInfo = {
                     name: $scope.data.selectedHospital.name,
                     grade: $scope.data.selectedHospital.grade,
@@ -703,6 +710,7 @@
                     district: $scope.data.selectedHospital.district,
                     address: $scope.data.selectedHospital.address,
                     username: $scope.data.selectedHospital.accountInfo.username,
+                    electricStatus:$scope.data.selectedHospital.electricStatus==true?1:0
                 }
 
                 var boxIds = [];

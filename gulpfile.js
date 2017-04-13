@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 var wrench = require('wrench');
+var browserSync = require('browser-sync');
 
 /**
  *  This will load all js or coffee files in the gulp directory
@@ -11,6 +12,7 @@ wrench.readdirSyncRecursive('./gulp').filter(function(file) {
   return (/\.(js|coffee)$/i).test(file);
 }).map(function(file) {
   require('./gulp/' + file);
+    console.log('gggg:'+'./gulp/' + file);
 });
 
 
@@ -19,5 +21,12 @@ wrench.readdirSyncRecursive('./gulp').filter(function(file) {
  *  main optimization build task
  */
 gulp.task('default', ['clean'], function () {
-  gulp.start('build');
+   gulp.start('build');
+   // console.log('111start watch?111');
+   //gulp.start('watch');
 });
+
+
+
+
+

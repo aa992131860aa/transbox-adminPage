@@ -1,6 +1,6 @@
 <script src="http://hovertree.com/texiao/bootstrap/4/js/city-picker.js"></script>
 
-<div class="modal-content">
+<div class="modal-content" style="width: 130%;">
   <div class="transbox-modal">
     <div><span>数据库管理/</span><span class="transbox-blue-color">医院管理详情</span></div>
     <hr style="border : 1px dashed #e7e7e7;" />
@@ -26,7 +26,7 @@
           <div class="form-group">
 
             <label class="col-sm-2 col-md-2 col-lg-2 control-label">地区：</label>
-            <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="col-sm-3 col-md-3 col-lg-3">
               <!-- <input required="true" ng-model="data.newHospital.district" type="text" class="form-control" id="inputEmail3" placeholder="地区"> -->
 
               <div style="position: relative;"><!-- container -->
@@ -34,7 +34,13 @@
               </div>
 
             </div>
+            <div class="col-sm-1 col-md-1 col-lg-1" style="width:120px ;margin-left: -25px">
+              <!--<input required="true" ng-model="data.selectedHospital.district" type="text" class="form-control" id="inputEmail3" placeholder="地区">-->
+              <table>
+                <tr><td > <input  type="checkbox" id="electricStatus" name="test" checked></td><td><span style="margin-left: 3px;color: #f00;cursor: pointer;" onclick="check()" >电子围栏</span></td></tr>
+              </table>
 
+            </div>
             <label class="col-sm-2 col-md-2 col-lg-2 control-label">等级：</label>
             <div class="btn-group col-sm-4 col-md-4 col-lg-4" uib-dropdown>
               <input ng-model="data.newHospital.grade" readonly="readonly" disabled="disabled" id="newHospGrade" type="text" class="transbox-dropdown-input form-control" placeholder="请选择医院等级" />
@@ -49,6 +55,18 @@
           </div>
         </form>
       </div>
+      <script>
+          function check(){
+              var test = document.getElementsByName("test");
+
+              if(test[0].checked){
+                  test[0].checked=false;
+              }else{
+                  test[0].checked=true;
+              }
+
+          }
+      </script>
       <!-- third row -->
       <div class="col-sm-12 col-md-12 col-lg-12">
         <form class="form-horizontal">
