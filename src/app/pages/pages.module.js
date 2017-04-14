@@ -26,7 +26,7 @@
     var accountType = getCookie('type');
 
     if (accountType === 'admin') {
-      $urlRouterProvider.otherwise('/hospital');
+      $urlRouterProvider.otherwise('/history');
 
       // baSidebarServiceProvider.addStaticItem({
       //   title: 'Pages',
