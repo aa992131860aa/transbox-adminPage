@@ -49,7 +49,8 @@
             angular.extend(toastrConfig, defaultConfig);
         });
 
-        var grades = angular.copy(Config.keyword.hospitalGrade);
+        var grades = angular.copy(Config.keyword.hospitalGrade?Config.keyword.hospitalGrade:"");
+        console.log("hospitalGrade:"+Config.keyword.hospitalGrade);
         $scope.data = {
             pageData: {
                 totalItems: 0,
