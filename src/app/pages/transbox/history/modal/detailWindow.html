@@ -1,4 +1,4 @@
-<div class="modal-content" style="width: 130%;text-align: center">
+<div class="modal-content" style="width: 153%;text-align: center">
     <div class="transbox-modal">
         <div class="transbox-modal-header">
             <div>
@@ -7,15 +7,28 @@
                         class="btn btn-default btn-blue-solid" id="baseInfo">基本信息
                 </button>
                 <button ng-click="modalCheckDataInfo()" type="button" class="btn btn-default"
-                        id="sensorInfo">传感数据
+                        id="sensorInfo">转运监控
                 </button>
-
+                <button ng-click="modalCheckFunctionInfo()" type="button" class="btn btn-default"
+                        id="functionInfo">功能数据
+                </button>
+                <button ng-click="modalCheckTeamInfo()" type="button" class="btn btn-default"
+                        id="teamInfo">转运团队
+                </button>
+                <button ng-click="modalCheckPatientInfo()" type="button" class="btn btn-default"
+                        id="patientInfo">患者信息
+                </button>
+                <button ng-click="exportExcel(transferInfo.transferId)"
+                        class="btn btn-default transbox-btn-size transbox-btn-bordered">导出
+                </button>
                 <button ng-click="$dismiss()"
                         class="btn btn-default transbox-btn-size transbox-btn-bordered">退出
                 </button>
 
+                <button ng-click="openInfoForWindow(transferInfo.deviceId)" style="float: right;margin-right: 20px;" class="btn btn-default transbox-btn-size transbox-btn-bordered">新窗口显示</button>
+
             </div>
-            <hr style="border : 1px dashed #e7e7e7;"/>
+            <hr style="border : 1px dashed #e7e7e7;width:90%; "/>
         </div>
         <div class="transbox-modal-body">
 
@@ -25,103 +38,128 @@
 
                     <div>
                         <div class="row">
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <h4 style="color: #3996e5">器官信息</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>箱号</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.deviceId"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>器官段号</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.segNumber"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>器官类型</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.type"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>器官数量</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.organCount"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>血型</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.bloodType"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>血液样本数量</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.bloodSampleCount"></div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>组织样本数量</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.organizationSampleCount"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>获取时间</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.getOrganAt"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                        </div>
+                        <div class="row">
+                            <hr style="border : 1px solid #D9D9D9;width:90%;margin-top: 10px;margin-bottom: 20px"/>
+                        </div>
+
+
+
+                        <div class="row">
+                            <h4 style="color: #3996e5">转运信息</h4>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>转运单号</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.transferNumber"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>转运起始地</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.fromCity"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>转运目的地</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.h_name"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>转运方式</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.tracfficType"></div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>航班/车号</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.tracfficNumber"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>转运人</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.tp_name"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>联系方式</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.phone"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+
+                        </div>
+                        <div class="row">
+                            <hr style="border : 1px solid #D9D9D9;margin-top: 10px;margin-bottom: 20px;width:90%; "/>
+                        </div>
+
+
+
+
+                        <div class="row"><h4 style="color: #3996e5">转运人信息</h4></div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>获取组织</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.o_name"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>联系人</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.contactPerson"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>联系方式</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.contactPhone"></div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>开箱密码</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.boxPin"></div>
@@ -171,7 +209,7 @@
                                           ng-bind="infoBase.avgHumidity?infoBase.avgHumidity : ''"></span>
                                 </div>
 
-                                <div style="height: 1px;width: 100%;background: #D9D9D9;margin-bottom: 15px;margin-top: 15px;float: right"></div>
+
 
                                 <div>
                                     <span class="way-span">碰撞次数:</span>
@@ -261,42 +299,45 @@
 
                                             mapInit();
                                             //在指定位置打开信息窗体
-                                            function openInfoCollision(map,maker,data) {
+                                            function openInfoCollision(map, e, data) {
                                                 //构建信息窗体中显示的内容
                                                 var info = [];
 
-                                                info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>"+碰撞异常+"</b>");
-                                                info.push("碰撞时间:<div style=\";color:#ff0000;\"><b>"+data+"</b>");
+                                                info.push("<div style=\"padding:0px 0px 0px 8px;\"><b>碰撞异常</b>");
+                                                info.push("<div style=\";color:#ff0000;\">" + data + "");
                                                 infoWindow = new AMap.InfoWindow({
                                                     content: info.join("<br/>")  //使用默认信息窗体框样式，显示信息内容
                                                 });
-                                                infoWindow.open(map, maker.getPosition());
+                                                infoWindow.open(map, e.target.getPosition());
                                             }
+
                                             //在指定位置打开信息窗体
-                                            function openInfoOpenData(map,maker,data) {
+                                            function openInfoOpenData(map, e, data) {
                                                 //构建信息窗体中显示的内容
                                                 var info = [];
 
-                                                info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>"+开箱异常+"</b>");
-                                                info.push("开箱时间:<div style=\";color:#ff0000;\"><b>"+data+"</b>");
+                                                info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>开箱异常</b>");
+                                                info.push("时间:<div style=\";color:#ff0000;\"><b>" + data + "</b>");
                                                 infoWindow = new AMap.InfoWindow({
                                                     content: info.join("<br/>")  //使用默认信息窗体框样式，显示信息内容
                                                 });
-                                                infoWindow.open(map, maker.getPosition());
+                                                infoWindow.open(map, e.target.getPosition());
                                             }
+
                                             //在指定位置打开信息窗体
-                                            function openInfoTemperature(map,maker,data,time) {
+                                            function openInfoTemperature(map, e, data, time) {
                                                 //构建信息窗体中显示的内容
                                                 var info = [];
 
-                                                info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>异常温度</b>");
-                                                info.push("温度:<span style=\"color:#ff0000;\"><b>"+data+"℃</b></span>");
-                                                info.push("时间:<sapn style=\"color:#ff0000;\"><b>"+time+"</b></sapn>");
+                                                info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>温度异常</b>");
+                                                info.push("温度:<span style=\"color:#ff0000;\"><b>" + data + "℃</b></span>");
+                                                info.push("时间:<sapn style=\"color:#ff0000;\"><b>" + time + "</b></sapn>");
                                                 infoWindow = new AMap.InfoWindow({
                                                     content: info.join("<br/>")  //使用默认信息窗体框样式，显示信息内容
                                                 });
-                                                infoWindow.open(map, maker.getPosition());
+                                                infoWindow.open(map, e.target.getPosition());
                                             }
+
                                             function completeEventHandler() {
                                                 lineArr = new Array();
                                                 //碰撞
@@ -318,63 +359,72 @@
 
                                                         }
 
-
+                                                        //结束标志
+                                                        if (i == recordData.length - 1) {
+                                                            marker = new AMap.Marker({
+                                                                map: mapObj,
+                                                                position: new AMap.LngLat(item.longitude, item.latitude),//基点位置
+                                                                //  title: item.temperature,
+                                                                icon: "http://webapi.amap.com/theme/v1.3/markers/n/end.png"
+                                                            });
+                                                        }
 
                                                         //异常温度
-                                                        if(item.temperature<0||item.temperature>6){
+                                                        if (item.temperature < 0 || item.temperature > 6) {
                                                             // console.log("t:"+item.temperature);
-                                                            marker = new AMap.Marker({
+                                                            markerT = new AMap.Marker({
                                                                 map: mapObj,
                                                                 position: new AMap.LngLat(item.longitude, item.latitude),//基点位置
                                                                 //  title: item.temperature,
                                                                 icon: "http://116.62.28.28:8080/transbox/images/temperature.png"
                                                             });
                                                             //鼠标点击marker弹出自定义的信息窗体
-                                                            AMap.event.addListener(marker, 'click', function() {
-                                                                openInfoTemperature(mapObj,marker,item.temperature,item.recordAt);
+                                                            markerT.on('click', function (e) {
+                                                                openInfoTemperature(mapObj, e, item.temperature, item.recordAt);
+
+
                                                             });
                                                         }
                                                         //碰撞
-                                                        for(var d=0;d<collisionData.length;d++){
+                                                        for (var d = 0; d < collisionData.length; d++) {
                                                             //console.log("c:"+collisionData[d]);
                                                             // console.log("r:"+item.recordAt);
-                                                            if(collisionData[d]==item.recordAt){
-                                                                marker = new AMap.Marker({
+                                                            if (collisionData[d] == item.recordAt) {
+                                                                markerC = new AMap.Marker({
                                                                     map: mapObj,
                                                                     position: new AMap.LngLat(item.longitude, item.latitude),//基点位置
                                                                     //  title: item.temperature,
                                                                     icon: "http://116.62.28.28:8080/transbox/images/collision.png"
                                                                 });
                                                                 //鼠标点击marker弹出自定义的信息窗体
-                                                                AMap.event.addListener(marker, 'click', function() {
-                                                                    openInfoCollision(mapObj,marker,item.recordAt);
+                                                                markerC.on('click', function (e) {
+                                                                    openInfoCollision(mapObj, e, item.recordAt);
                                                                 });
                                                                 break;
                                                             }
                                                         }
-                                                        for(var m=0;m<openData.length;m++){
+                                                        //开箱
+                                                        for (var m = 0; m < openData.length; m++) {
                                                             //console.log("c:"+collisionData[d]);
                                                             // console.log("r:"+item.recordAt);
-                                                            if(openData[m]==item.recordAt){
-                                                                marker = new AMap.Marker({
+                                                            if (openData[m] == item.recordAt) {
+                                                                markerO = new AMap.Marker({
                                                                     map: mapObj,
                                                                     position: new AMap.LngLat(item.longitude, item.latitude),//基点位置
                                                                     //  title: item.temperature,
                                                                     icon: "http://116.62.28.28:8080/transbox/images/open.png"
                                                                 });
                                                                 //鼠标点击marker弹出自定义的信息窗体
-                                                                AMap.event.addListener(marker, 'click', function() {
-                                                                    openInfoOpenData(mapObj,marker,item.recordAt);
+                                                                markerO.on('click', function (e) {
+                                                                    openInfoOpenData(mapObj, e, item.recordAt);
                                                                 });
                                                                 break;
                                                             }
                                                         }
-                                                        //打开
                                                         lineArr.push(new AMap.LngLat(item.longitude, item.latitude));
 
                                                     }
                                                 }
-
 
 
                                                 var polyline = new AMap.Polyline({
@@ -396,7 +446,25 @@
 
                                             }
 
+                                        } else {
+
+
+                                            var map = new AMap.Map('map', {
+                                                resizeEnable: true,
+                                                dragEnable: false,
+                                                zoomEnable: false,
+                                                zoom: 11,
+                                                center: [120.373091, 30.304104]
+                                            });
                                         }
+                                    } else {
+                                        var map = new AMap.Map('map', {
+                                            resizeEnable: true,
+                                            dragEnable: false,
+                                            zoomEnable: false,
+                                            zoom: 11,
+                                            center: [120.373091, 30.304104]
+                                        });
                                     }
 
                                 </script>
@@ -454,21 +522,20 @@
                         </div>
 
 
-
-
-                        <div class="section" >
+                        <div class="section">
 
                             <!--page3 湿度-->
 
                             <div style="padding-top:15px">
-                                <div style="width: 100%;height: 40px;"> <div style="text-align: center;">
+                                <div style="width: 100%;height: 40px;">
+                                    <div style="text-align: center;">
                         <span class="col-sm-4 col-md-4 col-lg-4">最高湿度
                         </span>
-                                    <span class="col-sm-4 col-md-4 col-lg-4">最低湿度
+                                        <span class="col-sm-4 col-md-4 col-lg-4">最低湿度
                         </span>
-                                    <span class="col-sm-4 col-md-4 col-lg-4">平均湿度
+                                        <span class="col-sm-4 col-md-4 col-lg-4">平均湿度
                         </span>
-                                </div>
+                                    </div>
 
                                     <div style="text-align: center">
                         <span class="col-sm-4 col-md-4 col-lg-4 color-blue" ng-bind="infoBase.maxHumidity">
@@ -476,14 +543,16 @@
                                         <span class="col-sm-4 col-md-4 col-lg-4 color-blue"
                                               ng-bind="infoBase.minHumidity?infoBase.minHumidity:''">
                         </span>
-                                        <span class="col-sm-4 col-md-4 col-lg-4 color-blue" ng-bind="infoBase.avgHumidity">
+                                        <span class="col-sm-4 col-md-4 col-lg-4 color-blue"
+                                              ng-bind="infoBase.avgHumidity">
                         </span>
-                                    </div></div>
+                                    </div>
+                                </div>
 
 
                                 <div class="onway-morris-content">
 
-                                    <div line-chart style="background-color: #FFFFFF;width: 100%"
+                                    <div line-chart style="background-color: #FFFFFF;width: 100%;height: 400px;"
                                          id="humidity"></div>
                                 </div>
                             </div>
@@ -494,18 +563,20 @@
                             var scope1 = angular.element($("#temperature")).scope();
 
                             var test = [];
-                            for (var i = 0; i < scope1.tDataY.length; i++) {
-                                test.push(scope1.tDataY[i] / 1.0);
+                            if (scope1.tDataY) {
+                                for (var i = 0; i < scope1.tDataY.length; i++) {
+                                    test.push(scope1.tDataY[i] / 1.0);
+                                }
                             }
                             var temratureTotal = scope1.temperatureTotal;
                             var tickIntervalSize = 8;
-                            if(temratureTotal<40){
+                            if (temratureTotal < 40) {
                                 tickIntervalSize = 8;
-                            }else{
-                                tickIntervalSize = parseInt(temratureTotal/5);
+                            } else {
+                                tickIntervalSize = parseInt(temratureTotal / 5);
                             }
 
-                            parseInt(temratureTotal/40);
+                            parseInt(temratureTotal / 40);
                             var chart = new Highcharts.Chart('temperature', {
                                 chart: {
                                     type: 'line'                         //指定图表的类型，默认是折线图（line）
@@ -523,6 +594,9 @@
                                     },
                                     tickPositions: [-6, 0, 6, 12, 18] // 指定竖轴坐标点的值
                                 },
+                                credits: {
+                                    enabled: false
+                                },
                                 series: [{                              //指定数据列
                                     name: '温度',                       //数据列名
                                     data: test,                  //数据
@@ -538,9 +612,10 @@
                                 }]
                             });
                             var test1 = [];
-
-                            for (var i = 0; i < scope1.dataY.length; i++) {
-                                test1.push(scope1.dataY[i] / 1.0);
+                            if (scope1.dataY) {
+                                for (var i = 0; i < scope1.dataY.length; i++) {
+                                    test1.push(scope1.dataY[i] / 1.0);
+                                }
                             }
                             var chart = new Highcharts.Chart('humidity', {
                                 chart: {
@@ -557,6 +632,9 @@
                                     title: {
                                         text: '湿度'                //指定y轴的标题
                                     }
+                                },
+                                credits: {
+                                    enabled: false
                                 },
                                 series: [{                              //指定数据列
                                     name: '湿度',                       //数据列名
@@ -600,6 +678,9 @@
                             </div>
                         </div>
                     </div>
+
+                </div>
+                <div ng-if="data.modalPageIndex === 2" class="col-sm-12 col-md-12 col-lg-12">
 
                 </div>
             </div>

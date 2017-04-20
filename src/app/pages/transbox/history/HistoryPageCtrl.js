@@ -17,7 +17,7 @@
                 resolve: {
                     params: params
                 },
-                windowTopClass: "transfer-modal-top-class"
+                windowTopClass: "transfer-history-modal-top-class"
             }).result.then(function (result) {
                 saveCB(result);
             }, function (result) {
@@ -608,6 +608,11 @@
             transferNumber: params.name.transferNumber,
             transferId:params.name.transferId
         }
+        $scope.openInfoForWindow = function (transfer_id) {
+            //localStorage.transfer_id = transfer_id;
+            var url ='detailWindow.html';
+            window.open(url,'_blank');
+        }
        var transferId =params.name.transferId;
         //$timeout(function () {
         // 根据传过来的参数 获取记录
@@ -818,7 +823,11 @@
             if ($scope.data.modalPageIndex != 0) {
                 $scope.data.modalPageIndex = 0;
                 $('#baseInfo').addClass('btn-blue-solid');
+
                 $('#sensorInfo').removeClass('btn-blue-solid');
+                $('#functionInfo').removeClass('btn-blue-solid');
+                $('#teamInfo').removeClass('btn-blue-solid');
+                $('#patientInfo').removeClass('btn-blue-solid');
             }
         };
 
@@ -826,7 +835,45 @@
             if ($scope.data.modalPageIndex != 1) {
                 $scope.data.modalPageIndex = 1;
                 $('#sensorInfo').addClass('btn-blue-solid');
+
                 $('#baseInfo').removeClass('btn-blue-solid');
+                $('#functionInfo').removeClass('btn-blue-solid');
+                $('#teamInfo').removeClass('btn-blue-solid');
+                $('#patientInfo').removeClass('btn-blue-solid');
+            }
+        };
+        $scope.modalCheckFunctionInfo = function () {
+            if ($scope.data.modalPageIndex != 2) {
+                $scope.data.modalPageIndex = 2;
+                $('#functionInfo').addClass('btn-blue-solid');
+
+                $('#baseInfo').removeClass('btn-blue-solid');
+                $('#sensorInfo').removeClass('btn-blue-solid');
+                $('#teamInfo').removeClass('btn-blue-solid');
+                $('#patientInfo').removeClass('btn-blue-solid');
+            }
+        };
+        $scope.modalCheckTeamInfo = function () {
+            if ($scope.data.modalPageIndex != 3) {
+                $scope.data.modalPageIndex = 3;
+                $('#teamInfo').addClass('btn-blue-solid');
+
+                $('#baseInfo').removeClass('btn-blue-solid');
+                $('#sensorInfo').removeClass('btn-blue-solid');
+                $('#functionInfo').removeClass('btn-blue-solid');
+                $('#patientInfo').removeClass('btn-blue-solid');
+            }
+        };
+        $scope.modalCheckPatientInfo = function () {
+            if ($scope.data.modalPageIndex != 4) {
+                $scope.data.modalPageIndex = 4;
+                $('#patientInfo').addClass('btn-blue-solid');
+
+                $('#baseInfo').removeClass('btn-blue-solid');
+                $('#sensorInfo').removeClass('btn-blue-solid');
+                $('#functionInfo').removeClass('btn-blue-solid');
+                $('#teamInfo').removeClass('btn-blue-solid');
+
             }
         };
 

@@ -54,9 +54,14 @@ tfoot tr td {
 }
 
 .transfer-modal-top-class {
-  top: 60px;
+  top: 40px;
   bottom: auto;
   left:-15%;
+}
+.transfer-history-modal-top-class {
+  top: 20px;
+  bottom: auto;
+  left:-25%;
 }
 
 .transbox-dropdown-menu {
@@ -119,7 +124,7 @@ tfoot tr td {
   padding: 20px;
   background: #F5F5F5;
   overflow-y: scroll;
-  max-height: 675px;
+  max-height: 700px;
 
 }
 

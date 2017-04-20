@@ -1,4 +1,4 @@
-<div class="modal-content" style="width: 130%;text-align: center">
+<div class="modal-content" style="width: 153%;text-align: center">
     <div class="transbox-modal">
         <div class="transbox-modal-header">
             <div>
@@ -7,7 +7,16 @@
                         class="btn btn-default btn-blue-solid" id="baseInfo">基本信息
                 </button>
                 <button ng-click="modalCheckDataInfo()" type="button" class="btn btn-default"
-                        id="sensorInfo">传感数据
+                        id="sensorInfo">转运监控
+                </button>
+                <button ng-click="modalCheckFunctionInfo()" type="button" class="btn btn-default"
+                        id="functionInfo">功能数据
+                </button>
+                <button ng-click="modalCheckTeamInfo()" type="button" class="btn btn-default"
+                        id="teamInfo">转运团队
+                </button>
+                <button ng-click="modalCheckPatientInfo()" type="button" class="btn btn-default"
+                        id="patientInfo">患者信息
                 </button>
                 <button ng-click="exportExcel(transferInfo.transferId)"
                         class="btn btn-default transbox-btn-size transbox-btn-bordered">导出
@@ -16,8 +25,12 @@
                         class="btn btn-default transbox-btn-size transbox-btn-bordered">退出
                 </button>
 
+                <button ng-click="openInfoForWindow()" style="display:none;float: right;margin-right: 20px;"
+                        class="btn btn-default transbox-btn-size transbox-btn-bordered">新窗口显示
+                </button>
+
             </div>
-            <hr style="border : 1px dashed #e7e7e7;"/>
+            <hr style="border : 1px dashed #e7e7e7;width:90%; "/>
         </div>
         <div class="transbox-modal-body">
 
@@ -27,103 +40,125 @@
 
                     <div>
                         <div class="row">
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <h4 style="color: #3996e5">器官信息</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>箱号</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.deviceId"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>器官段号</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.segNumber"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>器官类型</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.type"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>器官数量</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.organCount"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>血型</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.bloodType"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>血液样本数量</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.bloodSampleCount"></div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>组织样本数量</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.organizationSampleCount"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>获取时间</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.getOrganAt"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                        </div>
+                        <div class="row">
+                            <hr style="border : 1px solid #D9D9D9;width:90%;margin-top: 10px;margin-bottom: 20px"/>
+                        </div>
+
+
+                        <div class="row">
+                            <h4 style="color: #3996e5">转运信息</h4>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>转运单号</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.transferNumber"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>转运起始地</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.fromCity"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>转运目的地</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.h_name"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>转运方式</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.tracfficType"></div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>航班/车号</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.tracfficNumber"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>转运人</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.tp_name"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>联系方式</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.phone"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+
+                        </div>
+                        <div class="row">
+                            <hr style="border : 1px solid #D9D9D9;margin-top: 10px;margin-bottom: 20px;width:90%; "/>
+                        </div>
+
+
+                        <div class="row"><h4 style="color: #3996e5">转运人信息</h4></div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>获取组织</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.o_name"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>联系人</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.contactPerson"></div>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>联系方式</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.contactPhone"></div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-2 col-md-2 col-lg-2 transbox-transfer-info-block">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>开箱密码</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.boxPin"></div>
@@ -173,7 +208,6 @@
                                           ng-bind="infoBase.avgHumidity?infoBase.avgHumidity : ''"></span>
                                 </div>
 
-                                <div style="height: 1px;width: 100%;background: #D9D9D9;margin-bottom: 15px;margin-top: 15px;float: right"></div>
 
                                 <div>
                                     <span class="way-span">碰撞次数:</span>
@@ -263,34 +297,50 @@
 
                                             mapInit();
                                             //在指定位置打开信息窗体
-                                            function openInfoCollision(map,maker,data) {
+                                            function openInfoCollision(map, e, data) {
                                                 //构建信息窗体中显示的内容
                                                 var info = [];
 
-                                                info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>"+碰撞异常+"</b>");
-                                                info.push("碰撞时间:<div style=\";color:#ff0000;\"><b>"+data+"</b>");
+                                                info.push("<div style=\"padding:0px 0px 0px 8px;\"><b>碰撞异常</b>");
+                                                info.push("<div style=\";color:#ff0000;\">" + data + "");
                                                 infoWindow = new AMap.InfoWindow({
                                                     content: info.join("<br/>")  //使用默认信息窗体框样式，显示信息内容
                                                 });
-                                                infoWindow.open(map, maker.getPosition());
+                                                infoWindow.open(map, e.target.getPosition());
                                             }
+
                                             //在指定位置打开信息窗体
-                                            function openInfoTemperature(map,maker,data,time) {
+                                            function openInfoOpenData(map, e, data) {
                                                 //构建信息窗体中显示的内容
                                                 var info = [];
 
-                                                info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>异常温度</b>");
-                                                info.push("温度:<span style=\"color:#ff0000;\"><b>"+data+"℃</b></span>");
-                                                info.push("时间:<sapn style=\"color:#ff0000;\"><b>"+time+"</b></sapn>");
+                                                info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>开箱异常</b>");
+                                                info.push("时间:<div style=\";color:#ff0000;\"><b>" + data + "</b>");
                                                 infoWindow = new AMap.InfoWindow({
                                                     content: info.join("<br/>")  //使用默认信息窗体框样式，显示信息内容
                                                 });
-                                                infoWindow.open(map, maker.getPosition());
+                                                infoWindow.open(map, e.target.getPosition());
                                             }
+
+                                            //在指定位置打开信息窗体
+                                            function openInfoTemperature(map, e, data, time) {
+                                                //构建信息窗体中显示的内容
+                                                var info = [];
+
+                                                info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>温度异常</b>");
+                                                info.push("温度:<span style=\"color:#ff0000;\"><b>" + data + "℃</b></span>");
+                                                info.push("时间:<sapn style=\"color:#ff0000;\"><b>" + time + "</b></sapn>");
+                                                infoWindow = new AMap.InfoWindow({
+                                                    content: info.join("<br/>")  //使用默认信息窗体框样式，显示信息内容
+                                                });
+                                                infoWindow.open(map, e.target.getPosition());
+                                            }
+
                                             function completeEventHandler() {
                                                 lineArr = new Array();
                                                 //碰撞
-                                               var collisionData = scope.data.collisionData;
+                                                var collisionData = scope.data.collisionData;
+                                                var openData = scope.data.openData;
                                                 for (var i = 0; i < recordData.length; i++) {
                                                     var item = recordData[i];
                                                     if (item.longitude && item.latitude) {
@@ -318,33 +368,53 @@
                                                         }
 
                                                         //异常温度
-                                                        if(item.temperature<0||item.temperature>6){
-                                                           // console.log("t:"+item.temperature);
-                                                            marker = new AMap.Marker({
+                                                        if (item.temperature < 0 || item.temperature > 6) {
+                                                            // console.log("t:"+item.temperature);
+                                                            markerT = new AMap.Marker({
                                                                 map: mapObj,
                                                                 position: new AMap.LngLat(item.longitude, item.latitude),//基点位置
                                                                 //  title: item.temperature,
                                                                 icon: "http://116.62.28.28:8080/transbox/images/temperature.png"
                                                             });
                                                             //鼠标点击marker弹出自定义的信息窗体
-                                                            AMap.event.addListener(marker, 'click', function() {
-                                                                openInfoTemperature(mapObj,marker,item.temperature,item.recordAt);
+                                                            markerT.on('click', function (e) {
+                                                                openInfoTemperature(mapObj, e, item.temperature, item.recordAt);
+
+
                                                             });
                                                         }
                                                         //碰撞
-                                                        for(var d=0;d<collisionData.length;d++){
+                                                        for (var d = 0; d < collisionData.length; d++) {
                                                             //console.log("c:"+collisionData[d]);
                                                             // console.log("r:"+item.recordAt);
-                                                            if(collisionData[d]==item.recordAt){
-                                                                marker = new AMap.Marker({
+                                                            if (collisionData[d] == item.recordAt) {
+                                                                markerC = new AMap.Marker({
                                                                     map: mapObj,
                                                                     position: new AMap.LngLat(item.longitude, item.latitude),//基点位置
                                                                     //  title: item.temperature,
                                                                     icon: "http://116.62.28.28:8080/transbox/images/collision.png"
                                                                 });
                                                                 //鼠标点击marker弹出自定义的信息窗体
-                                                                AMap.event.addListener(marker, 'click', function() {
-                                                                    openInfoCollision(mapObj,marker,item.recordAt);
+                                                                markerC.on('click', function (e) {
+                                                                    openInfoCollision(mapObj, e, item.recordAt);
+                                                                });
+                                                                break;
+                                                            }
+                                                        }
+                                                        //开箱
+                                                        for (var m = 0; m < openData.length; m++) {
+                                                            //console.log("c:"+collisionData[d]);
+                                                            // console.log("r:"+item.recordAt);
+                                                            if (openData[m] == item.recordAt) {
+                                                                markerO = new AMap.Marker({
+                                                                    map: mapObj,
+                                                                    position: new AMap.LngLat(item.longitude, item.latitude),//基点位置
+                                                                    //  title: item.temperature,
+                                                                    icon: "http://116.62.28.28:8080/transbox/images/open.png"
+                                                                });
+                                                                //鼠标点击marker弹出自定义的信息窗体
+                                                                markerO.on('click', function (e) {
+                                                                    openInfoOpenData(mapObj, e, item.recordAt);
                                                                 });
                                                                 break;
                                                             }
@@ -353,7 +423,6 @@
 
                                                     }
                                                 }
-
 
 
                                                 var polyline = new AMap.Polyline({
@@ -375,7 +444,25 @@
 
                                             }
 
+                                        } else {
+
+
+                                            var map = new AMap.Map('map', {
+                                                resizeEnable: true,
+                                                dragEnable: false,
+                                                zoomEnable: false,
+                                                zoom: 11,
+                                                center: [120.373091, 30.304104]
+                                            });
                                         }
+                                    } else {
+                                        var map = new AMap.Map('map', {
+                                            resizeEnable: true,
+                                            dragEnable: false,
+                                            zoomEnable: false,
+                                            zoom: 11,
+                                            center: [120.373091, 30.304104]
+                                        });
                                     }
 
                                 </script>
@@ -391,36 +478,36 @@
 
                             <div style="padding-top:15px">
                                 <div style="width: 100%;height: 40px;">
-                                <div style="text-align: center">
+                                    <div style="text-align: center">
                         <span class="col-sm-3 col-md-3 col-lg-3">最高温度
                         </span>
-                                    <span class="col-sm-3 col-md-3 col-lg-3">最低温度
+                                        <span class="col-sm-3 col-md-3 col-lg-3">最低温度
                         </span>
-                                    <span class="col-sm-3 col-md-3 col-lg-3">平均温度
+                                        <span class="col-sm-3 col-md-3 col-lg-3">平均温度
                         </span>
-                                    <span class="col-sm-3 col-md-3 col-lg-3">异常温度总数
+                                        <span class="col-sm-3 col-md-3 col-lg-3">异常温度总数
                         </span>
-                                </div>
+                                    </div>
 
-                                <div style="text-align: center;">
+                                    <div style="text-align: center;">
                         <span class="col-sm-3 col-md-3 col-lg-3" ng-bind="infoBase.maxTemperature"
                               ng-class="infoBase.maxTemperature >=1 && infoBase.maxTemperature<=4 ?
                                'temp-color' : 'temp-color-warning'">
                         </span>
-                                    <span class="col-sm-3 col-md-3 col-lg-3" ng-bind="infoBase.minTemperature"
-                                          ng-class="infoBase.minTemperature >=1 && infoBase.minTemperature<=4 ?
+                                        <span class="col-sm-3 col-md-3 col-lg-3" ng-bind="infoBase.minTemperature"
+                                              ng-class="infoBase.minTemperature >=1 && infoBase.minTemperature<=4 ?
                                'temp-color' : 'temp-color-warning'">
                         </span>
-                                    <span class="col-sm-3 col-md-3 col-lg-3"
-                                          ng-class="infoBase.avgTemperature >=1 && infoBase.avgTemperature<=4 ?
+                                        <span class="col-sm-3 col-md-3 col-lg-3"
+                                              ng-class="infoBase.avgTemperature >=1 && infoBase.avgTemperature<=4 ?
                                'temp-color' : 'temp-color-warning'"
-                                          ng-bind="infoBase.avgTemperature?infoBase.avgTemperature+'℃':''">
+                                              ng-bind="infoBase.avgTemperature?infoBase.avgTemperature+'℃':''">
                         </span>
-                                    <span class="col-sm-3 col-md-3 col-lg-3"
-                                          ng-class="'temp-color-warning'"
-                                          ng-bind="unTemperature">
+                                        <span class="col-sm-3 col-md-3 col-lg-3"
+                                              ng-class="'temp-color-warning'"
+                                              ng-bind="unTemperature">
                         </span>
-                                </div>
+                                    </div>
                                 </div>
 
                                 <div class="onway-morris-content" style="background-color: #FFFFFF">
@@ -433,155 +520,355 @@
                         </div>
 
 
+                        <div class="section">
 
+                            <!--page3 湿度-->
 
-                    <div class="section" >
-
-                        <!--page3 湿度-->
-
-                        <div style="padding-top:15px">
-                            <div style="width: 100%;height: 40px;"> <div style="text-align: center;">
+                            <div style="padding-top:15px">
+                                <div style="width: 100%;height: 40px;">
+                                    <div style="text-align: center;">
                         <span class="col-sm-4 col-md-4 col-lg-4">最高湿度
                         </span>
-                                <span class="col-sm-4 col-md-4 col-lg-4">最低湿度
+                                        <span class="col-sm-4 col-md-4 col-lg-4">最低湿度
                         </span>
-                                <span class="col-sm-4 col-md-4 col-lg-4">平均湿度
+                                        <span class="col-sm-4 col-md-4 col-lg-4">平均湿度
                         </span>
-                            </div>
+                                    </div>
 
-                                <div style="text-align: center">
+                                    <div style="text-align: center">
                         <span class="col-sm-4 col-md-4 col-lg-4 color-blue" ng-bind="infoBase.maxHumidity">
                         </span>
-                                    <span class="col-sm-4 col-md-4 col-lg-4 color-blue"
-                                          ng-bind="infoBase.minHumidity?infoBase.minHumidity:''">
+                                        <span class="col-sm-4 col-md-4 col-lg-4 color-blue"
+                                              ng-bind="infoBase.minHumidity?infoBase.minHumidity:''">
                         </span>
-                                    <span class="col-sm-4 col-md-4 col-lg-4 color-blue" ng-bind="infoBase.avgHumidity">
+                                        <span class="col-sm-4 col-md-4 col-lg-4 color-blue"
+                                              ng-bind="infoBase.avgHumidity">
                         </span>
-                                </div></div>
+                                    </div>
+                                </div>
 
 
-                            <div class="onway-morris-content">
+                                <div class="onway-morris-content">
 
-                                <div line-chart style="background-color: #FFFFFF;width: 100%"
-                                        id="humidity"></div>
+                                    <div line-chart style="background-color: #FFFFFF;width: 100%;height: 400px;"
+                                         id="humidity"></div>
+                                </div>
                             </div>
+
                         </div>
 
-                    </div>
+                        <script>
+                            var scope1 = angular.element($("#temperature")).scope();
 
-                    <script>
-                        var scope1 = angular.element($("#temperature")).scope();
-
-                        var test = [];
-                        for (var i = 0; i < scope1.tDataY.length; i++) {
-                            test.push(scope1.tDataY[i] / 1.0);
-                        }
-                        var temratureTotal = scope1.temperatureTotal;
-                        var tickIntervalSize = 8;
-                        if(temratureTotal<40){
-                            tickIntervalSize = 8;
-                        }else{
-                            tickIntervalSize = parseInt(temratureTotal/5);
-                        }
-
-                        parseInt(temratureTotal/40);
-                        var chart = new Highcharts.Chart('temperature', {
-                            chart: {
-                                type: 'line'                         //指定图表的类型，默认是折线图（line）
-                            },
-                            title: {
-                                text: '温度监控显示（℃）'                //指定图表标题
-                            },
-                            xAxis: {
-                                tickInterval: tickIntervalSize,
-                                categories: scope1.tDataX //指定x轴分组
-                            },
-                            yAxis: {
-                                title: {
-                                    text: '温度'                //指定y轴的标题
-                                },
-                                tickPositions: [-6, 0, 6, 12, 18] // 指定竖轴坐标点的值
-                            },
-                            series: [{                              //指定数据列
-                                name: '温度',                       //数据列名
-                                data: test,                  //数据
-                                zones: [{
-                                    value: 0.0,
-                                    color: '#ff0000'
-                                }, {
-                                    value: 6.0,
-                                    color: '#379DF2'
-                                }, {
-                                    color: "#ff0000"
-                                }]
-                            }]
-                        });
-                        var test1 = [];
-
-                        for (var i = 0; i < scope1.dataY.length; i++) {
-                            test1.push(scope1.dataY[i] / 1.0);
-                        }
-                        var chart = new Highcharts.Chart('humidity', {
-                            chart: {
-                                type: 'line'                         //指定图表的类型，默认是折线图（line）
-                            },
-                            title: {
-                                text: '湿度监控显示（%）'                //指定图表标题
-                            },
-                            xAxis: {
-                                tickInterval: 8,
-                                categories: scope1.dataX //指定x轴分组
-                            },
-                            yAxis: {
-                                title: {
-                                    text: '湿度'                //指定y轴的标题
+                            var test = [];
+                            if (scope1.tDataY) {
+                                for (var i = 0; i < scope1.tDataY.length; i++) {
+                                    test.push(scope1.tDataY[i] / 1.0);
                                 }
-                            },
-                            series: [{                              //指定数据列
-                                name: '湿度',                       //数据列名
-                                data: test1
-                            }]
-                        });
-                    </script>
-                    <div class="section">
-                        <!--page5-->
+                            }
+                            var temratureTotal = scope1.temperatureTotal;
+                            var tickIntervalSize = 8;
+                            if (temratureTotal < 40) {
+                                tickIntervalSize = 8;
+                            } else {
+                                tickIntervalSize = parseInt(temratureTotal / 5);
+                            }
 
-                        <div style="padding: 15px">
+                            parseInt(temratureTotal / 40);
+                            var chart = new Highcharts.Chart('temperature', {
+                                chart: {
+                                    type: 'line'                         //指定图表的类型，默认是折线图（line）
+                                },
+                                title: {
+                                    text: '温度监控显示（℃）'                //指定图表标题
+                                },
+                                xAxis: {
+                                    tickInterval: tickIntervalSize,
+                                    categories: scope1.tDataX //指定x轴分组
+                                },
+                                yAxis: {
+                                    title: {
+                                        text: '温度'                //指定y轴的标题
+                                    },
+                                    tickPositions: [-6, 0, 6, 12, 18] // 指定竖轴坐标点的值
+                                },
+                                credits: {
+                                    enabled: false
+                                },
+                                series: [{                              //指定数据列
+                                    name: '温度',                       //数据列名
+                                    data: test,                  //数据
+                                    zones: [{
+                                        value: 0.0,
+                                        color: '#ff0000'
+                                    }, {
+                                        value: 6.0,
+                                        color: '#379DF2'
+                                    }, {
+                                        color: "#ff0000"
+                                    }]
+                                }]
+                            });
+                            var test1 = [];
+                            if (scope1.dataY) {
+                                for (var i = 0; i < scope1.dataY.length; i++) {
+                                    test1.push(scope1.dataY[i] / 1.0);
+                                }
+                            }
+                            var chart = new Highcharts.Chart('humidity', {
+                                chart: {
+                                    type: 'line'                         //指定图表的类型，默认是折线图（line）
+                                },
+                                title: {
+                                    text: '湿度监控显示（%）'                //指定图表标题
+                                },
+                                xAxis: {
+                                    tickInterval: 8,
+                                    categories: scope1.dataX //指定x轴分组
+                                },
+                                yAxis: {
+                                    title: {
+                                        text: '湿度'                //指定y轴的标题
+                                    }
+                                },
+                                credits: {
+                                    enabled: false
+                                },
+                                series: [{                              //指定数据列
+                                    name: '湿度',                       //数据列名
+                                    data: test1
+                                }]
+                            });
+                        </script>
+                        <div class="section">
+                            <!--page5-->
 
-                            <div>
+                            <div style="padding: 15px">
+
+                                <div>
                         <span class="way-span-weight">开箱次数:
                             <span class="color-blue"
                                   ng-bind="data.openData? (data.openData.length == 0? '0次' : data.openData.length+'次'):'0次'"></span>
                         </span>
-                                <span class="crash-span-weight-float">碰撞次数:
+                                    <span class="crash-span-weight-float">碰撞次数:
                             <span class="color-blue"
                                   ng-class="data.collisionData?(data.collisionData.length > 0? 'temp-color-warning' : 'temp-color'):'temp-color'"
                                   ng-bind="data.collisionData?(data.collisionData.length == 0? '0次' : data.collisionData.length+'次'):'0次'"></span>
                         </span>
-                            </div>
-
-                            <div class="onway-morris-content" style="padding: 10px;">
-                                <div>
-                                    <span class="crash-span-weight">开箱时间</span>
-                                    <span class="crash-span-weight-float">碰撞时间</span>
                                 </div>
 
-                                <div style="border-top: 1px #D9D9D9 solid"
-                                     ng-repeat="info in data.crashData">
+                                <div class="onway-morris-content" style="padding: 10px;">
+                                    <div>
+                                        <span class="crash-span-weight">开箱时间</span>
+                                        <span class="crash-span-weight-float">碰撞时间</span>
+                                    </div>
+
+                                    <div style="border-top: 1px #D9D9D9 solid"
+                                         ng-repeat="info in data.crashData">
                             <span class="crash-span-weight"
                                   ng-bind="getShowtime(info.oInfo)"></span>
-                                    <span class="crash-span-weight-float"
-                                          ng-bind="getShowtime(info.cInfo)"></span>
+                                        <span class="crash-span-weight-float"
+                                              ng-bind="getShowtime(info.cInfo)"></span>
+                                    </div>
+
                                 </div>
 
                             </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div ng-if="data.modalPageIndex === 2" class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="onway-morris-content" style="background-color: #FFFFFF">
+
+                        <div id="press" style="width: 100%">
 
                         </div>
                     </div>
-                </div>
 
+                    <div class="onway-morris-content" style="background-color: #FFFFFF;margin-top: 20px;">
+
+                        <div id="flow" style="width: 100%">
+
+                        </div>
+                    </div>
+                    <div class="onway-morris-content" style="background-color: #FFFFFF;margin-top: 20px;">
+
+                        <div id="organization" style="width: 100%">
+
+                        </div>
+                    </div>
+                    <script>
+                        //                        var scope1 = angular.element($("#temperature")).scope();
+                        //
+                        //                        var test = [];
+                        //                        if (scope1.tDataY) {
+                        //                            for (var i = 0; i < scope1.tDataY.length; i++) {
+                        //                                test.push(scope1.tDataY[i] / 1.0);
+                        //                            }
+                        //                        }
+                        //                        var temratureTotal = scope1.temperatureTotal;
+                        //                        var tickIntervalSize = 8;
+                        //                        if (temratureTotal < 40) {
+                        //                            tickIntervalSize = 8;
+                        //                        } else {
+                        //                            tickIntervalSize = parseInt(temratureTotal / 5);
+                        //                        }
+                        //
+                        //                        parseInt(temratureTotal / 40);
+                        var dataX = ['04-07 13:20', '04-07 14:20', '04-07 15:20', '04-07 16:20', '04-07 17:20', '04-07 18:20'
+                            , '04-07 19:20', '04-07 20:20', '04-07 21:20', '04-07 22:20', '04-07 23:20'
+                            , '04-07 23:20', '04-07 23:20', '04-08 01:20', '04-08 02:20', '04-08 03:20'
+                            , '04-08 04:20', '04-08 05:20', '04-08 06:20', '04-08 07:20', '04-08 08:20'
+                            , '04-08 09:20', '04-08 10:20', '04-08 11:20',];
+                        var dataY = [15, 20, 12, 8, 30, 13, 26, 10, 24, 19, 18, 22, 31, 10, 20, 20, 20, 21, 19, 29, 12, 14, 18, 13,];
+                        var chart = new Highcharts.Chart('press', {
+                            chart: {
+                                type: 'line'                         //指定图表的类型，默认是折线图（line）
+                            },
+                            title: {
+                                text: '压力监控显示（mm）'                //指定图表标题
+                            },
+                            xAxis: {
+                                tickInterval: 5,
+                                categories: dataX//指定x轴分组
+                            },
+                            yAxis: {
+                                title: {
+                                    text: '压力'                //指定y轴的标题
+                                }
+                            },
+                            credits: {
+                                enabled: false
+                            },
+                            series: [{                              //指定数据列
+                                name: '压力',                       //数据列名
+                                data: dataY,                  //数据
+                                zones: [{
+                                    value: -100,
+                                    color: '#379DF2'
+                                }]
+                            }]
+                        });
+
+                        var dataFlowX = ['04-07 13:20', '04-07 14:20', '04-07 15:20', '04-07 16:20', '04-07 17:20', '04-07 18:20'
+                            , '04-07 19:20', '04-07 20:20', '04-07 21:20', '04-07 22:20', '04-07 23:20'
+                            , '04-07 23:20', '04-07 23:20', '04-08 01:20', '04-08 02:20', '04-08 03:20'
+                            , '04-08 04:20', '04-08 05:20', '04-08 06:20', '04-08 07:20', '04-08 08:20'
+                            , '04-08 09:20', '04-08 10:20', '04-08 11:20',];
+                        var dataFlowY = [2, 3, 5, 6, 8, 9, 10, 10, 13, 12, 12, 15, 17, 18, 20, 20, 20, 21, 19, 22, 21, 23, 24, 15,];
+                        var chart = new Highcharts.Chart('flow', {
+                            chart: {
+                                type: 'line'                         //指定图表的类型，默认是折线图（line）
+                            },
+                            title: {
+                                text: '流速监控显示（cm/s）'                //指定图表标题
+                            },
+                            xAxis: {
+                                tickInterval: 5,
+                                categories: dataFlowX//指定x轴分组
+                            },
+                            yAxis: {
+                                title: {
+                                    text: '流速'                //指定y轴的标题
+                                }
+                            },
+                            credits: {
+                                enabled: false
+                            },
+                            series: [{                              //指定数据列
+                                name: '流速',                       //数据列名
+                                data: dataFlowY,                  //数据
+                                zones: [{
+                                    value: -100,
+                                    color: '#379DF2'
+                                }]
+                            }]
+                        });
+
+                        var dataOrgX = ['04-07 13:20', '04-07 14:20', '04-07 15:20', '04-07 16:20', '04-07 17:20', '04-07 18:20'
+                            , '04-07 19:20', '04-07 20:20', '04-07 21:20', '04-07 22:20', '04-07 23:20'
+                            , '04-07 23:20', '04-07 23:20', '04-08 01:20', '04-08 02:20', '04-08 03:20'
+                            , '04-08 04:20', '04-08 05:20', '04-08 06:20', '04-08 07:20', '04-08 08:20'
+                            , '04-08 09:20', '04-08 10:20', '04-08 11:20',];
+                        var dataOrgY = [15, 14, 12, 14, 13, 13, 12, 10, 13, 15, 16, 16, 17, 14, 13, 15, 14, 16, 14, 16, 14, 17, 18, 13,];
+                        var chart = new Highcharts.Chart('organization', {
+                            chart: {
+                                type: 'line'                         //指定图表的类型，默认是折线图（line）
+                            },
+                            title: {
+                                text: '组织力监控显示（N）'                //指定图表标题
+                            },
+                            xAxis: {
+                                tickInterval: 5,
+                                categories: dataOrgX//指定x轴分组
+                            },
+                            yAxis: {
+                                title: {
+                                    text: '组织力'                //指定y轴的标题
+                                }
+                            },
+                            credits: {
+                                enabled: false
+                            },
+                            series: [{                              //指定数据列
+                                name: '组织力',                       //数据列名
+                                data: dataOrgY,                  //数据
+                                zones: [{
+                                    value: -100,
+                                    color: '#379DF2'
+                                }]
+                            }]
+                        });
+
+                    </script>
+                </div>
+                <div ng-if="data.modalPageIndex === 3" class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">团队名称:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">医疗团队</div>
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">团队名称:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">医疗团队</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">团队人数:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">12</div>
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">团队人数:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">12</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">团队信息:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">团队信息</div>
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">团队信息:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">团队信息</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">联系电话:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">联系电话:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">当前状态:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">当前状态:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
+                    </div>
+                </div>
+                <div ng-if="data.modalPageIndex === 4" class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">患者姓名:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">王某某</div>
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">患者姓名:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">王某某</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">需求组织:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">肝脏</div>
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">需求组织:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">肝脏</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">临床状态:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">良好</div>
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">临床状态:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">良好</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">联系电话:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">联系电话:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">家属电话:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
+                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">家属电话:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
