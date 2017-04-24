@@ -16,7 +16,7 @@
                         id="teamInfo">转运团队
                 </button>
                 <button ng-click="modalCheckPatientInfo()" type="button" class="btn btn-default"
-                        id="patientInfo">患者信息
+                        id="patientInfo">术者信息
                 </button>
                 <button ng-click="exportExcel(transferInfo.transferId)"
                         class="btn btn-default transbox-btn-size transbox-btn-bordered">导出
@@ -25,7 +25,7 @@
                         class="btn btn-default transbox-btn-size transbox-btn-bordered">退出
                 </button>
 
-                <button ng-click="openInfoForWindow()" style="display:none;float: right;margin-right: 20px;"
+                <button ng-click="openInfoForWindow(transferInfo.transferId)" style="float: right;margin-right: 20px;"
                         class="btn btn-default transbox-btn-size transbox-btn-bordered">新窗口显示
                 </button>
 
@@ -40,14 +40,10 @@
 
                     <div>
                         <div class="row">
-                            <h4 style="color: #3996e5">器官信息</h4>
+                            <h4 style="color: #000">器官信息</h4>
                         </div>
                         <div class="row">
-                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
-                                <div>箱号</div>
-                                <div class="transbox-transfer-info-content"
-                                     ng-bind="transferInfo.deviceId"></div>
-                            </div>
+
                             <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>器官段号</div>
                                 <div class="transbox-transfer-info-content"
@@ -63,6 +59,12 @@
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.organCount"></div>
                             </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>获取时间</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.getOrganAt"></div>
+                            </div>
+
 
                         </div>
                         <div class="row">
@@ -81,11 +83,7 @@
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.organizationSampleCount"></div>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
-                                <div>获取时间</div>
-                                <div class="transbox-transfer-info-content"
-                                     ng-bind="transferInfo.getOrganAt"></div>
-                            </div>
+
                         </div>
                         <div class="row">
                             <hr style="border : 1px solid #D9D9D9;width:90%;margin-top: 10px;margin-bottom: 20px"/>
@@ -93,7 +91,7 @@
 
 
                         <div class="row">
-                            <h4 style="color: #3996e5">转运信息</h4>
+                            <h4 style="color: #000">转运信息</h4>
                         </div>
                         <div class="row">
 
@@ -102,6 +100,26 @@
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.transferNumber"></div>
                             </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>转运箱号</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.deviceId"></div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>保存模式</div>
+                                <div style="display: none;">静态冷,静态常温,灌流冷,灌流常温,</div>
+                                <div class="transbox-transfer-info-content"
+                                     >静态冷</div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>保存液</div>
+                                <div style="display: none;">UW,HTK</div>
+                                <div class="transbox-transfer-info-content"
+                                >UW</div>
+                            </div>
+
+                        </div>
+                        <div class="row">
                             <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>转运起始地</div>
                                 <div class="transbox-transfer-info-content"
@@ -117,52 +135,71 @@
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.tracfficType"></div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>航班/车号</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.tracfficNumber"></div>
                             </div>
+
+                        </div>
+                        <div class="row">
                             <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
-                                <div>转运人</div>
+                                <div>转运负责人</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.tp_name"></div>
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
-                                <div>联系方式</div>
+                                <div>负责人联系方式</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.phone"></div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <hr style="border : 1px solid #D9D9D9;margin-top: 10px;margin-bottom: 20px;width:90%; "/>
-                        </div>
-
-
-                        <div class="row"><h4 style="color: #3996e5">转运人信息</h4></div>
-                        <div class="row">
-                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
-                                <div>获取组织</div>
-                                <div class="transbox-transfer-info-content"
-                                     ng-bind="transferInfo.o_name"></div>
-                            </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
-                                <div>联系人</div>
-                                <div class="transbox-transfer-info-content"
-                                     ng-bind="transferInfo.contactPerson"></div>
-                            </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
-                                <div>联系方式</div>
-                                <div class="transbox-transfer-info-content"
-                                     ng-bind="transferInfo.contactPhone"></div>
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>开箱密码</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.boxPin"></div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <hr style="border : 1px solid #D9D9D9;margin-top: 10px;margin-bottom: 20px;width:90%; "/>
+                        </div>
+
+
+                        <div class="row"><h4 style="color: #000">转运人信息</h4></div>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 transbox-transfer-info-block">
+                                <div>OPO单位</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.o_name"></div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 transbox-transfer-info-block">
+                                <div>单位联系人</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.contactPerson"></div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 transbox-transfer-info-block">
+                                <div>联系方式</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.contactPhone"></div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 transbox-transfer-info-block">
+                                <div>捐献单位</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.o_name"></div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 transbox-transfer-info-block">
+                                <div>单位联系人</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.contactPerson"></div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 transbox-transfer-info-block">
+                                <div>联系方式</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.contactPhone"></div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -269,6 +306,9 @@
                                     var recordData;
 
                                     var scope = angular.element($("#map")).scope();
+                                    console.log(angular.element($("#map")));
+                                    console.log(scope);
+                                    console.log("page init");
                                     var data = scope.infoRecord;
 
                                     if (data) {
@@ -824,47 +864,158 @@
                     </script>
                 </div>
                 <div ng-if="data.modalPageIndex === 3" class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="row">
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">团队名称:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">医疗团队</div>
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">团队名称:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">医疗团队</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">团队人数:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">12</div>
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">团队人数:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">12</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">团队信息:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">团队信息</div>
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">团队信息:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">团队信息</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">联系电话:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">联系电话:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">当前状态:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">当前状态:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
-                    </div>
+                    <table class="table table-bordered" style="width: 50%;margin:0 auto;background-color: #FFFFFF">
+
+                        <thead>
+                        <tr>
+                            <th  colspan="12"><b>团队组长</b></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr >
+                            <td style="text-align: left;vertical-align: middle;" colspan="5"   width="42%"> 名字：王某某</td>
+                            <td style="text-align: left;vertical-align: middle;" colspan="5"   width="42%">职务：主治医生</td>
+                            <td colspan="2" width="16%"  rowspan="3"  ><img src="http://file06.16sucai.com/2016/0905/4383f2019610019278b3497f769ec32d.jpg" width="100" height="150"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">联系电话：18300000000</td>
+                            <td style="text-align: left;vertical-align: middle;" colspan="5"  width="42%">联系地址：浙江大学医学院附属第一医院</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">主导移植数量：10</td>
+                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">参与移植数量：5</td>
+                        </tr>
+                        <tr>
+                            <td colspan="12" style="text-align: left;vertical-align: middle;">简介：</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <table class="table table-bordered" style="width: 50%;margin:0 auto;background-color: #FFFFFF">
+
+                        <thead>
+                        <tr>
+                            <th  colspan="12"><b>团队成员1</b></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr >
+                            <td style="text-align: left;vertical-align: middle;" colspan="5"   width="42%"> 名字：王某某</td>
+                            <td style="text-align: left;vertical-align: middle;" colspan="5"   width="42%">职务：主治医生</td>
+                            <td colspan="2" width="16%"  rowspan="3"  ><img src="http://file06.16sucai.com/2016/0905/4383f2019610019278b3497f769ec32d.jpg" width="100" height="150"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">联系电话：18300000000</td>
+                            <td style="text-align: left;vertical-align: middle;" colspan="5"  width="42%">联系地址：浙江大学医学院附属第一医院</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">主导移植数量：10</td>
+                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">参与移植数量：5</td>
+                        </tr>
+                        <tr>
+                            <td colspan="12" style="text-align: left;vertical-align: middle;">简介：</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <table class="table table-bordered" style="width: 50%;margin:0 auto;background-color: #FFFFFF">
+
+                        <thead>
+                        <tr>
+                            <th  colspan="12"><b>团队成员2</b></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr >
+                            <td style="text-align: left;vertical-align: middle;" colspan="5"   width="42%"> 名字：王某某</td>
+                            <td style="text-align: left;vertical-align: middle;" colspan="5"   width="42%">职务：主治医生</td>
+                            <td colspan="2" width="16%"  rowspan="3"  ><img src="http://file06.16sucai.com/2016/0905/4383f2019610019278b3497f769ec32d.jpg" width="100" height="150"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">联系电话：18300000000</td>
+                            <td style="text-align: left;vertical-align: middle;" colspan="5"  width="42%">联系地址：浙江大学医学院附属第一医院</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">主导移植数量：10</td>
+                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">参与移植数量：5</td>
+                        </tr>
+                        <tr>
+                            <td colspan="12" style="text-align: left;vertical-align: middle;">简介：</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br><br>
                 </div>
                 <div ng-if="data.modalPageIndex === 4" class="col-sm-12 col-md-12 col-lg-12">
                     <div class="row">
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">患者姓名:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">王某某</div>
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">患者姓名:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">王某某</div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">患者姓名:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">王某某
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">患者姓名:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">王某某
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">需求组织:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">肝脏</div>
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">需求组织:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">肝脏</div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">需求组织:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">肝脏
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">需求组织:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">肝脏
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">临床状态:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">良好</div>
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">临床状态:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">良好</div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">临床状态:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">良好
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">临床状态:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">良好
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">联系电话:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">联系电话:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">联系电话:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">联系电话:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">家属电话:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
-                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right;margin-top: 5px;margin-bottom: 5px;">家属电话:</div><div class="col-sm-4 col-md-4 col-lg-4" style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000</div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">家属电话:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">家属电话:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000
+                        </div>
                     </div>
 
                 </div>

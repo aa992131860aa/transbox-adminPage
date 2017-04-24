@@ -459,6 +459,7 @@
                 //organSegNumber:"1354",
 
             };
+            console.log(params);
             // Http.get('/transferInfo', params).then(function (data) {
             //     $scope.data.selectedTransfer = data;
             //     $scope.initData();  // 调用获取相关数据
@@ -602,15 +603,15 @@
        // // // 在 Highcharts 加载之后加载功能模块
        //  require('highcharts/modules/exporting')(Highcharts);
        //  // 创建图表
-
+        console.log("js init1");
         var params1 = {
             organSegNumber: params.name.segNumber,
             transferNumber: params.name.transferNumber,
             transferId:params.name.transferId
         }
-        $scope.openInfoForWindow = function (transfer_id) {
-            //localStorage.transfer_id = transfer_id;
-            var url ='detailWindow.html';
+        $scope.openInfoForWindow = function (transferId) {
+           // localStorage.transferInfo = transferInfo;
+            var url ='http://116.62.28.28:63342/transbox-adminPage/src/app/pages/transbox/history/modal/detailWindow.html?transferId='+transferId;
             window.open(url,'_blank');
         }
        var transferId =params.name.transferId;
@@ -620,6 +621,7 @@
             function (data) {
                 $scope.infoBase = data[0][0];
                 $scope.infoRecord = data[1];
+                console.log("js init2");
                 if($scope.infoBase.avgHumidity){
                 $scope.infoBase.avgHumidity = $scope.infoBase.avgHumidity.toFixed(1)
                 }
