@@ -170,7 +170,7 @@
                         baseInfo.o_name = data[0].op_name,
                         baseInfo.organCount = data[0].t_organCount,
                         baseInfo.organSegNumber = data[0].o_segNumber,
-                        baseInfo.organizationSampleCount = data[0].o_organizationSampleCount1,
+                        baseInfo.organizationSampleCount = data[0].o_organizationSampleCount,
                         baseInfo.phone = data[0].tp_phone,
                         baseInfo.segNumber = data[0].o_segNumber,
                         baseInfo.tp_name = data[0].tp_name,

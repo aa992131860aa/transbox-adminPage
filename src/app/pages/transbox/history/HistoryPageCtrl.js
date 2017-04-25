@@ -611,7 +611,7 @@
         }
         $scope.openInfoForWindow = function (transferId) {
            // localStorage.transferInfo = transferInfo;
-            var url ='http://116.62.28.28:63342/transbox-adminPage/src/app/pages/transbox/history/modal/detailWindow.html?transferId='+transferId;
+            var url ='http://www.lifeperfusor.com/transbox/transbox-adminPage/src/app/pages/transbox/history/modal/detailWindow.html?transferId='+transferId;
             window.open(url,'_blank');
         }
        var transferId =params.name.transferId;
