@@ -1,4 +1,5 @@
-<table st-pipe="getTransfers" st-table="data.pageData.transfers" class="table table-bordered table-hover transfer-table">
+<table st-pipe="getTransfers" st-table="data.pageData.transfers"
+       class="table table-bordered table-hover transfer-table">
     <thead>
     <tr class="common-table-thead" style="cursor: pointer;">
         <th>
@@ -8,7 +9,8 @@
             <span class="sortorder" ng-show="propertyName === 'transferNumber'" ng-class="{reverse: reverse}"></span>
         </th>
         <th ng-click="sortBy('organInfo.segNumber')">器官段号
-            <span class="sortorder" ng-show="propertyName === 'organInfo.segNumber'" ng-class="{reverse: reverse}"></span>
+            <span class="sortorder" ng-show="propertyName === 'organInfo.segNumber'"
+                  ng-class="{reverse: reverse}"></span>
         </th>
         <th ng-click="sortBy('boxInfo.deviceId')">转运箱编号
             <span class="sortorder" ng-show="propertyName === 'boxInfo.deviceId'" ng-class="{reverse: reverse}"></span>
@@ -20,43 +22,51 @@
             <span class="sortorder" ng-show="propertyName === 'organCount'" ng-class="{reverse: reverse}"></span>
         </th>
         <th ng-click="sortBy('transferPersonInfo.name')">转运人
-            <span class="sortorder" ng-show="propertyName === 'transferPersonInfo.name'" ng-class="{reverse: reverse}"></span>
+            <span class="sortorder" ng-show="propertyName === 'transferPersonInfo.name'"
+                  ng-class="{reverse: reverse}"></span>
         </th>
         <th ng-click="sortBy('fromCity')">转运起始地
             <span class="sortorder" ng-show="propertyName === 'fromCity'" ng-class="{reverse: reverse}"></span>
         </th>
         <th ng-click="sortBy('toHospitalInfo.name')">转运目的地
-            <span class="sortorder" ng-show="propertyName === 'toHospitalInfo.name'" ng-class="{reverse: reverse}"></span>
+            <span class="sortorder" ng-show="propertyName === 'toHospitalInfo.name'"
+                  ng-class="{reverse: reverse}"></span>
         </th>
-        <th ng-click="sortBy('transfer.startAt')">转运日期
+        <th width="100px" ng-click="sortBy('transfer.startAt')">转运日期
             <span class="sortorder" ng-show="propertyName === 'transfer.startAt'" ng-class="{reverse: reverse}"></span>
         </th>
+        <th width="125px" ><span >操作</span> </th>
     </tr>
     </thead>
     <tbody ng-show="!data.pagination.isLoading">
-    <tr ng-click="pickTransfer(transfer)" ng-repeat="transfer in data.pageData.transfers | orderBy:propertyName:reverse" style="cursor: pointer;">
+    <tr ng-click="pickTransfer(transfer)" ng-repeat="transfer in data.pageData.transfers | orderBy:propertyName:reverse"
+        style="cursor: pointer;">
         <td ng-click="checkTransfer($event, $index)">
             <input ng-model="transfer.checked" type="checkbox">
         </td>
         <td><span ng-bind="transfer.transferNumber"></span></td>
         <td><span ng-bind="transfer.organInfo.segNumber"></span></td>
         <td><span ng-bind="transfer.boxInfo.deviceId"></span></td>
-        <td><span ng-bind="transfer.organInfo.type"></span> </td>
+        <td><span ng-bind="transfer.organInfo.type"></span></td>
         <td><span ng-bind="transfer.organCount"></span></td>
         <td><span ng-bind="transfer.transferPersonInfo.name"></span></td>
         <td><span ng-bind="transfer.fromCity"></span></td>
         <td><span ng-bind="transfer.toHospitalInfo.name"></span></td>
         <td><span ng-bind="getDateString(transfer.startAt)"></span></td>
+        <td ng-click="tdClick($event)"><span style="color: #ff0000;" ng-click="openNewModal($event, $index,transfer.transferid)">停止</span>
+           |
+            <span ng-click="createNewModal($event, $index,transfer.transferid,transfer.boxInfo.boxid,transfer)">完善信息</span></td>
     </tr>
     </tbody>
     <tbody ng-show="data.pagination.isLoading">
     <tr>
-        <td colspan="9" class="text-center">加载中 ... </td>
+        <td colspan="9" class="text-center">加载中 ...</td>
     </tr>
     </tbody>
     <tfoot>
     <tr>
-        <td id="transferTablePagination" colspan="9" class="text-center" st-pagination="" st-items-by-page="data.pagination.maxSize" st-displayed-pages="data.pageData.displayedPages">
+        <td id="transferTablePagination" colspan="9" class="text-center" st-pagination=""
+            st-items-by-page="data.pagination.maxSize" st-displayed-pages="data.pageData.displayedPages">
         </td>
     </tr>
     </tfoot>

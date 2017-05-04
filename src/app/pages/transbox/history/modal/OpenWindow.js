@@ -136,12 +136,37 @@
 (function () {
     'use strict';
 
-    angular.module('openWindow', ['HttpService'])
+    angular.module('openWindow', ["HttpService", "ui.bootstrap"])
         .controller('OpenWindowController', OpenWindowController);
 
+    function TeamModalCtrl($scope, Http, params) {
+
+    }
 
     // modal controller
-    function OpenWindowController($scope, Http, $location) {
+    function OpenWindowController($scope, Http, $location, $uibModal) {
+        $scope.open = function (page, size, ctrl, params, saveCB, cancelCB) {
+            $uibModal.open({
+                animation: true,
+                templateUrl: page,
+                size: size,
+                controller: ctrl,
+                bindToController: true,
+                resolve: {
+                    params: params
+                },
+                windowTopClass: "transfer-history-modal-top-class"
+            }).result.then(function (result) {
+                saveCB(result);
+            }, function (result) {
+                cancelCB(result);
+            });
+        };
+        //增加转运团队人员
+        $scope.addTeam = function () {
+
+
+        }
         //  var Highcharts = require('highcharts');
         // //
         // // // 在 Highcharts 加载之后加载功能模块
@@ -152,12 +177,76 @@
         var params2 = {
             transferId: transferId
         }
+        var teams = [
+            {
+                "id": 1,
+                "title": "团队组长",
+                "name": "王某某",
+                "post": "主治医生",
+                "phone": "18300000000",
+                "address": "浙江大学医学院附属第一医院",
+                "leaderNum": 2,
+                "attendNum": 4,
+                "brief": "coco",
+                "isShow": true
+            },
+            {
+                "id": 2,
+                "title": "团队组员",
+                "name": "王某某",
+                "post": "主治医生",
+                "phone": "18300000000",
+                "address": "浙江大学医学院附属第一医院",
+                "leaderNum": 2,
+                "attendNum": 4,
+                "brief": "coco",
+                "isShow": true
+            },
+            {
+                "id": 3,
+                "title": "团队组员",
+                "name": "王某某",
+                "post": "主治医生",
+                "phone": "18300000000",
+                "address": "浙江大学医学院附属第一医院",
+                "leaderNum": 2,
+                "attendNum": 4,
+                "brief": "coco",
+                "isShow": true
+            }
+        ];
+        $scope.item = {
+            id: 1,
+            title: "",
+            name: "",
+            post: "",
+            phone: "",
+            address: "",
+            leaderNum: "",
+            attendNum: "",
+            brief: "",
+            isShow: true
+        }
+        $scope.teams = teams;
+        //修改team
+        $scope.modifyTeam = function (index) {
+            $scope.teams[index].isShow = !$scope.teams[index].isShow;
+        }
+        //删除team
+        $scope.delTeam = function (index) {
+            $scope.teams.splice(index, 1);
+        }
+        //增加team
+        $scope.addTeam = function(){
+            $scope.item.isShow = !$scope.item.isShow;
+        }
         //$timeout(function () {
         Http.get('/infoBase', params2).then(
             function (data) {
 
-               // console.log(data);
-                if (data) {
+                // console.log(data);
+                if (data[0]) {
+
                         baseInfo.bloodSampleCount = data[0].o_bloodSampleCount,
                         baseInfo.bloodType = data[0].o_bloodType,
                         baseInfo.boxPin = data[0].t_boxPin,
@@ -179,8 +268,8 @@
                         baseInfo.transferId = data[0].transferId,
                         baseInfo.transferNumber = data[0].t_transferNumber,
                         baseInfo.type = data[0].o_type
-                        $scope.transferInfo = baseInfo;
-                        //console.log(baseInfo)
+                    $scope.transferInfo = baseInfo;
+                    //console.log(baseInfo)
                 }
 
 
@@ -190,8 +279,8 @@
 
 
         var params1 = {
-           // organSegNumber:  $scope.transferInfo.segNumber,
-           // transferNumber:  $scope.transferInfo.transferNumber,
+            // organSegNumber:  $scope.transferInfo.segNumber,
+            // transferNumber:  $scope.transferInfo.transferNumber,
             transferId: transferId
         }
 

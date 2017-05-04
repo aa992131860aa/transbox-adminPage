@@ -25,8 +25,13 @@
   <!-- endinject -->
   <!-- endbuild -->
 </head>
+<style>
+  modal-open {
+    overflow: initial !important;
+  }
+</style>
 <body>
-<div class="body-bg"></div>
+<div class="body-bg "></div>
 <main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
 
   <ba-sidebar></ba-sidebar>
@@ -77,4 +82,9 @@
 <!-- endbuild -->
 
 </body>
+
+<script src="http://oog5l31fv.bkt.clouddn.com/bootstrap-datetimepicker.min.js"></script>
+<script src="http://oog5l31fv.bkt.clouddn.com/bootstrap-datetimepicker.zh-CN.js"></script>
+<link rel="stylesheet" href="http://oog5l31fv.bkt.clouddn.com/bootstrap-datetimepicker.min.css"></link>
+<script src="http://oog5l31fv.bkt.clouddn.com/jquery-prompt21.js"></script>
 </html>

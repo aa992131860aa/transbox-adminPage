@@ -97,6 +97,14 @@
           title: '配件',
           stateRef: 'fitting',
           blank: false
+        },{
+            title: '医师库',
+            stateRef: 'doctor',
+            blank: false
+        },{
+            title: '术者库',
+            stateRef: 'patient',
+            blank: false
         }]
       });
 

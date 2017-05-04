@@ -63,12 +63,24 @@ tfoot tr td {
   bottom: auto;
   left:-25%;
 }
+.transfer-create-modal-top-class {
+  top: 20px;
+  bottom: auto;
+
+}
+.transfer-transfer-modal-top-class {
+
+}
+
 
 .transbox-dropdown-menu {
   left: auto;
   width: calc(100% - 30px);
 }
-
+.transbox-dropdown-menu1 {
+  left: auto;
+  width: calc(100% - 0px);
+}
 .transbox-dropdown-input {
   // border-top: 1px solid #e7e7e7;
   // border-right: 0;
@@ -88,6 +100,17 @@ tfoot tr td {
   top: 1px !important;
   width: 32px !important;
   height: 32px !important;
+  border: 0;
+  background-color: transparent;
+  // box-shadow: 0 !important;
+  // -webkit-box-shadow: 0 !important;
+  // outline:0 !important;
+}
+.transbox-dropdown-btn-right1 {
+  position: absolute !important;
+  right: 16px !important;
+  top: 5px !important;
+
   border: 0;
   background-color: transparent;
   // box-shadow: 0 !important;
@@ -123,6 +146,12 @@ tfoot tr td {
 .transbox-modal {
   padding: 20px;
   background: #F5F5F5;
+  overflow-y: scroll;
+  max-height: 700px;
+
+}
+.transbox-modal1 {
+  padding: 20px;
   overflow-y: scroll;
   max-height: 700px;
 

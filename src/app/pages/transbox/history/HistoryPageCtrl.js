@@ -3,7 +3,9 @@
 
     angular.module('BlurAdmin.pages.transbox.history')
         .controller('HistoryPageCtrl', HistoryPageCtrl)
-        .controller('HistoryModalCtrl', HistoryModalCtrl);
+        .controller('HistoryModalCtrl', HistoryModalCtrl)
+
+    ;
 
     function HistoryPageCtrl($scope, $filter, editableOptions, editableThemes, Http, Config, $uibModal, $window,
                              Common, toastr, toastrConfig) {
@@ -17,7 +19,7 @@
                 resolve: {
                     params: params
                 },
-                windowTopClass: "transfer-history-modal-top-class"
+                windowTopClass : "transfer-history-modal-top-class"
             }).result.then(function (result) {
                 saveCB(result);
             }, function (result) {
@@ -597,18 +599,78 @@
 
 
     // modal controller
-    function HistoryModalCtrl($scope, Http, params, Common, $timeout) {
-       //  var Highcharts = require('highcharts');
-       // //
-       // // // 在 Highcharts 加载之后加载功能模块
-       //  require('highcharts/modules/exporting')(Highcharts);
-       //  // 创建图表
-        console.log("js init1");
+    function HistoryModalCtrl($scope, Http, params,$uibModal, Common, $timeout) {
+        var teams = [
+            {
+                "id": 1,
+                "title": "团队组长",
+                "name": "王某某",
+                "post": "主治医生",
+                "phone": "18300000000",
+                "address": "浙江大学医学院附属第一医院",
+                "leaderNum": 2,
+                "attendNum": 4,
+                "brief": "coco",
+                "isShow": true
+            },
+            {
+                "id": 2,
+                "title": "团队组员",
+                "name": "王某某",
+                "post": "主治医生",
+                "phone": "18300000000",
+                "address": "浙江大学医学院附属第一医院",
+                "leaderNum": 2,
+                "attendNum": 4,
+                "brief": "coco",
+                "isShow": true
+            },
+            {
+                "id": 3,
+                "title": "团队组员",
+                "name": "王某某",
+                "post": "主治医生",
+                "phone": "18300000000",
+                "address": "浙江大学医学院附属第一医院",
+                "leaderNum": 2,
+                "attendNum": 4,
+                "brief": "coco",
+                "isShow": true
+            }
+        ];
+        $scope.item = {
+            id: 1,
+            title: "",
+            name: "",
+            post: "",
+            phone: "",
+            address: "",
+            leaderNum: "",
+            attendNum: "",
+            brief: "",
+            isShow: true
+        }
+        $scope.teams = teams;
+        //修改team
+        $scope.modifyTeam = function (index) {
+            $scope.teams[index].isShow = !$scope.teams[index].isShow;
+        }
+        //删除team
+        $scope.delTeam = function (index) {
+            $scope.teams.splice(index, 1);
+        }
+        //增加team
+        $scope.addTeam = function(){
+            $scope.item.isShow = !$scope.item.isShow;
+        }
         var params1 = {
             organSegNumber: params.name.segNumber,
             transferNumber: params.name.transferNumber,
             transferId:params.name.transferId
         }
+
+
+
         $scope.openInfoForWindow = function (transferId) {
            // localStorage.transferInfo = transferInfo;
             var url ='http://www.lifeperfusor.com/transbox/transbox-adminPage/src/app/pages/transbox/history/modal/detailWindow.html?transferId='+transferId;

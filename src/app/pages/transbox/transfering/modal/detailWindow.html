@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="openWindow" ng-controller="OpenWindowController">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>莱普晟器官转运监控平台</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic"
+          rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96x96.png">
+    <link rel="stylesheet" href="http://oog5l31fv.bkt.clouddn.com/app-0d7f75978b.css">
+    <link rel="stylesheet" href="http://oog5l31fv.bkt.clouddn.com/vendor-42b06dd2f4.css">
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script typet="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.4/jquery.fullPage.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.4/jquery.fullPage.js"></script>
+    <script src="http://webapi.amap.com/maps?v=1.3&key=6178b4ecd30a43f661ad2abf15f35595"></script>
+    <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="http://oog5l31fv.bkt.clouddn.com/bootstrap-datetimepicker.min.js"></script>
+    <script src="http://oog5l31fv.bkt.clouddn.com/bootstrap-datetimepicker.zh-CN.js"></script>
+    <link rel="stylesheet" href="http://oog5l31fv.bkt.clouddn.com/bootstrap-datetimepicker.min.css">
+    <script src="ui-bootstrap-tpls-1.3.2.js"></script>
+    <script src="OpenWindow.js"></script>
+
+
+    <style>
+        .file {
+            position: relative;
+            display: inline-block;
+            background: #D0EEFF;
+            border: 1px solid #99D3F5;
+            border-radius: 4px;
+            padding: 4px 12px;
+            overflow: hidden;
+            color: #1E88C7;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+        }
+
+        .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        .file:hover {
+            background: #AADFFD;
+            border-color: #78C3F3;
+            color: #004974;
+            text-decoration: none;
+        }
+
+        td, th {
+            border: solid #B5B5B5;
+            border-width: 0px 1px 1px 0px;
+            padding: 0px 0px;
+        }
+
+        table {
+            border: solid #B5B5B5;
+            border-width: 1px 0px 0px 1px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div style="width: 100%;text-align: center;margin-top: 20px;">
+    <div>
+        <div class="transbox-modal-header">
+            <div>
+                <span class="transbox-blue-color">历史信息详情(器官段号:{{transferInfo.segNumber}})</span>
+                <button ng-click="modalCheckBasicInfo()" type="button"
+                        class="btn btn-default btn-blue-solid" id="baseInfo">基本信息
+                </button>
+                <button ng-click="modalCheckDataInfo()" onclick="clickMap()" type="button" class="btn btn-default"
+                        id="sensorInfo">转运监控
+                </button>
+                <button ng-click="modalCheckFunctionInfo()" type="button" class="btn btn-default"
+                        id="functionInfo">功能数据
+                </button>
+                <button ng-click="modalCheckTeamInfo()" type="button" class="btn btn-default"
+                        id="teamInfo">转运团队
+                </button>
+                <button ng-click="modalCheckPatientInfo()" type="button" class="btn btn-default"
+                        id="patientInfo">术者信息
+                </button>
+                <button ng-click="exportExcel(transferInfo.transferId)"
+                        class="btn btn-default transbox-btn-size transbox-btn-bordered">导出
+                </button>
+                <button onclick="closeWindow()"
+                        class="btn btn-default transbox-btn-size transbox-btn-bordered">退出
+                </button>
+
+                <button ng-click="openInfoForWindow()" style="display:none;float: right;margin-right: 20px;"
+                        class="btn btn-default transbox-btn-size transbox-btn-bordered">新窗口显示
+                </button>
+
+            </div>
+            <hr style="border : 1px dashed #e7e7e7;width:90%; "/>
+        </div>
+        <div class="transbox-modal-body">
+
+            <div class="row">
+                <div ng-if="data.modalPageIndex === 0" class="col-sm-12 col-md-12 col-lg-12"
+                     style="text-align: center;">
+
+                    <div>
+                        <div class="row">
+                            <h4 style="color: #000">器官信息</h4>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>器官段号</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.segNumber"></div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>器官类型</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.type"></div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>器官数量</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.organCount"></div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>获取时间</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.getOrganAt"></div>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>血型</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.bloodType"></div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>血液样本数量</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.bloodSampleCount"></div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>组织样本数量</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.organizationSampleCount"></div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <hr style="border : 1px solid #D9D9D9;width:90%;margin-top: 10px;margin-bottom: 20px"/>
+                        </div>
+
+
+                        <div class="row">
+                            <h4 style="color: #000">转运信息</h4>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>转运单号</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.transferNumber"></div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>转运箱号</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.deviceId"></div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>保存模式</div>
+                                <div style="display: none;">静态冷,静态常温,灌流冷,灌流常温,</div>
+                                <div class="transbox-transfer-info-content"
+                                >静态冷
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>保存液</div>
+                                <div style="display: none;">UW,HTK</div>
+                                <div class="transbox-transfer-info-content"
+                                >UW
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>转运起始地</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.fromCity"></div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>转运目的地</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.h_name"></div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>转运方式</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.tracfficType"></div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>航班/车号</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.tracfficNumber"></div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>转运负责人</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.tp_name"></div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>负责人联系方式</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.phone"></div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>开箱密码</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.boxPin"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <hr style="border : 1px solid #D9D9D9;margin-top: 10px;margin-bottom: 20px;width:90%; "/>
+                        </div>
+
+
+                        <div class="row"><h4 style="color: #000">转运人信息</h4></div>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 transbox-transfer-info-block">
+                                <div>OPO单位</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.o_name"></div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 transbox-transfer-info-block">
+                                <div>单位联系人</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.contactPerson"></div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 transbox-transfer-info-block">
+                                <div>联系方式</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.contactPhone"></div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 transbox-transfer-info-block">
+                                <div>捐献单位</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.o_name"></div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 transbox-transfer-info-block">
+                                <div>单位联系人</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.contactPerson"></div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 transbox-transfer-info-block">
+                                <div>联系方式</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.contactPhone"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="data.modalPageIndex === 1" class="col-sm-12 col-md-12 col-lg-12">
+                    <!--<div style="text-align: center;line-height: 40px"-->
+                    <!--ng-show="info.records.length = 0">-->
+                    <!--本条转运暂无记录，请稍后查看。-->
+                    <!--</div>-->
+
+                    <div full-page options="mainOptions">
+                        <div class="section">
+                            <!--page1-->
+
+                            <div style="padding: 15px;height: 430px;">
+                                <div>
+                                    <span class="way-span">最高温度:</span>
+                                    <span class="way-span-color"
+                                          ng-class="infoBase.maxTemperature >=1 && infoBase.maxTemperature<=4 ?
+                               'way-span-color' : 'way-span-color-warning'"
+                                          ng-bind="infoBase.maxTemperature"></span>
+                                    <span class="way-span">最高湿度:</span>
+                                    <span class="way-span-color-right"
+                                          ng-bind="infoBase.maxHumidity"></span>
+                                </div>
+                                <div>
+                                    <span class="way-span">最低温度:</span>
+                                    <span ng-class="infoBase.minTemperature >=1 && infoBase.minTemperature<=4 ?
+                               'way-span-color' : 'way-span-color-warning'"
+                                          ng-bind="infoBase.minTemperature"></span>
+                                    <span class="way-span">最低湿度:</span>
+                                    <span class="way-span-color-right"
+                                          ng-bind="infoBase.minHumidity"></span>
+                                </div>
+
+                                <div>
+                                    <span class="way-span">平均温度:</span>
+                                    <span ng-class="infoBase.avgTemperature >=1 && infoBase.avgTemperature<=4 ?
+                               'way-span-color' : 'way-span-color-warning'"
+                                          ng-bind="infoBase.avgTemperature?
+                                          infoBase.avgTemperature+'℃':''"></span>
+                                    <span class="way-span">平均湿度:</span>
+                                    <span class="way-span-color-right"
+                                          ng-bind="infoBase.avgHumidity?infoBase.avgHumidity : ''"></span>
+                                </div>
+
+
+                                <div>
+                                    <span class="way-span">碰撞次数:</span>
+                                    <span ng-class="data.collisionData.length > 0? 'way-span-color-warning' : 'way-span-color'"
+                                          ng-bind="data.collisionData.length == 0? '0次' : data.collisionData.length+'次'"></span>
+                                    <span class="way-span">开箱次数:</span>
+                                    <span class="way-span-color-right"
+                                          ng-bind="data.openData.length == 0? '0次' : data.openData.length+'次'"></span>
+                                </div>
+                                <div>
+                                    <span class="way-span">当前位置:</span>
+                                    <span class="way-span-color"
+                                          ng-bind="infoBase.currentCity"></span>
+                                    <span class="way-span">剩余距离:</span>
+                                    <span class="way-span-color-right"
+                                          ng-bind="infoBase.distance"></span>
+                                </div>
+                                <div>
+                                    <span class="way-span">剩余电量:</span>
+                                    <span class="way-span-color"
+                                          ng-bind="infoBase.power"></span>
+                                    <span class="way-span">消耗电量:</span>
+                                    <span class="way-span-color-right"
+                                          ng-bind="infoBase.expendPower"></span>
+                                </div>
+                                <div>
+                                    <span class="way-span">开始时间:</span>
+                                    <span class="way-span-color" ng-bind="infoBase.minRecordAt"></span>
+                                    <span class="way-span">持续时间:</span>
+                                    <span class="way-span-color-right"
+                                          ng-bind="infoBase.duration"></span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <!--page4-->
+
+                            <!--<div style="padding: 15px;height: 100%">-->
+                            <div style="padding: 0px;height: 700px">
+
+                                <div>
+                        <span class="way-span-weight">当前位置:
+                            <span class="color-blue"
+                                  ng-bind="infoBase.currentCity"></span>
+                        </span>
+                                    <span class="crash-span-weight-float">剩余距离:
+                            <span class="color-blue"
+                                  ng-bind="infoBase.distance"></span>
+                        </span>
+                                </div>
+
+                                <div id="map"
+                                     style="height: calc(100% - 70px);width: inherit"></div>
+
+                                <script src="map.js"></script>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="section">
+
+                            <!--page2 温度-->
+
+                            <div style="padding-top:15px">
+                                <div style="width: 100%;height: 40px;">
+                                    <div style="text-align: center">
+                        <span class="col-sm-3 col-md-3 col-lg-3">最高温度
+                        </span>
+                                        <span class="col-sm-3 col-md-3 col-lg-3">最低温度
+                        </span>
+                                        <span class="col-sm-3 col-md-3 col-lg-3">平均温度
+                        </span>
+                                        <span class="col-sm-3 col-md-3 col-lg-3">异常温度总数
+                        </span>
+                                    </div>
+
+                                    <div style="text-align: center;">
+                        <span class="col-sm-3 col-md-3 col-lg-3" ng-bind="infoBase.maxTemperature"
+                              ng-class="infoBase.maxTemperature >=1 && infoBase.maxTemperature<=4 ?
+                               'temp-color' : 'temp-color-warning'">
+                        </span>
+                                        <span class="col-sm-3 col-md-3 col-lg-3" ng-bind="infoBase.minTemperature"
+                                              ng-class="infoBase.minTemperature >=1 && infoBase.minTemperature<=4 ?
+                               'temp-color' : 'temp-color-warning'">
+                        </span>
+                                        <span class="col-sm-3 col-md-3 col-lg-3"
+                                              ng-class="infoBase.avgTemperature >=1 && infoBase.avgTemperature<=4 ?
+                               'temp-color' : 'temp-color-warning'"
+                                              ng-bind="infoBase.avgTemperature?infoBase.avgTemperature+'℃':''">
+                        </span>
+                                        <span class="col-sm-3 col-md-3 col-lg-3"
+                                              ng-class="'temp-color-warning'"
+                                              ng-bind="unTemperature">
+                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="onway-morris-content" style="background-color: #FFFFFF">
+
+                                    <div id="temperature" style="width: 100%">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="section">
+
+                            <!--page3 湿度-->
+
+                            <div style="padding-top:15px">
+                                <div style="width: 100%;height: 40px;">
+                                    <div style="text-align: center;">
+                        <span class="col-sm-4 col-md-4 col-lg-4">最高湿度
+                        </span>
+                                        <span class="col-sm-4 col-md-4 col-lg-4">最低湿度
+                        </span>
+                                        <span class="col-sm-4 col-md-4 col-lg-4">平均湿度
+                        </span>
+                                    </div>
+
+                                    <div style="text-align: center">
+                        <span class="col-sm-4 col-md-4 col-lg-4 color-blue" ng-bind="infoBase.maxHumidity">
+                        </span>
+                                        <span class="col-sm-4 col-md-4 col-lg-4 color-blue"
+                                              ng-bind="infoBase.minHumidity?infoBase.minHumidity:''">
+                        </span>
+                                        <span class="col-sm-4 col-md-4 col-lg-4 color-blue"
+                                              ng-bind="infoBase.avgHumidity">
+                        </span>
+                                    </div>
+                                </div>
+
+
+                                <div class="onway-morris-content">
+
+                                    <div line-chart style="background-color: #FFFFFF;width: 100%;height: 400px;"
+                                         id="humidity"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="section">
+                            <!--page5-->
+
+                            <div style="padding: 15px">
+
+                                <div>
+                        <span class="way-span-weight">开箱次数:
+                            <span class="color-blue"
+                                  ng-bind="data.openData? (data.openData.length == 0? '0次' : data.openData.length+'次'):'0次'"></span>
+                        </span>
+                                    <span class="crash-span-weight-float">碰撞次数:
+                            <span class="color-blue"
+                                  ng-class="data.collisionData?(data.collisionData.length > 0? 'temp-color-warning' : 'temp-color'):'temp-color'"
+                                  ng-bind="data.collisionData?(data.collisionData.length == 0? '0次' : data.collisionData.length+'次'):'0次'"></span>
+                        </span>
+                                </div>
+
+                                <div class="onway-morris-content" style="padding: 10px;">
+                                    <div>
+                                        <span class="crash-span-weight">开箱时间</span>
+                                        <span class="crash-span-weight-float">碰撞时间</span>
+                                    </div>
+
+                                    <div style="border-top: 1px #D9D9D9 solid"
+                                         ng-repeat="info in data.crashData">
+                            <span class="crash-span-weight"
+                                  ng-bind="getShowtime(info.oInfo)"></span>
+                                        <span class="crash-span-weight-float"
+                                              ng-bind="getShowtime(info.cInfo)"></span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div ng-if="data.modalPageIndex === 2" class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="onway-morris-content" style="background-color: #FFFFFF">
+
+                        <div id="press" style="width: 100%">
+
+                        </div>
+                    </div>
+
+                    <div class="onway-morris-content" style="background-color: #FFFFFF;margin-top: 20px;">
+
+                        <div id="flow" style="width: 100%">
+
+                        </div>
+                    </div>
+                    <div class="onway-morris-content" style="background-color: #FFFFFF;margin-top: 20px;">
+
+                        <div id="organization" style="width: 100%">
+
+                        </div>
+                    </div>
+                    <script>
+                        //                        var scope1 = angular.element($("#temperature")).scope();
+                        //
+                        //                        var test = [];
+                        //                        if (scope1.tDataY) {
+                        //                            for (var i = 0; i < scope1.tDataY.length; i++) {
+                        //                                test.push(scope1.tDataY[i] / 1.0);
+                        //                            }
+                        //                        }
+                        //                        var temratureTotal = scope1.temperatureTotal;
+                        //                        var tickIntervalSize = 8;
+                        //                        if (temratureTotal < 40) {
+                        //                            tickIntervalSize = 8;
+                        //                        } else {
+                        //                            tickIntervalSize = parseInt(temratureTotal / 5);
+                        //                        }
+                        //
+                        //                        parseInt(temratureTotal / 40);
+                        var dataX = ['04-07 13:20', '04-07 14:20', '04-07 15:20', '04-07 16:20', '04-07 17:20', '04-07 18:20'
+                            , '04-07 19:20', '04-07 20:20', '04-07 21:20', '04-07 22:20', '04-07 23:20'
+                            , '04-07 23:20', '04-07 23:20', '04-08 01:20', '04-08 02:20', '04-08 03:20'
+                            , '04-08 04:20', '04-08 05:20', '04-08 06:20', '04-08 07:20', '04-08 08:20'
+                            , '04-08 09:20', '04-08 10:20', '04-08 11:20',];
+                        var dataY = [15, 20, 12, 8, 30, 13, 26, 10, 24, 19, 18, 22, 31, 10, 20, 20, 20, 21, 19, 29, 12, 14, 18, 13,];
+                        var chart = new Highcharts.Chart('press', {
+                            chart: {
+                                type: 'line'                         //指定图表的类型，默认是折线图（line）
+                            },
+                            title: {
+                                text: '压力监控显示（mm）'                //指定图表标题
+                            },
+                            xAxis: {
+                                tickInterval: 5,
+                                categories: dataX//指定x轴分组
+                            },
+                            yAxis: {
+                                title: {
+                                    text: '压力'                //指定y轴的标题
+                                }
+                            },
+                            credits: {
+                                enabled: false
+                            },
+                            series: [{                              //指定数据列
+                                name: '压力',                       //数据列名
+                                data: dataY,                  //数据
+                                zones: [{
+                                    value: -100,
+                                    color: '#379DF2'
+                                }]
+                            }]
+                        });
+
+                        var dataFlowX = ['04-07 13:20', '04-07 14:20', '04-07 15:20', '04-07 16:20', '04-07 17:20', '04-07 18:20'
+                            , '04-07 19:20', '04-07 20:20', '04-07 21:20', '04-07 22:20', '04-07 23:20'
+                            , '04-07 23:20', '04-07 23:20', '04-08 01:20', '04-08 02:20', '04-08 03:20'
+                            , '04-08 04:20', '04-08 05:20', '04-08 06:20', '04-08 07:20', '04-08 08:20'
+                            , '04-08 09:20', '04-08 10:20', '04-08 11:20',];
+                        var dataFlowY = [2, 3, 5, 6, 8, 9, 10, 10, 13, 12, 12, 15, 17, 18, 20, 20, 20, 21, 19, 22, 21, 23, 24, 15,];
+                        var chart = new Highcharts.Chart('flow', {
+                            chart: {
+                                type: 'line'                         //指定图表的类型，默认是折线图（line）
+                            },
+                            title: {
+                                text: '流速监控显示（cm/s）'                //指定图表标题
+                            },
+                            xAxis: {
+                                tickInterval: 5,
+                                categories: dataFlowX//指定x轴分组
+                            },
+                            yAxis: {
+                                title: {
+                                    text: '流速'                //指定y轴的标题
+                                }
+                            },
+                            credits: {
+                                enabled: false
+                            },
+                            series: [{                              //指定数据列
+                                name: '流速',                       //数据列名
+                                data: dataFlowY,                  //数据
+                                zones: [{
+                                    value: -100,
+                                    color: '#379DF2'
+                                }]
+                            }]
+                        });
+
+                        var dataOrgX = ['04-07 13:20', '04-07 14:20', '04-07 15:20', '04-07 16:20', '04-07 17:20', '04-07 18:20'
+                            , '04-07 19:20', '04-07 20:20', '04-07 21:20', '04-07 22:20', '04-07 23:20'
+                            , '04-07 23:20', '04-07 23:20', '04-08 01:20', '04-08 02:20', '04-08 03:20'
+                            , '04-08 04:20', '04-08 05:20', '04-08 06:20', '04-08 07:20', '04-08 08:20'
+                            , '04-08 09:20', '04-08 10:20', '04-08 11:20',];
+                        var dataOrgY = [15, 14, 12, 14, 13, 13, 12, 10, 13, 15, 16, 16, 17, 14, 13, 15, 14, 16, 14, 16, 14, 17, 18, 13,];
+                        var chart = new Highcharts.Chart('organization', {
+                            chart: {
+                                type: 'line'                         //指定图表的类型，默认是折线图（line）
+                            },
+                            title: {
+                                text: '组织力监控显示（N）'                //指定图表标题
+                            },
+                            xAxis: {
+                                tickInterval: 5,
+                                categories: dataOrgX//指定x轴分组
+                            },
+                            yAxis: {
+                                title: {
+                                    text: '组织力'                //指定y轴的标题
+                                }
+                            },
+                            credits: {
+                                enabled: false
+                            },
+                            series: [{                              //指定数据列
+                                name: '组织力',                       //数据列名
+                                data: dataOrgY,                  //数据
+                                zones: [{
+                                    value: -100,
+                                    color: '#379DF2'
+                                }]
+                            }]
+                        });
+
+                    </script>
+                </div>
+                <div ng-if="data.modalPageIndex === 3" class="col-sm-12 col-md-12 col-lg-12">
+
+                    <div ng-repeat="item in teams">
+                        <div class="" ng-show="item.isShow">
+                            <table class="table table-bordered" style=" width: 50%;margin:0 auto;">
+
+                                <thead>
+                                <tr>
+                                    <th colspan="12"><b>{{item.title}}</b>
+                                        <div style="float: right;margin-right: -10px;" class="btn-group btn-group-xs">
+                                            <button type="button" class="btn btn-warning" ng-click="modifyTeam($index)">
+                                                修改
+                                            </button>
+                                            <button type="button" class="btn btn-danger" ng-click="delTeam($index)">删除
+                                            </button>
+                                        </div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">
+                                        名字：{{item.name}}
+                                    </td>
+                                    <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">
+                                        职务：{{item.post}}
+                                    </td>
+                                    <td colspan="2" width="16%" rowspan="3"><img
+                                            src="http://file06.16sucai.com/2016/0905/4383f2019610019278b3497f769ec32d.jpg"
+                                            width="100" height="150"></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">
+                                        联系电话：{{item.phone}}
+                                    </td>
+                                    <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">
+                                        联系地址：{{item.address}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">
+                                        主导移植数量：{{item.leaderNum}}
+                                    </td>
+                                    <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">
+                                        参与移植数量：{{item.attendNum}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="12" style="text-align: left;vertical-align: middle;">
+                                        简介：{{item.brief}}
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <div class="" ng-show="!item.isShow">
+                            <table style="width: 50%;margin:0 auto;">
+
+                                <thead>
+                                <tr>
+                                    <th colspan="12" style="text-align: center;padding: 8px;"><input
+                                            class="form-control input-sm " style="width: 150px;margin:0 auto;"
+                                            type="text" placeholder="请输入标题" ng-model="item.title">
+
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label"
+                                                   style="color: #000000;padding-left: 0px;">名字:</label>
+                                            <div class="col-sm-8" style="padding-left: 0px;">
+                                                <input class="form-control input-sm" ng-model="item.name" type="text">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label"
+                                                   style="color: #000000;padding-left: 0px;">职务:</label>
+                                            <div class="col-sm-8" style="padding-left: 0px;">
+                                                <input class="form-control input-sm" ng-model="item.post" type="text">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td rowspan="3" width="100px" height="150px" style="vertical-align: middle">
+                                        <a href="javascript:;" class="file">选择头像
+                                            <input type="file" name="">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label"
+                                                   style="color: #000000;padding-left: 0px;">联系电话:</label>
+                                            <div class="col-sm-8" style="padding-left: 0px;">
+                                                <input class="form-control input-sm" ng-model="item.phone" type="text">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label"
+                                                   style="color: #000000;padding-left: 0px;">联系地址:</label>
+                                            <div class="col-sm-8" style="padding-left: 0px;">
+                                                <input class="form-control input-sm" ng-model="item.address"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label"
+                                                   style="color: #000000;padding-left: 0px;">主导移植数量:</label>
+                                            <div class="col-sm-8" style="padding-left: 0px;">
+                                                <input class="form-control input-sm" ng-model="item.leaderNum"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label"
+                                                   style="color: #000000;padding-left: 0px;"> 参与移植数量:</label>
+                                            <div class="col-sm-8" style="padding-left: 0px;">
+                                                <input class="form-control input-sm" ng-model="item.attendNum"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="12" style="text-align: left;vertical-align: middle;">
+
+                                        <div class="form-group" style="margin-left: 30px;margin-right: 30px;">
+                                            <label style="color: #000000;">简介:</label>
+                                            <textarea class="form-control" rows="3">{{item.brief}}</textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="12" style="text-align: center;padding: 5px;">
+                                        <button class="btn btn-default btn-sm" style="width: 80px"
+                                                ng-click="modifyTeam($index)">取消
+                                        </button>
+                                        <button class="btn btn-primary btn-sm" ng-click="modifyTeam($index)"
+                                                style="width: 80px;margin-left: 40px;">
+                                            保存
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="" ng-show="!item.isShow">
+                        <table style="width: 50%;margin:0 auto;">
+
+                            <thead>
+                            <tr>
+                                <th colspan="12" style="text-align: center;padding: 8px;"><input
+                                        class="form-control input-sm " style="width: 150px;margin:0 auto;"
+                                        type="text" placeholder="请输入标题" ng-model="item.title">
+
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label"
+                                               style="color: #000000;padding-left: 0px;">名字:</label>
+                                        <div class="col-sm-8" style="padding-left: 0px;">
+                                            <input class="form-control input-sm" ng-model="item.name" type="text">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label"
+                                               style="color: #000000;padding-left: 0px;">职务:</label>
+                                        <div class="col-sm-8" style="padding-left: 0px;">
+                                            <input class="form-control input-sm" ng-model="item.post" type="text">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td rowspan="3" width="100px" height="150px" style="vertical-align: middle">
+                                    <a href="javascript:;" class="file">选择文件
+                                        <input type="file" name="">
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label"
+                                               style="color: #000000;padding-left: 0px;">联系电话:</label>
+                                        <div class="col-sm-8" style="padding-left: 0px;">
+                                            <input class="form-control input-sm" ng-model="item.phone" type="text">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label"
+                                               style="color: #000000;padding-left: 0px;">联系地址:</label>
+                                        <div class="col-sm-8" style="padding-left: 0px;">
+                                            <input class="form-control input-sm" ng-model="item.address" type="text">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label"
+                                               style="color: #000000;padding-left: 0px;">主导移植数量:</label>
+                                        <div class="col-sm-8" style="padding-left: 0px;">
+                                            <input class="form-control input-sm" ng-model="item.leaderNum" type="text">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label"
+                                               style="color: #000000;padding-left: 0px;"> 参与移植数量:</label>
+                                        <div class="col-sm-8" style="padding-left: 0px;">
+                                            <input class="form-control input-sm" ng-model="item.attendNum" type="text">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" style="text-align: left;vertical-align: middle;">
+
+                                    <div class="form-group" style="margin-left: 30px;margin-right: 30px;">
+                                        <label style="color: #000000;">简介:</label>
+                                        <textarea class="form-control" rows="3">{{item.brief}}</textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" style="text-align: center;padding: 5px;">
+                                    <button class="btn btn-default btn-sm" style="width: 80px"
+                                            ng-click="modifyTeam($index)">取消
+                                    </button>
+                                    <button class="btn btn-primary btn-sm" ng-click="modifyTeam($index)"
+                                            style="width: 80px;margin-left: 40px;">
+                                        保存
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+
+                    <button class="btn btn-primary" style="width: 50%;margin:0 auto;" ng-click="addTeam()">+</button>
+
+                    <br>
+                    <br>
+                    <br>
+
+
+                </div>
+                <div ng-if="data.modalPageIndex === 4" class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 10px;margin-bottom: 5px;">患者姓名:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">王某某
+                            <button class="btn btn-warning" style="margin-left: 15px">病例对接</button>
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">患者姓名:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">王某某
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">需求组织:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">肝脏
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">需求组织:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">肝脏
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">临床状态:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">良好
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">临床状态:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">良好
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">联系电话:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">联系电话:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">家属电话:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"
+                             style="text-align: right;margin-top: 5px;margin-bottom: 5px;">家属电话:
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4"
+                             style="text-align: left;color: #3996e5;margin-top: 5px;margin-bottom: 5px;">18300000000
+                        </div>
+                    </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        language: 'zh-CN',
+        weekStart: 1,
+        format: 'yyyy-mm-dd hh:ii:ss',
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
+
+</script>
+</body>
+
+</html>
+
+

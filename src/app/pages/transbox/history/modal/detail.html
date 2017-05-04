@@ -1,8 +1,49 @@
-<div class="modal-content" style="width: 153%;text-align: center">
+<style>
+    .file {
+        position: relative;
+        display: inline-block;
+        background: #D0EEFF;
+        border: 1px solid #99D3F5;
+        border-radius: 4px;
+        padding: 4px 12px;
+        overflow: hidden;
+        color: #1E88C7;
+        text-decoration: none;
+        text-indent: 0;
+        line-height: 20px;
+    }
+
+    .file input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+
+    .file:hover {
+        background: #AADFFD;
+        border-color: #78C3F3;
+        color: #004974;
+        text-decoration: none;
+    }
+
+    td, th {
+        border: solid #B5B5B5;
+        border-width: 0px 1px 1px 0px;
+        padding: 0px 0px;
+    }
+
+    table {
+        border: solid #B5B5B5;
+        border-width: 1px 0px 0px 1px;
+    }
+</style>
+<div class="modal-content" style="width: 153%;text-align: center;overflow: inherit !important;">
     <div class="transbox-modal">
         <div class="transbox-modal-header">
             <div>
-                <span class="transbox-blue-color">历史信息详情</span>
+                <span class="transbox-blue-color">历史信息详情(器官段号:{{transferInfo.segNumber}})</span>
                 <button ng-click="modalCheckBasicInfo()" type="button"
                         class="btn btn-default btn-blue-solid" id="baseInfo">基本信息
                 </button>
@@ -863,88 +904,271 @@
 
                     </script>
                 </div>
-                <div ng-if="data.modalPageIndex === 3" class="col-sm-12 col-md-12 col-lg-12">
-                    <table class="table table-bordered" style="width: 50%;margin:0 auto;background-color: #FFFFFF">
+                <div ng-if="data.modalPageIndex === 3" class="col-sm-12 col-md-12 col-lg-12" style="background-color: #FFFFFF">
+                    <div ng-repeat="item in teams">
+                        <div class="" ng-show="item.isShow">
+                            <table class="table table-bordered" style=" width: 50%;margin:0 auto;">
 
-                        <thead>
-                        <tr>
-                            <th  colspan="12"><b>团队组长</b></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr >
-                            <td style="text-align: left;vertical-align: middle;" colspan="5"   width="42%"> 名字：王某某</td>
-                            <td style="text-align: left;vertical-align: middle;" colspan="5"   width="42%">职务：主治医生</td>
-                            <td colspan="2" width="16%"  rowspan="3"  ><img src="http://file06.16sucai.com/2016/0905/4383f2019610019278b3497f769ec32d.jpg" width="100" height="150"></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">联系电话：18300000000</td>
-                            <td style="text-align: left;vertical-align: middle;" colspan="5"  width="42%">联系地址：浙江大学医学院附属第一医院</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">主导移植数量：10</td>
-                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">参与移植数量：5</td>
-                        </tr>
-                        <tr>
-                            <td colspan="12" style="text-align: left;vertical-align: middle;">简介：</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                                <thead>
+                                <tr>
+                                    <th colspan="12"><b>{{item.title}}</b>
+                                        <div style="float: right;margin-right: -10px;" class="btn-group btn-group-xs">
+                                            <button type="button" class="btn btn-warning" ng-click="modifyTeam($index)">
+                                                修改
+                                            </button>
+                                            <button type="button" class="btn btn-danger" ng-click="delTeam($index)">删除
+                                            </button>
+                                        </div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">
+                                        名字：{{item.name}}
+                                    </td>
+                                    <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">
+                                        职务：{{item.post}}
+                                    </td>
+                                    <td colspan="2" width="16%" rowspan="3"><img
+                                            src="http://file06.16sucai.com/2016/0905/4383f2019610019278b3497f769ec32d.jpg"
+                                            width="100" height="150"></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">
+                                        联系电话：{{item.phone}}
+                                    </td>
+                                    <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">
+                                        联系地址：{{item.address}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">
+                                        主导移植数量：{{item.leaderNum}}
+                                    </td>
+                                    <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">
+                                        参与移植数量：{{item.attendNum}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="12" style="text-align: left;vertical-align: middle;">
+                                        简介：{{item.brief}}
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <div class="" ng-show="!item.isShow">
+                            <table style="width: 50%;margin:0 auto;">
+
+                                <thead>
+                                <tr>
+                                    <th colspan="12" style="text-align: center;padding: 8px;"><input
+                                            class="form-control input-sm " style="width: 150px;margin:0 auto;"
+                                            type="text" placeholder="请输入标题" ng-model="item.title">
+
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label"
+                                                   style="color: #000000;padding-left: 0px;">名字:</label>
+                                            <div class="col-sm-8" style="padding-left: 0px;">
+                                                <input class="form-control input-sm" ng-model="item.name" type="text">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label"
+                                                   style="color: #000000;padding-left: 0px;">职务:</label>
+                                            <div class="col-sm-8" style="padding-left: 0px;">
+                                                <input class="form-control input-sm" ng-model="item.post" type="text">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td rowspan="3" width="100px" height="150px" style="vertical-align: middle">
+                                        <a href="javascript:;" class="file">选择头像
+                                            <input type="file" name="">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label"
+                                                   style="color: #000000;padding-left: 0px;">联系电话:</label>
+                                            <div class="col-sm-8" style="padding-left: 0px;">
+                                                <input class="form-control input-sm" ng-model="item.phone" type="text">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label"
+                                                   style="color: #000000;padding-left: 0px;">联系地址:</label>
+                                            <div class="col-sm-8" style="padding-left: 0px;">
+                                                <input class="form-control input-sm" ng-model="item.address" type="text">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label"
+                                                   style="color: #000000;padding-left: 0px;">主导移植数量:</label>
+                                            <div class="col-sm-8" style="padding-left: 0px;">
+                                                <input class="form-control input-sm" ng-model="item.leaderNum" type="text">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label"
+                                                   style="color: #000000;padding-left: 0px;"> 参与移植数量:</label>
+                                            <div class="col-sm-8" style="padding-left: 0px;">
+                                                <input class="form-control input-sm" ng-model="item.attendNum" type="text">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="12" style="text-align: left;vertical-align: middle;">
+
+                                        <div class="form-group" style="margin-left: 30px;margin-right: 30px;">
+                                            <label style="color: #000000;">简介:</label>
+                                            <textarea class="form-control" rows="3">{{item.brief}}</textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="12" style="text-align: center;padding: 5px;">
+                                        <button class="btn btn-default btn-sm" style="width: 80px"
+                                                ng-click="modifyTeam($index)">取消
+                                        </button>
+                                        <button class="btn btn-primary btn-sm" ng-click="modifyTeam($index)" style="width: 80px;margin-left: 40px;">
+                                            保存
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="" ng-show="!item.isShow">
+                        <table style="width: 50%;margin:0 auto;">
+
+                            <thead>
+                            <tr>
+                                <th colspan="12" style="text-align: center;padding: 8px;"><input
+                                        class="form-control input-sm " style="width: 150px;margin:0 auto;"
+                                        type="text" placeholder="请输入标题" ng-model="item.title">
+
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label"
+                                               style="color: #000000;padding-left: 0px;">名字:</label>
+                                        <div class="col-sm-8" style="padding-left: 0px;">
+                                            <input class="form-control input-sm" ng-model="item.name" type="text">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label"
+                                               style="color: #000000;padding-left: 0px;">职务:</label>
+                                        <div class="col-sm-8" style="padding-left: 0px;">
+                                            <input class="form-control input-sm" ng-model="item.post" type="text">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td rowspan="3" width="100px" height="150px" style="vertical-align: middle">
+                                    <a href="javascript:;" class="file">选择文件
+                                        <input type="file" name="">
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label"
+                                               style="color: #000000;padding-left: 0px;">联系电话:</label>
+                                        <div class="col-sm-8" style="padding-left: 0px;">
+                                            <input class="form-control input-sm" ng-model="item.phone" type="text">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label"
+                                               style="color: #000000;padding-left: 0px;">联系地址:</label>
+                                        <div class="col-sm-8" style="padding-left: 0px;">
+                                            <input class="form-control input-sm" ng-model="item.address" type="text">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label"
+                                               style="color: #000000;padding-left: 0px;">主导移植数量:</label>
+                                        <div class="col-sm-8" style="padding-left: 0px;">
+                                            <input class="form-control input-sm" ng-model="item.leaderNum" type="text">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="text-align: right;vertical-align: middle;" colspan="5" width="42%">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label"
+                                               style="color: #000000;padding-left: 0px;"> 参与移植数量:</label>
+                                        <div class="col-sm-8" style="padding-left: 0px;">
+                                            <input class="form-control input-sm" ng-model="item.attendNum" type="text">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" style="text-align: left;vertical-align: middle;">
+
+                                    <div class="form-group" style="margin-left: 30px;margin-right: 30px;">
+                                        <label style="color: #000000;">简介:</label>
+                                        <textarea class="form-control" rows="3">{{item.brief}}</textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" style="text-align: center;padding: 5px;">
+                                    <button class="btn btn-default btn-sm" style="width: 80px"
+                                            ng-click="modifyTeam($index)">取消
+                                    </button>
+                                    <button class="btn btn-primary btn-sm" ng-click="modifyTeam($index)" style="width: 80px;margin-left: 40px;">
+                                        保存
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <br>
-                    <table class="table table-bordered" style="width: 50%;margin:0 auto;background-color: #FFFFFF">
 
-                        <thead>
-                        <tr>
-                            <th  colspan="12"><b>团队成员1</b></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr >
-                            <td style="text-align: left;vertical-align: middle;" colspan="5"   width="42%"> 名字：王某某</td>
-                            <td style="text-align: left;vertical-align: middle;" colspan="5"   width="42%">职务：主治医生</td>
-                            <td colspan="2" width="16%"  rowspan="3"  ><img src="http://file06.16sucai.com/2016/0905/4383f2019610019278b3497f769ec32d.jpg" width="100" height="150"></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">联系电话：18300000000</td>
-                            <td style="text-align: left;vertical-align: middle;" colspan="5"  width="42%">联系地址：浙江大学医学院附属第一医院</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">主导移植数量：10</td>
-                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">参与移植数量：5</td>
-                        </tr>
-                        <tr>
-                            <td colspan="12" style="text-align: left;vertical-align: middle;">简介：</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <button class="btn btn-primary" style="width: 50%;margin:0 auto;" ng-click="addTeam()">+</button>
+
                     <br>
-                    <table class="table table-bordered" style="width: 50%;margin:0 auto;background-color: #FFFFFF">
-
-                        <thead>
-                        <tr>
-                            <th  colspan="12"><b>团队成员2</b></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr >
-                            <td style="text-align: left;vertical-align: middle;" colspan="5"   width="42%"> 名字：王某某</td>
-                            <td style="text-align: left;vertical-align: middle;" colspan="5"   width="42%">职务：主治医生</td>
-                            <td colspan="2" width="16%"  rowspan="3"  ><img src="http://file06.16sucai.com/2016/0905/4383f2019610019278b3497f769ec32d.jpg" width="100" height="150"></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">联系电话：18300000000</td>
-                            <td style="text-align: left;vertical-align: middle;" colspan="5"  width="42%">联系地址：浙江大学医学院附属第一医院</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">主导移植数量：10</td>
-                            <td style="text-align: left;vertical-align: middle;" colspan="5" width="42%">参与移植数量：5</td>
-                        </tr>
-                        <tr>
-                            <td colspan="12" style="text-align: left;vertical-align: middle;">简介：</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <br><br>
+                    <br>
+                    <br>
                 </div>
                 <div ng-if="data.modalPageIndex === 4" class="col-sm-12 col-md-12 col-lg-12">
                     <div class="row">

@@ -26,7 +26,7 @@
     //local host
     //var host = 'http://116.62.28.28:1337/transbox/api';
     //release host
-   var host = 'http://www.lifeperfusor.com/transbox/api';
+    var host = 'http://www.lifeperfusor.com/transbox/api';
     var path = '/account/login';
     var login = function(){
     var account = $('#inputUsername').val();
@@ -48,6 +48,7 @@
     } else {
     createCookie('apple', accountid, 1);
     createCookie('type', type, 1);
+    createCookie('account', account, 1);
     // local transbox
     //window.location.assign('/index.html');
     //release transbox

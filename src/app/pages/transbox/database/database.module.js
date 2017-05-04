@@ -6,6 +6,8 @@
         'BlurAdmin.pages.transbox.database.opo',
         'BlurAdmin.pages.transbox.database.box',
         'BlurAdmin.pages.transbox.database.fitting',
+        'BlurAdmin.pages.transbox.database.doctor',
+        'BlurAdmin.pages.transbox.database.patient',
     ]);
 
 })();

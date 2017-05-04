@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular.module('ConfigFactory', [])
@@ -8,7 +8,8 @@
         return {
             apiPath: {
                 transfers: '/transfers',
-                transfersOrganType:'/transfersOrganType',
+                transfersOrganType: '/transfersOrganType',
+                login: '/account/login',
                 transfersSql: '/transfersSql',
                 hospitalName: '/hospitalName',
                 hospitals: '/hospitals',
@@ -23,7 +24,7 @@
                 keyword: '/keyword',
                 account: '/account'
             },
-            getCookie: function(c_name) {
+            getCookie: function (c_name) {
                 if (document.cookie.length > 0) {
                     var c_start = document.cookie.indexOf(c_name + "=");
                     if (c_start != -1) {
@@ -35,16 +36,16 @@
                 }
                 return "";
             },
-            setCookie: function(c_name, value, expiredays) {
+            setCookie: function (c_name, value, expiredays) {
                 var exdate = new Date();
                 exdate.setDate(exdate.getDate() + expiredays);
                 document.cookie = c_name + "=" + escape(value) +
                     ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString());
             },
-            removeCookie: function(name) {
+            removeCookie: function (name) {
                 document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
             },
-            getFormatStringFromDate: function(date) {
+            getFormatStringFromDate: function (date) {
                 if (!date || !date.getMonth()) {
                     return null;
                 }
@@ -55,7 +56,7 @@
 
                 return year + '-' + month + '-' + day;
             },
-            getDateStringFromObject: function(obj) {
+            getDateStringFromObject: function (obj) {
                 if (!obj) {
                     return null;
                 }
@@ -75,12 +76,12 @@
 
                     return year + '-' + month + '-' + day;
 
-                }else {
+                } else {
                     return null;
                 }
             },
             userInfo: {},
-            getDateObjFromString: function(str) {
+            getDateObjFromString: function (str) {
                 if (!str || str.length < 1) {
                     return str;
                 }

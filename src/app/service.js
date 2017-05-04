@@ -4,9 +4,41 @@
 	angular.module('HttpService', [])
 		.service("Utils", utils)
 		.service("Http", http)
-		.service("Common", common);
+		.service("Common", common)
+		.service("Common1",common1);
+    function common1() {
 
+        return {
+            attr: function (id) {
+                $('#' + id).attr("readonly", "readonly");
+                $('#' + id).attr("disabled", "disabled");
+            },
+            removeAttr: function (id) {
+                $('#' + id).removeAttr("readonly", "readonly");
+                $('#' + id).removeAttr("disabled", "disabled");
+            },
+            Validate_checkphone: function (phone) {
+                var reg = /^(1)[\d]{10}$/;
+                if (!reg.test(phone)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+            arrMaxNum2: function arrMaxNum2(arr) {
+                return Math.max.apply(null, arr);
+            },
+            arrMinNum2: function arrMinNum2(arr) {
+                return Math.min.apply(null, arr);
+            },
+            arrAverageNum2: function arrAverageNum2(arr) {
+                var sum = eval(arr.join("+"));
+                // return ~~(sum / arr.length * 100) / 100;
+                return (~~(sum / arr.length * 100) / 100).toFixed(2);
+            },
 
+        }
+    }
 
 	// by xiyangyang begin
 	function common() {
