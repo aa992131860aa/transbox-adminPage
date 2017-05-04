@@ -247,7 +247,7 @@
                 // console.log(data);
                 if (data[0]) {
 
-                    baseInfo.bloodSampleCount = data[0].o_bloodSampleCount,
+                        baseInfo.bloodSampleCount = data[0].o_bloodSampleCount,
                         baseInfo.bloodType = data[0].o_bloodType,
                         baseInfo.boxPin = data[0].t_boxPin,
                         baseInfo.contactPerson = data[0].op_contactPerson,
@@ -272,6 +272,7 @@
                     console.log(baseInfo)
                 }
                 console.log("gggg")
+                console.log(data);
 
             }, function (msg) {
                console.log(msg);
