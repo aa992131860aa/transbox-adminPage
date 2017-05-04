@@ -245,7 +245,8 @@
             function (data) {
 
                 // console.log(data);
-                if (data) {
+                if (data[0]) {
+
                     baseInfo.bloodSampleCount = data[0].o_bloodSampleCount,
                         baseInfo.bloodType = data[0].o_bloodType,
                         baseInfo.boxPin = data[0].t_boxPin,
@@ -268,12 +269,12 @@
                         baseInfo.transferNumber = data[0].t_transferNumber,
                         baseInfo.type = data[0].o_type
                     $scope.transferInfo = baseInfo;
-                    //console.log(baseInfo)
+                    console.log(baseInfo)
                 }
-
+                console.log("gggg")
 
             }, function (msg) {
-
+               console.log(msg);
             });
 
 
