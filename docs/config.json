@@ -1,7 +1,7 @@
 {
   "baseUrl": "/blur-admin/",
   "locals": {
-    "url": "http://116.62.28.28:8080",
+    "url": "http://127.0.0.1:8080",
     "name": "The Wintersmith's blog",
     "owner": "Someone",
     "description": "Ramblings of an immor(t)al demigod"

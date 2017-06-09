@@ -1445,7 +1445,7 @@
 
         /**
          * Get the computed CSS value for given element and property, only for numerical
-         * properties. For width and height, the dimension of the inner box (excluding
+         * properties. For width and height, the dimension of the inner comprehensive (excluding
          * padding) is returned. Used for fitting the chart within the container.
          *
          * @function #getStyle
@@ -3639,11 +3639,11 @@
 
 
             /**
-             * Align the element relative to the chart or another box.
+             * Align the element relative to the chart or another comprehensive.
              * ß
              * @param {Object} [alignOptions] The alignment options. The function can be
              *   called without this parameter in order to re-align an element after the
-             *   box has been updated.
+             *   comprehensive has been updated.
              * @param {string} [alignOptions.align=left] Horizontal alignment. Can be
              *   one of `left`, `center` and `right`.
              * @param {string} [alignOptions.verticalAlign=top] Vertical alignment. Can
@@ -3654,9 +3654,9 @@
              * @param {Boolean} [alignByTranslate=false] Use the `transform` attribute
              *   with translateX and translateY custom attributes to align this elements
              *   rather than `x` and `y` attributes.
-             * @param {String|Object} box The box to align to, needs a width and height.
-             *   When the box is a string, it refers to an object in the Renderer. For
-             *   example, when box is `spacingBox`, it refers to `Renderer.spacingBox`
+             * @param {String|Object} box The comprehensive to align to, needs a width and height.
+             *   When the comprehensive is a string, it refers to an object in the Renderer. For
+             *   example, when comprehensive is `spacingBox`, it refers to `Renderer.spacingBox`
              *   which holds `width`, `height`, `x` and `y` properties.
              * @returns {SVGElement} Returns the SVGElement for chaining.
              */
@@ -3730,19 +3730,19 @@
             },
 
             /**
-             * Get the bounding box (width, height, x and y) for the element. Generally
+             * Get the bounding comprehensive (width, height, x and y) for the element. Generally
              * used to get rendered text size. Since this is called a lot in charts,
              * the results are cached based on text properties, in order to save DOM
-             * traffic. The returned bounding box includes the rotation, so for example
+             * traffic. The returned bounding comprehensive includes the rotation, so for example
              * a single text line of rotation 90 will report a greater height, and a
              * width corresponding to the line-height.
              *
              * @param {boolean} [reload] Skip the cache and get the updated DOM bouding
-             *   box.
+             *   comprehensive.
              * @param {number} [rot] Override the element's rotation. This is internally
-             *   used on axis labels with a value of 0 to find out what the bounding box
+             *   used on axis labels with a value of 0 to find out what the bounding comprehensive
              *   would be have been if it were not rotated.
-             * @returns {Object} The bounding box with `x`, `y`, `width` and `height`
+             * @returns {Object} The bounding comprehensive with `x`, `y`, `width` and `height`
              * properties.
              */
             getBBox: function(reload, rot) {
@@ -3775,13 +3775,13 @@
 
                     // Since numbers are monospaced, and numerical labels appear a lot
                     // in a chart, we assume that a label of n characters has the same
-                    // bounding box as others of the same length. Unless there is inner
+                    // bounding comprehensive as others of the same length. Unless there is inner
                     // HTML in the label. In that case, leave the numbers as is (#5899).
                     if (cacheKey.indexOf('<') === -1) {
                         cacheKey = cacheKey.replace(/[0-9]/g, '0');
                     }
 
-                    // Properties that affect bounding box
+                    // Properties that affect bounding comprehensive
                     cacheKey += [
                             '',
                             rotation || 0,
@@ -3805,14 +3805,14 @@
                         try { // Fails in Firefox if the container has display: none.
 
                             // When the text shadow shim is used, we need to hide the fake shadows
-                            // to get the correct bounding box (#3872)
+                            // to get the correct bounding comprehensive (#3872)
                             toggleTextShadowShim = this.fakeTS && function(display) {
                                 each(element.querySelectorAll('.highcharts-text-outline'), function(tspan) {
                                     tspan.style.display = display;
                                 });
                             };
 
-                            // Workaround for #3842, Firefox reporting wrong bounding box for shadows
+                            // Workaround for #3842, Firefox reporting wrong bounding comprehensive for shadows
                             if (toggleTextShadowShim) {
                                 toggleTextShadowShim('none');
                             }
@@ -3856,9 +3856,9 @@
                         width = bBox.width;
                         height = bBox.height;
 
-                        // Workaround for wrong bounding box in IE, Edge and Chrome on
+                        // Workaround for wrong bounding comprehensive in IE, Edge and Chrome on
                         // Windows. With Highcharts' default font, IE and Edge report
-                        // a box height of 16.899 and Chrome rounds it to 17. If this 
+                        // a comprehensive height of 16.899 and Chrome rounds it to 17. If this 
                         // stands uncorrected, it results in more padding added below
                         // the text than above when adding a label border or background.
                         // Also vertical positioning is affected.
@@ -3880,7 +3880,7 @@
                     }
 
                     // Cache it. When loading a chart in a hidden iframe in Firefox and IE/Edge, the
-                    // bounding box height is 0, so don't cache it (#5620).
+                    // bounding comprehensive height is 0, so don't cache it (#5620).
                     if (cacheKey && bBox.height > 0) {
 
                         // Rotate (#4681)
@@ -4879,7 +4879,7 @@
                                         }
 
                                         while (!ellipsis && hasWhiteSpace && (words.length || rest.length)) {
-                                            wrapper.rotation = 0; // discard rotation when computing box
+                                            wrapper.rotation = 0; // discard rotation when computing comprehensive
                                             actualWidth = renderer.getSpanWidth(wrapper, tspan);
                                             tooLong = actualWidth > width;
 
@@ -5868,7 +5868,7 @@
              * @param {SVGElement|SVGDOMElement} [elem] The element to inspect for a
              *   current font size.
              * @returns {Object} An object containing `h`: the line height, `b`: the
-             * baseline relative to the top of the box, and `f`: the font size.
+             * baseline relative to the top of the comprehensive, and `f`: the font size.
              */
             fontMetrics: function(fontSize, elem) {
                 var lineHeight,
@@ -5894,7 +5894,7 @@
                     fontSize = 12;
                 }
 
-                // Empirical values found by comparing font size and bounding box
+                // Empirical values found by comparing font size and bounding comprehensive
                 // height. Applies to the default font family.
                 // http://jsfiddle.net/highcharts/7xvn7/
                 lineHeight = fontSize < 24 ? fontSize + 3 : Math.round(fontSize * 1.2);
@@ -5978,9 +5978,9 @@
 
 
                 /**
-                 * This function runs after the label is added to the DOM (when the bounding box is
+                 * This function runs after the label is added to the DOM (when the bounding comprehensive is
                  * available), and after the text of the label is updated to detect the new bounding
-                 * box and reflect it in the border box.
+                 * comprehensive and reflect it in the border comprehensive.
                  */
                 updateBoxSize = function() {
                     var style = text.element.style,
@@ -5988,7 +5988,7 @@
                         attribs = {};
 
                     bBox = (width === undefined || height === undefined || textAlign) && defined(text.textStr) &&
-                        text.getBBox(); //#3295 && 3514 box failure when string equals 0
+                        text.getBBox(); //#3295 && 3514 comprehensive failure when string equals 0
                     wrapper.width = (width || bBox.width || 0) + 2 * padding + paddingLeft;
                     wrapper.height = (height || bBox.height || 0) + 2 * padding;
 
@@ -5998,15 +5998,15 @@
 
                     if (needsBox) {
 
-                        // Create the border box if it is not already present
+                        // Create the border comprehensive if it is not already present
                         if (!box) {
                             wrapper.box = box = renderer.symbols[shape] || hasBGImage ? // Symbol definition exists (#5324)
                                 renderer.symbol(shape) :
                                 renderer.rect();
 
                             box.addClass(
-                                (className === 'button' ? '' : 'highcharts-label-box') + // Don't use label className for buttons
-                                (className ? ' highcharts-' + className + '-box' : '')
+                                (className === 'button' ? '' : 'highcharts-label-comprehensive') + // Don't use label className for buttons
+                                (className ? ' highcharts-' + className + '-comprehensive' : '')
                             );
 
                             box.add(wrapper);
@@ -6016,7 +6016,7 @@
                             attribs.y = (baseline ? -baselineOffset : 0) + crispAdjust;
                         }
 
-                        // Apply the box attributes
+                        // Apply the comprehensive attributes
                         attribs.width = Math.round(wrapper.width);
                         attribs.height = Math.round(wrapper.height);
 
@@ -6057,7 +6057,7 @@
                 };
 
                 /**
-                 * Set a box attribute, or defer it if the box is not yet created
+                 * Set a comprehensive attribute, or defer it if the comprehensive is not yet created
                  * @param {Object} key
                  * @param {Object} value
                  */
@@ -6070,7 +6070,7 @@
                 };
 
                 /**
-                 * After the text element is added, get the desired size of the border box
+                 * After the text element is added, get the desired size of the border comprehensive
                  * and add it before the text in the DOM.
                  */
                 wrapper.onAdd = function() {
@@ -6126,7 +6126,7 @@
                     }[value];
                     if (value !== alignFactor) {
                         alignFactor = value;
-                        if (bBox) { // Bounding box exists, means we're dynamically changing
+                        if (bBox) { // Bounding comprehensive exists, means we're dynamically changing
                             wrapper.attr({
                                 x: wrapperX
                             }); // #5134
@@ -6134,7 +6134,7 @@
                     }
                 };
 
-                // apply these to the box and the text alike
+                // apply these to the comprehensive and the text alike
                 wrapper.textSetter = function(value) {
                     if (value !== undefined) {
                         text.textSetter(value);
@@ -6143,7 +6143,7 @@
                     updateTextPadding();
                 };
 
-                // apply these to the box but not to the text
+                // apply these to the comprehensive but not to the text
                 wrapper['stroke-widthSetter'] = function(value, key) {
                     if (value) {
                         needsBox = true;
@@ -6182,7 +6182,7 @@
                     wrapper.attr('translateY', wrapperY);
                 };
 
-                // Redirect certain methods to either the box or the text
+                // Redirect certain methods to either the comprehensive or the text
                 var baseCss = wrapper.css;
                 return extend(wrapper, {
                     /**
@@ -6205,7 +6205,7 @@
                         return baseCss.call(wrapper, styles);
                     },
                     /**
-                     * Return the bounding box of the box, not the group.
+                     * Return the bounding comprehensive of the comprehensive, not the group.
                      * @ignore
                      */
                     getBBox: function() {
@@ -6218,7 +6218,7 @@
                     },
 
                     /**
-                     * Apply the shadow to the box.
+                     * Apply the shadow to the comprehensive.
                      * @ignore
                      */
                     shadow: function(b) {
@@ -6310,7 +6310,7 @@
             },
 
             /**
-             * VML and useHTML method for calculating the bounding box based on offsets
+             * VML and useHTML method for calculating the bounding comprehensive based on offsets
              * @param {Boolean} refresh Whether to force a fresh value from the DOM or to
              * use the cached value
              *
@@ -7207,7 +7207,7 @@
                     container.appendChild(boxWrapper.element);
 
 
-                    // generate the containing box
+                    // generate the containing comprehensive
                     renderer.isVML = true;
                     renderer.box = box;
                     renderer.boxWrapper = boxWrapper;
@@ -7452,7 +7452,7 @@
                                 if (wrapper.added) {
                                     applyRadialGradient();
                                 } else {
-                                    // We need to know the bounding box to get the size and position right
+                                    // We need to know the bounding comprehensive to get the size and position right
                                     wrapper.onAdd = applyRadialGradient;
                                 }
 
@@ -7639,7 +7639,7 @@
                     });
 
                     // Recursively invert child elements, needed for nested composite
-                    // shapes like box plots and error bars. #1680, #1806.
+                    // shapes like comprehensive plots and error bars. #1680, #1806.
                     each(element.childNodes, function(child) {
                         ren.invertChild(child, element);
                     });
@@ -7917,7 +7917,7 @@
                     textWidth,
                     css = {};
 
-                // Check if the label overshoots the chart spacing box. If it does, move it.
+                // Check if the label overshoots the chart spacing comprehensive. If it does, move it.
                 // If it now overshoots the slotWidth, add ellipsis.
                 if (!rotation) {
                     leftPos = pxPos - factor * labelWidth;
@@ -7937,7 +7937,7 @@
                     }
                     // If the label width exceeds the available space, set a text width to be
                     // picked up below. Also, if a width has been set before, we need to set a new
-                    // one because the reported labelWidth will be limited by the box (#3938).
+                    // one because the reported labelWidth will be limited by the comprehensive (#3938).
                     if (labelWidth > modifiedSlotWidth || (axis.autoRotation && (label.styles || {}).width)) {
                         textWidth = modifiedSlotWidth;
                     }
@@ -8495,7 +8495,7 @@
 
                 }
 
-                // get the bounding box and align the label
+                // get the bounding comprehensive and align the label
                 // #3000 changed to better handle choice between plotband or plotline
                 xs = [path[1], path[4], (isBand ? path[6] : path[1])];
                 ys = [path[2], path[5], (isBand ? path[7] : path[2])];
@@ -10525,13 +10525,13 @@
                             pos = tickPositions[i];
                             label = ticks[pos].label;
                             if (label) {
-                                // Reset ellipsis in order to get the correct bounding box (#4070)
+                                // Reset ellipsis in order to get the correct bounding comprehensive (#4070)
                                 if (label.styles && label.styles.textOverflow === 'ellipsis') {
                                     label.css({
                                         textOverflow: 'clip'
                                     });
 
-                                    // Set the correct width in order to read the bounding box height (#4678, #5034)
+                                    // Set the correct width in order to read the bounding comprehensive height (#4678, #5034)
                                 } else if (ticks[pos].labelLength > slotWidth) {
                                     label.css({
                                         width: slotWidth + 'px'
@@ -11733,7 +11733,7 @@
                      * Handle the secondary dimension. If the preferred dimension is tooltip
                      * on top or bottom of the point, the second dimension is to align the tooltip
                      * above the point, trying to align center but allowing left or right
-                     * align within the chart box.
+                     * align within the chart comprehensive.
                      */
                     secondDimension = function(dim, outerSize, innerSize, point) {
                         var retVal;
@@ -11883,7 +11883,7 @@
                             text: text && text.join ? text.join('') : text
                         });
 
-                        // Set the stroke color of the box to reflect the point
+                        // Set the stroke color of the comprehensive to reflect the point
                         label.removeClass(/highcharts-color-[\d]+/g)
                             .addClass('highcharts-color-' + pick(point.colorIndex, currentSeries.colorIndex));
 
@@ -11941,7 +11941,7 @@
                     // Store the tooltip referance on the series
                     if (!tt) {
                         owner.tt = tt = ren.label(null, null, null, 'callout')
-                            .addClass('highcharts-tooltip-box ' + colorClass)
+                            .addClass('highcharts-tooltip-comprehensive ' + colorClass)
                             .attr({
                                 'padding': options.padding,
                                 'r': options.borderRadius,
@@ -13788,7 +13788,7 @@
 
                 if (!li) { // generate it once, later move it
 
-                    // Generate the group box, a group to hold the symbol and text. Text
+                    // Generate the group comprehensive, a group to hold the symbol and text. Text
                     // is to be appended in Legend class.
                     item.legendGroup = renderer.g('legend-item')
                         .addClass(
@@ -13833,7 +13833,7 @@
                         li.attr('y', legend.baseline);
                     }
 
-                    // Draw the legend symbol inside the group box
+                    // Draw the legend symbol inside the group comprehensive
                     legend.symbolHeight = options.symbolHeight || legend.fontMetrics.f;
                     series.drawLegendSymbol(legend, item);
 
@@ -14051,7 +14051,7 @@
                     legend.renderItem(item);
                 });
 
-                // Get the box
+                // Get the comprehensive
                 legendWidth = (options.width || legend.offsetWidth) + padding;
                 legendHeight = legend.lastItemY + legend.lastLineHeight +
                     legend.titleHeight;
@@ -14061,7 +14061,7 @@
                 // Draw the border and/or background
                 if (!box) {
                     legend.box = box = renderer.rect()
-                        .addClass('highcharts-legend-box')
+                        .addClass('highcharts-legend-comprehensive')
                         .attr({
                             r: options.borderRadius
                         })
@@ -18769,7 +18769,7 @@
                             if (inArray('chart.' + key, this.propsRequireUpdateSeries) !== -1) {
                                 updateAllSeries = true;
                             }
-                            // Only dirty box
+                            // Only dirty comprehensive
                             if (inArray(key, this.propsRequireDirtyBox) !== -1) {
                                 this.isDirtyBox = true;
                             }
@@ -19847,11 +19847,11 @@
             });
 
             while (overlapping) {
-                // Initial positions: target centered in box
+                // Initial positions: target centered in comprehensive
                 i = boxes.length;
                 while (i--) {
                     box = boxes[i];
-                    // Composite box, average of targets
+                    // Composite comprehensive, average of targets
                     target = (Math.min.apply(0, box.targets) + Math.max.apply(0, box.targets)) / 2;
                     box.pos = Math.min(Math.max(0, target - box.size / 2), len - box.size);
                 }
@@ -19861,7 +19861,7 @@
                 overlapping = false;
                 while (i--) {
                     if (i > 0 && boxes[i - 1].pos + boxes[i - 1].size > boxes[i].pos) { // Overlap
-                        boxes[i - 1].size += boxes[i].size; // Add this size to the previous box
+                        boxes[i - 1].size += boxes[i].size; // Add this size to the previous comprehensive
                         boxes[i - 1].targets = boxes[i - 1].targets.concat(boxes[i].targets);
 
                         // Overlapping right, push left
@@ -20032,7 +20032,7 @@
                         }
                         dataLabel.attr(attr);
 
-                        // Styles must be applied before add in order to read text bounding box
+                        // Styles must be applied before add in order to read text bounding comprehensive
                         dataLabel.css(style).shadow(options.shadow);
 
 
@@ -20087,7 +20087,7 @@
 
                 baseline = chart.renderer.fontMetrics(fontSize, dataLabel).b;
 
-                // The alignment box is a singular point
+                // The alignment comprehensive is a singular point
                 alignTo = extend({
                     x: inverted ? chart.plotWidth - plotY : plotX,
                     y: Math.round(inverted ? chart.plotHeight - plotX : plotY),
@@ -20603,9 +20603,9 @@
             seriesTypes.column.prototype.alignDataLabel = function(point, dataLabel, options, alignTo, isNew) {
                 var inverted = this.chart.inverted,
                     series = point.series,
-                    dlBox = point.dlBox || point.shapeArgs, // data label box for alignment
+                    dlBox = point.dlBox || point.shapeArgs, // data label comprehensive for alignment
                     below = pick(point.below, point.plotY > pick(this.translatedThreshold, series.yAxis.len)), // point.below is used in range series
-                    inside = pick(options.inside, !!this.options.stacking), // draw it inside the box?
+                    inside = pick(options.inside, !!this.options.stacking), // draw it inside the comprehensive?
                     overshoot;
 
                 // Align to the column itself, or the top of it
@@ -20630,7 +20630,7 @@
                         };
                     }
 
-                    // Compute the alignment box
+                    // Compute the alignment comprehensive
                     if (!inside) {
                         if (inverted) {
                             alignTo.x += below ? 0 : alignTo.width;
@@ -22920,7 +22920,7 @@
         extend(Chart.prototype, {
 
             /**
-             * Fit an inner box to an outer. If the inner box overflows left or right, align it to the sides of the
+             * Fit an inner comprehensive to an outer. If the inner comprehensive overflows left or right, align it to the sides of the
              * outer. If it overflows both sides, fit it within the outer. This is a pattern that occurs more places
              * in Highcharts, perhaps it should be elevated to a common utility function.
              */
@@ -23225,7 +23225,7 @@
             preserveAspectRatio: true, // X axis and Y axis must have same translation slope
             pointArrayMap: ['value'],
             /**
-             * Get the bounding box of all paths in the map combined.
+             * Get the bounding comprehensive of all paths in the map combined.
              */
             getBox: function(paths) {
                 var MAX_VALUE = Number.MAX_VALUE,
@@ -23238,7 +23238,7 @@
                     yAxis = this.yAxis,
                     hasBox;
 
-                // Find the bounding box
+                // Find the bounding comprehensive
                 each(paths || [], function(point) {
 
                     if (point.path) {
@@ -23255,7 +23255,7 @@
                             pointMinY = MAX_VALUE,
                             properties = point.properties;
 
-                        // The first time a map point is used, analyze its box
+                        // The first time a map point is used, analyze its comprehensive
                         if (!point._foundBox) {
                             while (i--) {
                                 if (isNumber(path[i])) {
@@ -23269,7 +23269,7 @@
                                     even = !even;
                                 }
                             }
-                            // Cache point bounding box for use to position data labels, bubbles etc
+                            // Cache point bounding comprehensive for use to position data labels, bubbles etc
                             point._midX = pointMinX + (pointMaxX - pointMinX) *
                                 (point.middleX || (properties && properties['hc-middle-x']) || 0.5); // pick is slower and very marginally needed
                             point._midY = pointMinY + (pointMaxY - pointMinY) *
@@ -23291,7 +23291,7 @@
                     }
                 });
 
-                // Set the box for the whole series
+                // Set the comprehensive for the whole series
                 if (hasBox) {
                     this.minY = Math.min(minY, pick(this.minY, MAX_VALUE));
                     this.maxY = Math.max(maxY, pick(this.maxY, -MAX_VALUE));
@@ -23313,7 +23313,7 @@
                 // Get the actual value extremes for colors
                 Series.prototype.getExtremes.call(this, this.valueData);
 
-                // Recalculate box on updated data
+                // Recalculate comprehensive on updated data
                 if (this.chart.hasRendered && this.isDirtyData) {
                     this.getBox(this.options.data);
                 }
@@ -23327,7 +23327,7 @@
             },
 
             /**
-             * Translate the path so that it automatically fits into the plot area box
+             * Translate the path so that it automatically fits into the plot area comprehensive
              * @param {Object} path
              */
             translatePath: function(path) {
@@ -24269,7 +24269,7 @@
                             height: 2 * radius
                         });
 
-                        // Alignment box for the data label
+                        // Alignment comprehensive for the data label
                         point.dlBox = {
                             x: point.plotX - radius,
                             y: point.plotY - radius,

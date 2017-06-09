@@ -174,7 +174,7 @@ AmCharts.themes.black = {
 		margin: "1px",
 		outline: "none",
 		opacity: 1,
-		boxSizing: "border-box"
+		boxSizing: "border-comprehensive"
 	},
 
 	PeriodInputField: {

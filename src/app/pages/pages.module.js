@@ -78,6 +78,24 @@
         blank: true
       });
 
+        baSidebarServiceProvider.addStaticItem({
+            title: '转运历史统计',
+            icon: 'ion-gear-a',
+            subMenu: [{
+                title: '综合分析',
+                stateRef: 'comprehensive',
+                blank: false
+            }, {
+                title: '器官类别',
+                stateRef: 'opo',
+                blank: false
+            }, {
+                title: '转运分析',
+                stateRef: 'box',
+                blank: false
+            }]
+        });
+
       baSidebarServiceProvider.addStaticItem({
         title: '数据库管理',
         icon: 'ion-gear-a',

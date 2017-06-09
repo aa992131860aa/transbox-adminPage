@@ -1089,6 +1089,7 @@
         $scope.openInfoForWindow = function (transferId) {
             // localStorage.transferInfo = transferInfo;
             var url = 'http://www.lifeperfusor.com/transbox/transbox-adminPage/src/app/pages/transbox/transfering/modal/detailWindow.html?transferId=' + transferId;
+            //var url = 'http://localhost:63342/transbox-adminPage/src/app/pages/transbox/transfering/modal/detailWindow.html?transferId=' + transferId;
             window.open(url, '_blank');
         }
         var transferId = params.name.transferId;
@@ -1350,7 +1351,7 @@
             var strWindowFeatures = "location=yes,height=570,width=520,scrollbars=yes,status=yes";
             //local
             //var URL = 'http://localhost:1337/transbox/api/export/' + transferid;
-            var URL = 'http://116.62.28.28:8080/transbox/download.do?transfer_id=' + transferid;
+            var URL = 'http://127.0.0.1:8080/transbox/download.do?transfer_id=' + transferid;
             //release
             // var URL = 'http://www.lifeperfusor.com/transbox/api/export/' + transferid;
             var win = window.open(URL, "_blank", strWindowFeatures);

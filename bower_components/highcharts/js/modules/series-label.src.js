@@ -23,7 +23,7 @@
          * EXPERIMENTAL Highcharts module to place labels next to a series in a natural position.
          *
          * TODO:
-         * - add column support (box collision detection, boxesToAvoid logic)
+         * - add column support (comprehensive collision detection, boxesToAvoid logic)
          * - other series types, area etc.
          * - avoid data labels, when data labels above, show series label below.
          * - add more options (connector, format, formatter)
@@ -79,7 +79,7 @@
         }
 
         /**
-         * Detect if a box intersects with a line
+         * Detect if a comprehensive intersects with a line
          */
         function boxIntersectLine(x, y, w, h, x1, y1, x2, y2) {
             return (
@@ -281,7 +281,7 @@
                 points = series.interpolatedPoints;
                 if (series.visible && points) {
                     for (j = 1; j < points.length; j += 1) {
-                        // If any of the box sides intersect with the line, return
+                        // If any of the comprehensive sides intersect with the line, return
                         if (boxIntersectLine(
                                 x,
                                 y,

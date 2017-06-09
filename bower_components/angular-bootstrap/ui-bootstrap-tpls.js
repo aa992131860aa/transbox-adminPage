@@ -6393,7 +6393,7 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.debounce', 'ui.bootstrap
         'border-color': 'transparent',
         'box-shadow': 'none',
         'opacity': 1,
-        'background': 'none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255)',
+        'background': 'none 0% 0% / auto repeat scroll padding-comprehensive border-comprehensive rgb(255, 255, 255)',
         'color': '#999'
       });
       element.css({

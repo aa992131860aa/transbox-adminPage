@@ -974,7 +974,7 @@
         extend(Chart.prototype, {
 
             /**
-             * Fit an inner box to an outer. If the inner box overflows left or right, align it to the sides of the
+             * Fit an inner comprehensive to an outer. If the inner comprehensive overflows left or right, align it to the sides of the
              * outer. If it overflows both sides, fit it within the outer. This is a pattern that occurs more places
              * in Highcharts, perhaps it should be elevated to a common utility function.
              */

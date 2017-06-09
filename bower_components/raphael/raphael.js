@@ -1367,8 +1367,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     **
 	     * Returns `true` if two bounding boxes intersect
 	     > Parameters
-	     - bbox1 (string) first bounding box
-	     - bbox2 (string) second bounding box
+	     - bbox1 (string) first bounding comprehensive
+	     - bbox2 (string) second bounding comprehensive
 	     = (boolean) `true` if they intersect
 	    \*/
 	    R.isBBoxIntersect = function (bbox1, bbox2) {
@@ -1632,19 +1632,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	     **
 	     * Utility method
 	     **
-	     * Return bounding box of a given path
+	     * Return bounding comprehensive of a given path
 	     > Parameters
 	     - path (string) path string
-	     = (object) bounding box
+	     = (object) bounding comprehensive
 	     o {
-	     o     x: (number) x coordinate of the left top point of the box
-	     o     y: (number) y coordinate of the left top point of the box
-	     o     x2: (number) x coordinate of the right bottom point of the box
-	     o     y2: (number) y coordinate of the right bottom point of the box
-	     o     width: (number) width of the box
-	     o     height: (number) height of the box
-	     o     cx: (number) x coordinate of the center of the box
-	     o     cy: (number) y coordinate of the center of the box
+	     o     x: (number) x coordinate of the left top point of the comprehensive
+	     o     y: (number) y coordinate of the left top point of the comprehensive
+	     o     x2: (number) x coordinate of the right bottom point of the comprehensive
+	     o     y2: (number) y coordinate of the right bottom point of the comprehensive
+	     o     width: (number) width of the comprehensive
+	     o     height: (number) height of the comprehensive
+	     o     cx: (number) x coordinate of the center of the comprehensive
+	     o     cy: (number) y coordinate of the center of the comprehensive
 	     o }
 	    \*/
 	    var pathDimensions = R.pathBBox = function (path) {
@@ -3570,7 +3570,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * Paper.setViewBox
 	     [ method ]
 	     **
-	     * Sets the view box of the paper. Practically it gives you ability to zoom and pan whole paper surface by
+	     * Sets the view comprehensive of the paper. Practically it gives you ability to zoom and pan whole paper surface by
 	     * specifying new boundaries.
 	     **
 	     > Parameters
@@ -3579,7 +3579,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     - y (number) new y position, default is `0`
 	     - w (number) new width of the canvas
 	     - h (number) new height of the canvas
-	     - fit (boolean) `true` if you want graphics to fit into new boundary box
+	     - fit (boolean) `true` if you want graphics to fit into new boundary comprehensive
 	    \*/
 	    paperproto.setViewBox = function (x, y, w, h, fit) {
 	        return R._engine.setViewBox.call(this, x, y, w, h, fit);
@@ -3777,12 +3777,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * Element.getBBox
 	     [ method ]
 	     **
-	     * Return bounding box for a given element
+	     * Return bounding comprehensive for a given element
 	     **
 	     > Parameters
 	     **
-	     - isWithoutTransform (boolean) flag, `true` if you want to have bounding box before transformations. Default is `false`.
-	     = (object) Bounding box object:
+	     - isWithoutTransform (boolean) flag, `true` if you want to have bounding comprehensive before transformations. Default is `false`.
+	     = (object) Bounding comprehensive object:
 	     o {
 	     o     x: (number) top left corner x
 	     o     y: (number) top left corner y

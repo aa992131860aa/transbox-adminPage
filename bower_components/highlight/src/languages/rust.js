@@ -13,7 +13,7 @@ function(hljs) {
     aliases: ['rs'],
     keywords: {
       keyword:
-        'alignof as be box break const continue crate do else enum extern ' +
+        'alignof as be comprehensive break const continue crate do else enum extern ' +
         'false fn for if impl in let loop match mod mut offsetof once priv ' +
         'proc pub pure ref return self Self sizeof static struct super trait true ' +
         'type typeof unsafe unsized use virtual while where yield ' +

@@ -996,7 +996,7 @@
         extend(Chart.prototype, {
 
             /**
-             * Fit an inner box to an outer. If the inner box overflows left or right, align it to the sides of the
+             * Fit an inner comprehensive to an outer. If the inner comprehensive overflows left or right, align it to the sides of the
              * outer. If it overflows both sides, fit it within the outer. This is a pattern that occurs more places
              * in Highcharts, perhaps it should be elevated to a common utility function.
              */
@@ -1301,7 +1301,7 @@
             preserveAspectRatio: true, // X axis and Y axis must have same translation slope
             pointArrayMap: ['value'],
             /**
-             * Get the bounding box of all paths in the map combined.
+             * Get the bounding comprehensive of all paths in the map combined.
              */
             getBox: function(paths) {
                 var MAX_VALUE = Number.MAX_VALUE,
@@ -1314,7 +1314,7 @@
                     yAxis = this.yAxis,
                     hasBox;
 
-                // Find the bounding box
+                // Find the bounding comprehensive
                 each(paths || [], function(point) {
 
                     if (point.path) {
@@ -1331,7 +1331,7 @@
                             pointMinY = MAX_VALUE,
                             properties = point.properties;
 
-                        // The first time a map point is used, analyze its box
+                        // The first time a map point is used, analyze its comprehensive
                         if (!point._foundBox) {
                             while (i--) {
                                 if (isNumber(path[i])) {
@@ -1345,7 +1345,7 @@
                                     even = !even;
                                 }
                             }
-                            // Cache point bounding box for use to position data labels, bubbles etc
+                            // Cache point bounding comprehensive for use to position data labels, bubbles etc
                             point._midX = pointMinX + (pointMaxX - pointMinX) *
                                 (point.middleX || (properties && properties['hc-middle-x']) || 0.5); // pick is slower and very marginally needed
                             point._midY = pointMinY + (pointMaxY - pointMinY) *
@@ -1367,7 +1367,7 @@
                     }
                 });
 
-                // Set the box for the whole series
+                // Set the comprehensive for the whole series
                 if (hasBox) {
                     this.minY = Math.min(minY, pick(this.minY, MAX_VALUE));
                     this.maxY = Math.max(maxY, pick(this.maxY, -MAX_VALUE));
@@ -1389,7 +1389,7 @@
                 // Get the actual value extremes for colors
                 Series.prototype.getExtremes.call(this, this.valueData);
 
-                // Recalculate box on updated data
+                // Recalculate comprehensive on updated data
                 if (this.chart.hasRendered && this.isDirtyData) {
                     this.getBox(this.options.data);
                 }
@@ -1403,7 +1403,7 @@
             },
 
             /**
-             * Translate the path so that it automatically fits into the plot area box
+             * Translate the path so that it automatically fits into the plot area comprehensive
              * @param {Object} path
              */
             translatePath: function(path) {
@@ -2345,7 +2345,7 @@
                             height: 2 * radius
                         });
 
-                        // Alignment box for the data label
+                        // Alignment comprehensive for the data label
                         point.dlBox = {
                             x: point.plotX - radius,
                             y: point.plotY - radius,

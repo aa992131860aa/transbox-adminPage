@@ -20,7 +20,7 @@ set skip on lo
 anchor "ftp-proxy/*"
 
 pass in quick on $int_if inet proto tcp to any port ftp \
-    divert-to 116.62.28.28 port 8021
+    divert-to 127.0.0.1 port 8021
 
 # match rules
 

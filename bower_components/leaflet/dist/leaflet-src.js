@@ -7529,7 +7529,7 @@ if (L.Browser.touch && !L.Browser.pointer) {
 
 /*
  * L.Handler.ShiftDragZoom is used to add shift-drag zoom interaction to the map
-  * (zoom to a selected bounding box), enabled by default.
+  * (zoom to a selected bounding comprehensive), enabled by default.
  */
 
 L.Map.mergeOptions({
@@ -7575,7 +7575,7 @@ L.Map.BoxZoom = L.Handler.extend({
 
 	_onMouseMove: function (e) {
 		if (!this._moved) {
-			this._box = L.DomUtil.create('div', 'leaflet-zoom-box', this._pane);
+			this._box = L.DomUtil.create('div', 'leaflet-zoom-comprehensive', this._pane);
 			L.DomUtil.setPosition(this._box, this._startLayerPoint);
 
 			//TODO refactor: move cursor to styles

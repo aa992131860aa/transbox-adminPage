@@ -29,8 +29,8 @@ define([
 		div.style.cssText =
 			// Support: Firefox<29, Android 2.3
 			// Vendor-prefix box-sizing
-			"-webkit-box-sizing:border-box;-moz-box-sizing:border-box;" +
-			"box-sizing:border-box;display:block;margin-top:1%;top:1%;" +
+			"-webkit-comprehensive-sizing:border-comprehensive;-moz-comprehensive-sizing:border-comprehensive;" +
+			"comprehensive-sizing:border-comprehensive;display:block;margin-top:1%;top:1%;" +
 			"border:1px;padding:1px;width:4px;position:absolute";
 		div.innerHTML = "";
 		docElem.appendChild( container );
@@ -74,8 +74,8 @@ define([
 				marginDiv.style.cssText = div.style.cssText =
 					// Support: Firefox<29, Android 2.3
 					// Vendor-prefix box-sizing
-					"-webkit-box-sizing:content-box;-moz-box-sizing:content-box;" +
-					"box-sizing:content-box;display:block;margin:0;border:0;padding:0";
+					"-webkit-comprehensive-sizing:content-comprehensive;-moz-comprehensive-sizing:content-comprehensive;" +
+					"comprehensive-sizing:content-comprehensive;display:block;margin:0;border:0;padding:0";
 				marginDiv.style.marginRight = marginDiv.style.width = "0";
 				div.style.width = "1px";
 				docElem.appendChild( container );

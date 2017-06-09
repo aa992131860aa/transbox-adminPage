@@ -1009,7 +1009,7 @@ fabric.Collection = {
   };
 
   /**
-   * Calculate bounding box of a elliptic-arc
+   * Calculate bounding comprehensive of a elliptic-arc
    * @param {Number} fx start point of arc
    * @param {Number} fy
    * @param {Number} rx horizontal radius
@@ -1041,7 +1041,7 @@ fabric.Collection = {
   };
 
   /**
-   * Calculate bounding box of a beziercurve
+   * Calculate bounding comprehensive of a beziercurve
    * @param {Number} x0 starting point
    * @param {Number} y0
    * @param {Number} x1 first control point
@@ -5575,7 +5575,7 @@ fabric.Pattern = fabric.util.createClass(/** @lends fabric.Pattern.prototype */ 
 
       if (object.width && object.height) {
         //http://www.w3.org/TR/SVG/filters.html#FilterEffectsRegion
-        // we add some extra space to filter box to contain the blur ( 20 )
+        // we add some extra space to filter comprehensive to contain the blur ( 20 )
         fBoxX = toFixed(Math.abs(this.offsetX / object.getWidth()), 2) * 100 + 20;
         fBoxY = toFixed(Math.abs(this.offsetY / object.getHeight()), 2) * 100 + 20;
       }
@@ -6591,7 +6591,7 @@ fabric.Pattern = fabric.util.createClass(/** @lends fabric.Pattern.prototype */ 
 
     /**
      * Method to render only the top canvas.
-     * Also used to render the group selection box.
+     * Also used to render the group selection comprehensive.
      * @return {fabric.Canvas} thisArg
      * @chainable
      */
@@ -8111,7 +8111,7 @@ fabric.PatternBrush = fabric.util.createClass(fabric.PencilBrush, /** @lends fab
     containerClass:         'canvas-container',
 
     /**
-     * When true, object detection happens on per-pixel basis rather than on per-bounding-box
+     * When true, object detection happens on per-pixel basis rather than on per-bounding-comprehensive
      * @type Boolean
      * @default
      */
@@ -8754,7 +8754,7 @@ fabric.PatternBrush = fabric.util.createClass(fabric.PencilBrush, /** @lends fab
      */
     _searchPossibleTargets: function(e) {
 
-      // Cache all targets where their bounding box contains point.
+      // Cache all targets where their bounding comprehensive contains point.
       var target,
           pointer = this.getPointer(e, true),
           i = this._objects.length;
@@ -9660,7 +9660,7 @@ fabric.PatternBrush = fabric.util.createClass(fabric.PencilBrush, /** @lends fab
 
       var groupSelector = this._groupSelector;
 
-      // We initially clicked in an empty area, so we draw a box for multiple selection
+      // We initially clicked in an empty area, so we draw a comprehensive for multiple selection
       if (groupSelector) {
         pointer = this.getPointer(e, true);
 
@@ -11093,7 +11093,7 @@ fabric.util.object.extend(fabric.StaticCanvas.prototype, /** @lends fabric.Stati
     rotatingPointOffset:      40,
 
     /**
-     * When set to `true`, objects are "found" on canvas on per-pixel basis rather than according to bounding box
+     * When set to `true`, objects are "found" on canvas on per-pixel basis rather than according to bounding comprehensive
      * @type Boolean
      * @default
      */
@@ -12538,7 +12538,7 @@ fabric.util.object.extend(fabric.StaticCanvas.prototype, /** @lends fabric.Stati
     },
 
     /**
-     * Scales an object to a given width, with respect to bounding box (scaling by x/y equally)
+     * Scales an object to a given width, with respect to bounding comprehensive (scaling by x/y equally)
      * @param {Number} value New width value
      * @return {fabric.Object} thisArg
      * @chainable
@@ -12550,7 +12550,7 @@ fabric.util.object.extend(fabric.StaticCanvas.prototype, /** @lends fabric.Stati
     },
 
     /**
-     * Scales an object to a given height, with respect to bounding box (scaling by x/y equally)
+     * Scales an object to a given height, with respect to bounding comprehensive (scaling by x/y equally)
      * @param {Number} value New height value
      * @return {fabric.Object} thisArg
      * @chainable
@@ -13030,7 +13030,7 @@ fabric.util.object.extend(fabric.Object.prototype, /** @lends fabric.Object.prot
     },
 
     /**
-     * Draws borders of an object's bounding box.
+     * Draws borders of an object's bounding comprehensive.
      * Requires public properties: width, height
      * Requires public options: padding, borderColor
      * @param {CanvasRenderingContext2D} ctx Context to draw on
@@ -13079,7 +13079,7 @@ fabric.util.object.extend(fabric.Object.prototype, /** @lends fabric.Object.prot
     },
 
     /**
-     * Draws corners of an object's bounding box.
+     * Draws corners of an object's bounding comprehensive.
      * Requires public properties: width, height
      * Requires public options: cornerSize, padding
      * @param {CanvasRenderingContext2D} ctx Context to draw on
@@ -13638,7 +13638,7 @@ fabric.util.object.extend(fabric.Object.prototype, /** @lends fabric.Object.prot
       }
 
       if (!this.strokeDashArray || this.strokeDashArray && supportsLineDash) {
-        // move from center (of virtual box) to its left/top corner
+        // move from center (of virtual comprehensive) to its left/top corner
         // we can't assume x1, y1 is top left and x2, y2 is bottom right
         var p = this.calcLinePoints();
         ctx.moveTo(p.x1, p.y1);
@@ -14913,7 +14913,7 @@ fabric.util.object.extend(fabric.Object.prototype, /** @lends fabric.Object.prot
      * @private
      */
     _applyPointOffset: function() {
-      // change points to offset polygon into a bounding box
+      // change points to offset polygon into a bounding comprehensive
       // executed one time
       this.points.forEach(function(p) {
         p.x -= (this.minX + this.width / 2);
@@ -20189,7 +20189,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
       var textSpans = [ ],
           textBgRects = [ ],
           height = 0;
-      // bounding-box background
+      // bounding-comprehensive background
       this._setSVGBg(textBgRects);
 
       // text and text-background
@@ -20350,8 +20350,8 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
         text = new fabric.Text(textContent, options),
         /*
           Adjust positioning:
-            x/y attributes in SVG correspond to the bottom-left corner of text bounding box
-            top/left properties in Fabric correspond to center point of text bounding box
+            x/y attributes in SVG correspond to the bottom-left corner of text bounding comprehensive
+            top/left properties in Fabric correspond to center point of text bounding comprehensive
         */
         offX = 0;
 
@@ -20807,8 +20807,8 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
      */
     _getCursorBoundaries: function(chars, typeOfBoundaries) {
 
-      // left/top are left/top of entire text box
-      // leftOffset/topOffset are offset from that left/top point of a text box
+      // left/top are left/top of entire text comprehensive
+      // leftOffset/topOffset are offset from that left/top point of a text comprehensive
 
       var left = Math.round(this._getLeftOffset()),
           top = this._getTopOffset(),
@@ -20961,7 +20961,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
 
       this.skipTextAlign = true;
 
-      // set proper box offset
+      // set proper comprehensive offset
       left -= this.textAlign === 'center'
         ? (this.width / 2)
         : (this.textAlign === 'right')

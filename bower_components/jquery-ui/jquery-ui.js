@@ -2096,7 +2096,7 @@ var accordion = $.widget( "ui.accordion", {
 				step: function( now, fx ) {
 					fx.now = Math.round( now );
 					if ( fx.prop !== "height" ) {
-						if ( boxSizing === "content-box" ) {
+						if ( boxSizing === "content-comprehensive" ) {
 							adjust += fx.now;
 						}
 					} else if ( that.options.heightStyle !== "content" ) {
@@ -3849,7 +3849,7 @@ function Datepicker() {
 		showOptions: {}, // Options for enhanced animations
 		defaultDate: null, // Used when field is blank: actual date,
 			// +/-number for offset from today, null for today
-		appendText: "", // Display text following the input box, e.g. showing the format
+		appendText: "", // Display text following the input comprehensive, e.g. showing the format
 		buttonText: "...", // Text for trigger button
 		buttonImage: "", // URL for trigger button image
 		buttonImageOnly: false, // True if the image appears alone, false if it appears on a button
@@ -4066,7 +4066,7 @@ $.extend(Datepicker.prototype, {
 		inst.dpDiv.css( "display", "block" );
 	},
 
-	/* Pop-up the date picker in a "dialog" box.
+	/* Pop-up the date picker in a "dialog" comprehensive.
 	 * @param  input element - ignored
 	 * @param  date	string or Date - the initial date to display
 	 * @param  onSelect  function - the function to call when a date is selected
@@ -11261,7 +11261,7 @@ var effectSize = $.effects.effect.size = function( o, done ) {
 		}
 	};
 
-	// Scale the css box
+	// Scale the css comprehensive
 	if ( scale === "box" || scale === "both" ) {
 
 		// Vertical props scaling

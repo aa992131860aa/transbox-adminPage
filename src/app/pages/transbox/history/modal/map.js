@@ -113,7 +113,7 @@ function map() {
                                 map: mapObj,
                                 position: new AMap.LngLat(item.longitude, item.latitude),//基点位置
                                 //  title: item.temperature,
-                                icon: "http://116.62.28.28:8080/transbox/images/temperature.png"
+                                icon: "http://127.0.0.1:8080/transbox/images/temperature.png"
                             });
                             //鼠标点击marker弹出自定义的信息窗体
                             markerT.on('click', function (e) {
@@ -131,7 +131,7 @@ function map() {
                                     map: mapObj,
                                     position: new AMap.LngLat(item.longitude, item.latitude),//基点位置
                                     //  title: item.temperature,
-                                    icon: "http://116.62.28.28:8080/transbox/images/collision.png"
+                                    icon: "http://127.0.0.1:8080/transbox/images/collision.png"
                                 });
                                 //鼠标点击marker弹出自定义的信息窗体
                                 markerC.on('click', function (e) {
@@ -149,7 +149,7 @@ function map() {
                                     map: mapObj,
                                     position: new AMap.LngLat(item.longitude, item.latitude),//基点位置
                                     //  title: item.temperature,
-                                    icon: "http://116.62.28.28:8080/transbox/images/open.png"
+                                    icon: "http://127.0.0.1:8080/transbox/images/open.png"
                                 });
                                 //鼠标点击marker弹出自定义的信息窗体
                                 markerO.on('click', function (e) {
