@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('BlurAdmin.pages.transbox.database.box')
+    angular.module('BlurAdmin.pages.transbox.statistics.comprehensive')
         .controller('ComprehensivePageCtrl', ComprehensivePageCtrl)
         .controller('BoxModalCtrl', BoxModalCtrl);
 

@@ -8,7 +8,7 @@
         $stateProvider
             .state('box', {
                 url: '/box',
-                templateUrl: 'app/pages/transbox/database/comprehensive/comprehensive.html',
+                templateUrl: 'app/pages/transbox/database/box/box.html',
                 title: '设备管理',
                 controller: 'BoxPageCtrl'
             });

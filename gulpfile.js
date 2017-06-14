@@ -9,9 +9,9 @@ var browserSync = require('browser-sync');
  *  in order to load all gulp tasks
  */
 wrench.readdirSyncRecursive('./gulp').filter(function(file) {
-  return (/\.(js|coffee)$/i).test(file);
+    return (/\.(js|coffee)$/i).test(file);
 }).map(function(file) {
-  require('./gulp/' + file);
+    require('./gulp/' + file);
     console.log('gggg:'+'./gulp/' + file);
 });
 
@@ -21,9 +21,9 @@ wrench.readdirSyncRecursive('./gulp').filter(function(file) {
  *  main optimization build task
  */
 gulp.task('default', ['clean'], function () {
-   gulp.start('build');
-   // console.log('111start watch?111');
-   //gulp.start('watch');
+    gulp.start('build');
+    // console.log('111start watch?111');
+    //gulp.start('watch');
 });
 
 

@@ -25,9 +25,9 @@
     <script src="http://oba97lyy4.bkt.clouddn.com/jquery-2.2.2.js"></script>
     <script type="text/javascript">
     //local host
-    var host = 'http://127.0.0.1:1337/transbox/api';
+   // var host = 'http://116.62.28.28:1337/transbox/api';
     //release host
-    //var host = 'http://www.lifeperfusor.com/transbox/api';
+    var host = 'http://www.lifeperfusor.com/transbox/api';
     var path = '/account/login';
     var login = function(){
     var account = $('#inputUsername').val();
@@ -41,21 +41,21 @@
     if(response.status=='OK') {
     var accountid = response.data.accountid;
     var type = response.data.type;
-    if (pwd === '123456') {
+    //if (pwd === '123456') {
     // local transbox
    // window.location.assign('/pwd.html?accountid=' + accountid);
     //release transbox
-        window.location.assign('/transbox/transbox-adminPage/src/pwd.html?accountid=' + accountid);
-    } else {
+   //     window.location.assign('/transbox/transbox-adminPage/src/pwd.html?accountid=' + accountid);
+   // } else {
     createCookie('apple', accountid, 1);
     createCookie('type', type, 1);
     createCookie('account', account, 1);
     // local transbox
     //window.location.assign('/index.html');
     //release transbox
-     //window.location.assign('/transbox/transbox-adminPage/release/index.html');
-        window.location.assign('/transbox-adminPage/release/index.html');
-    }
+     window.location.assign('/transbox/transbox-adminPage/release/index.html');
+     //   window.location.assign('/transbox-adminPage/release/index.html');
+   // }
     
     }else {
     alert("账号或密码错误");

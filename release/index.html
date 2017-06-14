@@ -1,5 +1,44 @@
-<!DOCTYPE html><html lang="en" ng-app="BlurAdmin"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>莱普晟器官转运监控平台</title><link href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic" rel="stylesheet" type="text/css"><link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96x96.png"><link rel="stylesheet" href="styles/vendor-42b06dd2f4.css"><link rel="stylesheet" href="styles/app-04a2cae41e.css"></head><style>
-  modal-open {
-    overflow: initial !important;
-  }
-</style><body><div class="body-bg"></div><main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }"><ba-sidebar></ba-sidebar><page-top></page-top><div class="al-main"><div class="al-content"><content-top></content-top><div ui-view=""></div></div></div><back-top></back-top></main><div id="preloader" ng-show="!$pageFinishedLoading"><div></div></div><script src="scripts/vendor-294752741b.js"></script><script src="scripts/app-320d270367.js"></script></body><script src="http://oog5l31fv.bkt.clouddn.com/bootstrap-datetimepicker.min.js"></script><script src="http://oog5l31fv.bkt.clouddn.com/bootstrap-datetimepicker.zh-CN.js"></script><link rel="stylesheet" href="http://oog5l31fv.bkt.clouddn.com/bootstrap-datetimepicker.min.css"><script src="http://oog5l31fv.bkt.clouddn.com/jquery-prompt21.js"></script></html>
+<!DOCTYPE html>
+<html lang="en" ng-app="BlurAdmin">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>莱普晟器官转运监控平台</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic"
+          rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96x96.png">
+    <link rel="stylesheet" href="http://oog5l31fv.bkt.clouddn.com/vendor-42b06dd2f4.css">
+    <link rel="stylesheet" href="http://oog5l31fv.bkt.clouddn.com/app-5bbc93f7fe.css">
+</head>
+<style>
+    modal-open {
+        overflow: initial !important;
+    }
+</style>
+<body>
+<div class="body-bg"></div>
+<main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
+    <ba-sidebar></ba-sidebar>
+    <page-top></page-top>
+    <div class="al-main">
+        <div class="al-content">
+            <content-top></content-top>
+            <div ui-view=""></div>
+        </div>
+    </div>
+    <back-top></back-top>
+</main>
+<div id="preloader" ng-show="!$pageFinishedLoading">
+    <div></div>
+</div>
+<script src="http://oog5l31fv.bkt.clouddn.com/vendor-cd3b37b259.js"></script>
+<script src="http://oog5l31fv.bkt.clouddn.com/app-3c107bec8d.js"></script>
+</body>
+<script src="http://oog5l31fv.bkt.clouddn.com/bootstrap-datetimepicker.min.js"></script>
+<script src="http://oog5l31fv.bkt.clouddn.com/bootstrap-datetimepicker.zh-CN.js"></script>
+<link rel="stylesheet" href="http://oog5l31fv.bkt.clouddn.com/bootstrap-datetimepicker.min.css">
+<script src="http://oog5l31fv.bkt.clouddn.com/jquery-prompt21.js"></script>
+</html>

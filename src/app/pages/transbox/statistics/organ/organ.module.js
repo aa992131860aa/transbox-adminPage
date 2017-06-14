@@ -1,16 +1,16 @@
 (function () {
     'use strict';
 
-    angular.module('BlurAdmin.pages.transbox.statistics.comprehensive', ['HttpService', 'ConfigFactory'])
+    angular.module('BlurAdmin.pages.transbox.statistics.organ', ['HttpService', 'ConfigFactory'])
         .config(routeConfig);
 
     function routeConfig($stateProvider) {
         $stateProvider
-            .state('comprehensive', {
-                url: '/comprehensive',
-                templateUrl: 'app/pages/transbox/statistics/comprehensive/comprehensive.html',
-                title: '综合分析',
-                controller: 'ComprehensivePageCtrl'
+            .state('organ', {
+                url: '/organ',
+                templateUrl: 'app/pages/transbox/statistics/organ/organ.html',
+                title: '器官分析',
+                controller: 'OrganPageCtrl'
             });
     }
 

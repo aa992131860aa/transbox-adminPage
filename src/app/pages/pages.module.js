@@ -87,11 +87,11 @@
                 blank: false
             }, {
                 title: '器官类别',
-                stateRef: 'opo',
+                stateRef: 'organ',
                 blank: false
             }, {
                 title: '转运分析',
-                stateRef: 'box',
+                stateRef: 'transfer',
                 blank: false
             }]
         });

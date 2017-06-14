@@ -1,11 +1,11 @@
 (function () {
     'use strict';
 
-    angular.module('BlurAdmin.pages.transbox.database.box')
-        .controller('ComprehensivePageCtrl', ComprehensivePageCtrl)
+    angular.module('BlurAdmin.pages.transbox.statistics.organ')
+        .controller('OrganPageCtrl', OrganPageCtrl)
         .controller('BoxModalCtrl', BoxModalCtrl);
 
-    function ComprehensivePageCtrl($scope, $filter, editableOptions, editableThemes, Http, Config, $uibModal, toastr, toastrConfig) {
+    function OrganPageCtrl($scope, $filter, editableOptions, editableThemes, Http, Config, $uibModal, toastr, toastrConfig) {
     	var defaultConfig = angular.copy(toastrConfig);
         $scope.types = ['success', 'error', 'info', 'warning'];
         var openedToasts = [];

@@ -3,6 +3,7 @@
 
     angular.module('BlurAdmin.pages.transbox',[
     	'BlurAdmin.pages.transbox.database',
+        'BlurAdmin.pages.transbox.statistics',
         'BlurAdmin.pages.transbox.transfering',
         'BlurAdmin.pages.transbox.history',
 
