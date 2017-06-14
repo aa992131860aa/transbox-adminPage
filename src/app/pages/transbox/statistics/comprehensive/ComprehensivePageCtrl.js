@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module('BlurAdmin.pages.transbox.database.box')
-        .controller('BoxPageCtrl', BoxPageCtrl)
+        .controller('ComprehensivePageCtrl', ComprehensivePageCtrl)
         .controller('BoxModalCtrl', BoxModalCtrl);
 
-    function BoxPageCtrl($scope, $filter, editableOptions, editableThemes, Http, Config, $uibModal, toastr, toastrConfig) {
+    function ComprehensivePageCtrl($scope, $filter, editableOptions, editableThemes, Http, Config, $uibModal, toastr, toastrConfig) {
     	var defaultConfig = angular.copy(toastrConfig);
         $scope.types = ['success', 'error', 'info', 'warning'];
         var openedToasts = [];
