@@ -8,9 +8,13 @@
         $stateProvider
             .state('comprehensive', {
                 url: '/comprehensive',
+                //templateUrl: 'http://localhost:8080/transbox/trop.jsp',
                 templateUrl: 'app/pages/transbox/statistics/comprehensive/comprehensive.html',
                 title: '综合分析',
-                controller: 'ComprehensivePageCtrl'
+               controller: 'ComprehensivePageCtrl',
+                // headers: {
+                //     'Content-Type': 'application/x-www-form-urlencoded'
+                // }
             });
     }
 

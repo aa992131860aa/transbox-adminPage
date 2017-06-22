@@ -22,12 +22,12 @@
     }
     </style>
     <!-- <script src="../bower_components/jquery/dist/jquery.js"></script> -->
-    <script src="http://oba97lyy4.bkt.clouddn.com/jquery-2.2.2.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
     <script type="text/javascript">
     //local host
-   // var host = 'http://116.62.28.28:1337/transbox/api';
+    //var host = 'http://127.0.0.1:1337/transbox/api';
     //release host
-    var host = 'http://www.lifeperfusor.com/transbox/api';
+   var host = 'http://www.lifeperfusor.com/transbox/api';
     var path = '/account/login';
     var login = function(){
     var account = $('#inputUsername').val();
@@ -54,7 +54,7 @@
     //window.location.assign('/index.html');
     //release transbox
      window.location.assign('/transbox/transbox-adminPage/release/index.html');
-     //   window.location.assign('/transbox-adminPage/release/index.html');
+       // window.location.assign('/transbox-adminPage/release/index.html');
    // }
     
     }else {
@@ -92,7 +92,9 @@
   <body>
     <main class="auth-main">
     <div class="auth-block" style="text-align: center;">
-      <img src="assets/img/transbox/logo.png" alt="">
+      <img src="http://oog5l31fv.bkt.clouddn.com/shulan.png" width="90" height="90" alt="">
+      <br><br>
+      <font style="margin-top: 5px;" size="5"><b>树兰医院器官转运及质量监控平台</b></font>
       <form class="form-horizontal" style="margin-top: 30px;">
         <div class="">
           <input type="text" class="form-control transbox-width" id="inputUsername" placeholder="输入账号">
@@ -106,5 +108,7 @@
       </form>
     </div>
     </main>
+    <div style="color: #fff;" align="center">Copyright @ 2017 杭州莱普晟医疗科技有限公司系统维护</div>
+    <br>
   </body>
 </html>

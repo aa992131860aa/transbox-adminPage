@@ -2,7 +2,92 @@
     'use strict';
 
     angular.module('ConfigFactory', [])
-        .factory('Config', config);
+        .factory('Config', config)
+        .directive('eChart', function($http, $window) {
+        function link($scope, element, attrs) {
+            var myChart = echarts.init(element[0]);
+            attrs.$observe('eData', function() {//通过$observe监听attrs中绑定的option属性，可以通过ajax请求数据，动态更新图表。
+                var option = $scope.$eval(attrs.eData);
+                if (angular.isObject(option)) {
+                    myChart.setOption(option);
+                }
+            }, true);
+            $scope.getDom = function() {
+                return {
+                    'height': element[0].offsetHeight,
+                    'width': element[0].offsetWidth
+                };
+            };
+            $scope.$watch($scope.getDom(), function() {
+                // resize echarts图表
+                myChart.resize();
+            }, true);
+        }
+        return {
+            restrict: 'A',
+            link: link
+        };
+    });
+    //     .factory('$echartsConfig', function () {
+    //     return {
+    //
+    //         tooltip : {
+    //             trigger: 'axis'
+    //         },
+    //         legend: {
+    //             data:[]
+    //         },
+    //         xAxis : [
+    //             {
+    //                 type : 'category',
+    //                 boundaryGap : false,
+    //                 data : [1,2,3,4,5,6]
+    //             }
+    //         ],
+    //         yAxis : [
+    //             {
+    //                 type : 'value'
+    //
+    //             }
+    //         ],
+    //         series : [
+    //             {
+    //                 name:'',
+    //                 type:'line',
+    //                 data:[0,0,0,0,0,0],
+    //             }
+    //         ]
+    //     };
+    // })
+    // //echarts directive
+    //     .directive('echarts', ['$echartsConfig','$window', function ($echartsConfig,$window) {
+    //         return {
+    //             restrict: 'A',
+    //             link: function (scope, element, attrs) {
+    //                 if (!scope.$echartsInstance)
+    //                     scope.$echartsInstance = {};
+    //                 scope.$watch(attrs.echarts, function () {
+    //                     var option=angular.extend({},$echartsConfig,scope.$eval(attrs.echarts));
+    //                     if (option.id) {
+    //                         scope.$echartsInstance[option.id] = echarts.init(element[0]);
+    //                         scope.$echartsInstance[option.id].setOption(option);
+    //                     } else {
+    //                         scope.$echartsInstance = echarts.init(element[0]);
+    //                         scope.$echartsInstance.setOption(option);
+    //                     }
+    //                 });
+    //                 $window.onresize = function() {
+    //                     if(scope.$echartsInstance.searchTimeOption)
+    //                         scope.$echartsInstance.searchTimeOption.resize();
+    //                     if(scope.$echartsInstance.searchCostOption)
+    //                         scope.$echartsInstance.searchCostOption.resize();
+    //                     if(scope.$echartsInstance.searchNumOption)
+    //                         scope.$echartsInstance.searchNumOption.resize();
+    //
+    //                 };
+    //             }
+    //         };
+    //     }])
 
     function config($rootScope) {
         return {
