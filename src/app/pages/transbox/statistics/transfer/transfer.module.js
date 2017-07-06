@@ -9,7 +9,7 @@
             .state('transfer', {
                 url: '/transfer',
                 templateUrl: 'app/pages/transbox/statistics/transfer/transfer.html',
-                title: '转运分析',
+                title: '实时统计分析图',
                 controller: 'TransferPageCtrl'
             });
     }

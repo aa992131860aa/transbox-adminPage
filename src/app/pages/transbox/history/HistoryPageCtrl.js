@@ -573,8 +573,8 @@
                     var transferid = transferIds[i];
                     var strWindowFeatures = "location=yes,height=570,width=520,scrollbars=yes,status=yes";
                     //local
-                    //var URL = 'http://127.0.0.1:8080/transbox/api/export/' + transferid;
-                    var URL = 'http://127.0.0.1:8080/transbox/download.do?transfer_id=' + transferid;
+                    //var URL = 'http://116.62.28.28:8080/transbox/api/export/' + transferid;
+                    var URL = 'http://116.62.28.28:8080/transbox/download.do?transfer_id=' + transferid;
                     //release
                     //var URL = 'http://www.lifeperfusor.com/transbox/api/export/' + transferid;
                     var win = window.open(URL, "_blank", strWindowFeatures);
@@ -949,7 +949,7 @@
             var strWindowFeatures = "location=yes,height=570,width=520,scrollbars=yes,status=yes";
             //local
             //var URL = 'http://localhost:1337/transbox/api/export/' + transferid;
-            var URL = 'http://127.0.0.1:8080/transbox/download.do?transfer_id=' + transferid;
+            var URL = 'http://116.62.28.28:8080/transbox/download.do?transfer_id=' + transferid;
             //release
             // var URL = 'http://www.lifeperfusor.com/transbox/api/export/' + transferid;
             var win = window.open(URL, "_blank", strWindowFeatures);

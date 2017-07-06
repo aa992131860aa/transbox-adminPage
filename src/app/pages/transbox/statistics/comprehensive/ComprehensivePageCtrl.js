@@ -5,7 +5,11 @@
         .controller('ComprehensivePageCtrl', ComprehensivePageCtrl);
 
     function ComprehensivePageCtrl($scope, $filter, editableOptions, editableThemes, Http, Config, $uibModal, toastr, toastrConfig) {
-        console.log('gggg');
+        $scope.openInfoForWindow = function (transferId) {
+            // localStorage.transferInfo = transferInfo;
+            var url ='http://116.62.28.28:8888/WebReport/ReportServer?formlet=LED.frm';
+            window.open(url,'_self');
+        }
 
         <!-- 地图-->
 
@@ -267,7 +271,7 @@
             });
 
             var option = {
-                backgroundColor: '#fff',
+                backgroundColor: '#f0f3f04',
                 title: {
                     text: '箱子运输路径分布',
                     //subtext: '数据纯属虚构',
@@ -326,7 +330,7 @@
                 title: {
                     text: '器官种类分布',
                     //subtext: '纯属虚构',
-                    x: 'left',
+                    x: 'center',
                     textStyle: {
                         color: '#000',
                         fontSize: 28,
@@ -386,7 +390,8 @@
                         fontSize: 28,
                         fontWeight: 'normal',
 
-                    }
+                    },
+                    x:'center'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -399,7 +404,8 @@
                 },
                 legend: {
                     data: ['心', '肝', '肺', '肾', '胰岛', '角膜'],
-                    align: 'right'
+                    x: 'center',
+                    top:50
                 },
                 toolbox: {
                     feature: {
@@ -410,6 +416,7 @@
                     left: '3%',
                     right: '4%',
                     bottom: '3%',
+                    top:'25%',
                     containLabel: true
                 },
                 xAxis: [
@@ -488,7 +495,8 @@
                         fontSize: 28,
                         fontWeight: 'normal',
 
-                    }
+                    },
+                    x:'center'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -500,8 +508,10 @@
                     left: '3%',
                     right: '4%',
                     bottom: '3%',
+                    top:'25%',
                     containLabel: true
                 },
+
                 xAxis: [
                     {
                         type: 'category',
@@ -549,13 +559,23 @@
                         fontSize: 28,
                         fontWeight: 'normal',
 
-                    }
+                    },
+                    x:'center'
+
                 },
                 tooltip: {
                     trigger: 'axis'
                 },
                 legend: {
-                    data: ['转运总数', '异常转运']
+                    data: ['转运总数', '异常转运'],
+                    top:'50'
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    top:'25%',
+                    containLabel: true
                 },
                 toolbox: {
                     show: true,

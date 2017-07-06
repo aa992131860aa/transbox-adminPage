@@ -9,7 +9,7 @@
             .state('organ', {
                 url: '/organ',
                 templateUrl: 'app/pages/transbox/statistics/organ/organ.html',
-                title: '器官分析',
+                title: '2017年转运报告',
                 controller: 'OrganPageCtrl'
             });
     }

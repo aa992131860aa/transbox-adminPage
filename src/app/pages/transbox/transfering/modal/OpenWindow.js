@@ -71,9 +71,9 @@
 
     function http($http, $rootScope, Utils) {
         //local host
-        //var host = "http://116.62.28.28:1337/transbox/api";
+        var host = "http://116.62.28.28:1337/transbox/api";
         //release host
-        var host = "http://www.lifeperfusor.com/transbox/api";
+        //var host = "http://www.lifeperfusor.com/transbox/api";
 
         return {
             host: host,

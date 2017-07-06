@@ -10,7 +10,7 @@
                 url: '/comprehensive',
                 //templateUrl: 'http://localhost:8080/transbox/trop.jsp',
                 templateUrl: 'app/pages/transbox/statistics/comprehensive/comprehensive.html',
-                title: '综合分析',
+                title: '统计汇总',
                controller: 'ComprehensivePageCtrl',
                 // headers: {
                 //     'Content-Type': 'application/x-www-form-urlencoded'

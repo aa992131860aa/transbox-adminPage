@@ -4,15 +4,33 @@
     <meta charset="utf-8">
     <title>ECharts</title>
     <!-- 引入 echarts.js -->
+    <style type="text/css">
 
+        #nav {
+            width: 80px;
+            height: 40px;
+            border: 1px solid #3BA7DC;
+            color: #ffffff;
+            background-color: #3BA7DC;
+            position: fixed;
+            right: 0;
+            top: 25%;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+        }
+    </style>
 
 </head>
+
 <body>
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
 
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+
+
+<button id="nav" ng-click="openInfoForWindow()">大屏显示</button>
 <div class="row">
-    <div class="col-sm-12 col-md-12 col-lg-12" id="main1" style="width: 1300px;height: 800px;"></div>
+    <div class="col-sm-12 col-md-12 col-lg-12" id="main1" style="width: 1280px;height: 600px;"></div>
 
 </div>
 <div class="row" style="margin-top: 80px">
@@ -24,8 +42,6 @@
     <div class="col-sm-12 col-md-6 col-lg-6" id="main4" style="width: 650px;height: 400px;"></div>
     <div class="col-sm-12 col-md-6 col-lg-6" id="main5" style="width: 650px;height: 400px;"></div>
 </div>
-
-
 
 
 </body>

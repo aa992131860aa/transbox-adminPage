@@ -71,7 +71,7 @@
 
     function http($http, $rootScope, Utils) {
         //local host
-        var host = "http://127.0.0.1:1337/transbox/api";
+        var host = "http://116.62.28.28:1337/transbox/api";
         //release host
         //var host = "http://www.lifeperfusor.com/transbox/api";
 
@@ -544,7 +544,7 @@
             var strWindowFeatures = "location=yes,height=570,width=520,scrollbars=yes,status=yes";
             //local
             //var URL = 'http://localhost:1337/transbox/api/export/' + transferid;
-            var URL = 'http://127.0.0.1:8080/transbox/download.do?transfer_id=' + transferId;
+            var URL = 'http://116.62.28.28:8080/transbox/download.do?transfer_id=' + transferId;
             //release
             // var URL = 'http://www.lifeperfusor.com/transbox/api/export/' + transferid;
             var win = window.open(URL, "_blank", strWindowFeatures);

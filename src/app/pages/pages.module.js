@@ -79,18 +79,18 @@
       });
 
         baSidebarServiceProvider.addStaticItem({
-            title: '转运历史统计',
+            title: '云数据统计',
             icon: 'ion-gear-a',
             subMenu: [{
-                title: '综合分析',
+                title: '统计汇总',
                 stateRef: 'comprehensive',
                 blank: false
             }, {
-                title: '器官类别',
+                title: '2017年转运报告',
                 stateRef: 'organ',
                 blank: false
             }, {
-                title: '转运分析',
+                title: '实时统计分析图',
                 stateRef: 'transfer',
                 blank: false
             }]
