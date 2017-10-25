@@ -10,6 +10,7 @@
     var today = new Date();
     $scope.data = {
       userInfo: Config.userInfo,
+      username:Config.getCookie("account"),
       today: Config.getDateStringFromObject(today),
     }
 

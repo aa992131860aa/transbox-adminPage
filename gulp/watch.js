@@ -49,25 +49,28 @@ gulp.task('watch', ['inject'], function () {
         'src/sass/**/*.css',
         'src/sass/**/*.scss'
     ], function (event) {
-        console.log('watch one');
+
         if (isOnlyChange(event)) {
             gulp.start('styles-reload');
         } else {
             gulp.start('inject-reload');
         }
+        console.log('watch one'+event+"1111111"+isOnlyChange(event));
     });
 
     gulp.watch('src/app/**/*.js', function (event) {
-        console.log('watch two');
+
         if (isOnlyChange(event)) {
             gulp.start('scripts-reload');
         } else {
             gulp.start('inject-reload');
         }
+        console.log('watch two'+event+"2222222"+isOnlyChange(event));
     });
 
     gulp.watch('src/app/**/*.html', function (event) {
-        console.log('watch three');
+
         browserSync.reload(event.path);
+        console.log('watch three'+event+"3333333"+event.path);
     });
 });

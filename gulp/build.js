@@ -32,7 +32,6 @@ gulp.task('html', ['inject', 'partials'], function () {
     ignorePath: path.join(conf.paths.tmp, '/partials'),
     addRootSlash: false
   };
-
   var htmlFilter = $.filter('*.html', { restore: true });
   var jsFilter = $.filter('**/*.js', { restore: true });
   var cssFilter = $.filter('**/*.css', { restore: true });

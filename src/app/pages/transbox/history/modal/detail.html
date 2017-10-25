@@ -120,6 +120,11 @@
                                      ng-bind="transferInfo.bloodSampleCount"></div>
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
+                                <div>组织样本</div>
+                                <div class="transbox-transfer-info-content"
+                                     ng-bind="transferInfo.sampleOrgan"></div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 transbox-transfer-info-block">
                                 <div>组织样本数量</div>
                                 <div class="transbox-transfer-info-content"
                                      ng-bind="transferInfo.organizationSampleCount"></div>
@@ -267,7 +272,7 @@
                                 </div>
                                 <div>
                                     <span class="way-span">最低温度:</span>
-                                    <span ng-class="infoBase.minTemperature >=1 && infoBase.minTemperature<=4 ?
+                                    <span ng-class="infoBase.minTemperature >=1 && infoBase.minTemperature<=10 ?
                                'way-span-color' : 'way-span-color-warning'"
                                           ng-bind="infoBase.minTemperature"></span>
                                     <span class="way-span">最低湿度:</span>
@@ -277,13 +282,13 @@
 
                                 <div>
                                     <span class="way-span">平均温度:</span>
-                                    <span ng-class="infoBase.avgTemperature >=1 && infoBase.avgTemperature<=4 ?
+                                    <span ng-class="infoBase.avgTemperature >=1 && infoBase.avgTemperature<=10 ?
                                'way-span-color' : 'way-span-color-warning'"
-                                          ng-bind="infoBase.avgTemperature?
-                                          infoBase.avgTemperature+'℃':''"></span>
+                                          ng-bind="infoBase.minTemperature?
+                                          infoBase.minTemperature+'℃':''"></span>
                                     <span class="way-span">平均湿度:</span>
                                     <span class="way-span-color-right"
-                                          ng-bind="infoBase.avgHumidity?infoBase.avgHumidity : ''"></span>
+                                          ng-bind="infoBase.minHumidity?infoBase.minHumidity : ''"></span>
                                 </div>
 
 

@@ -163,12 +163,15 @@
             temperature: {}, // 统计温度max/min
             openData: [],
             collisionData: [],
-            crashData: [] //总的crash 数据
+            crashData: [], //总的crash 数据
+            organSeg:'',
+            boxNo:''
         }
-        $scope.openNewModal = function (event, index, transferId) {
+        $scope.openNewModal = function (event, index, transferId,organSeg,boxNo) {
             event.stopPropagation();
             $scope.data.transferId = transferId;
-
+            $scope.data.organSeg = organSeg;
+            $scope.data.boxNo = boxNo;
 
             var options = {
                 animation: true,
@@ -188,13 +191,15 @@
                 //console.log($scope.data.newOpo);
             });
         }
-        var username = Config.userInfo.username;
+
+        var username = Config.getCookie("account");
         $scope.stopTransfer = function () {
             var pwd = $scope.data.pwd;
             var loginParams = {
                 pwd: pwd,
-                username: $scope.data.username
+                username:username
             }
+            console.log(loginParams)
             var stopParams = {
                 transferid: $scope.data.transferId
             }
@@ -202,19 +207,54 @@
 
             Http.post(Config.apiPath.login, loginParams).then(function (data) {
 
+
                 //验证密码成功
-                if (data.username == $scope.data.username) {
+                if (data.username == username) {
+                     //  alert($scope.data.organSeg+","+$scope.data.boxNo);
                     //停止转运
-                    Http.put("/transfer/" + $scope.data.transferId + "/done", stopParams).then(function (data) {
+                    // Http.put("/transfer/" + $scope.data.transferId + "/done", stopParams).then(function (data) {
+                    //
+                    //     $scope.openToast('success', '删除成功', '您已成功停止转运');
+                    //
+                    //     $scope.deleteModal();
+                    //     //刷新界面
+                    //     $scope.refreshTable();
+                    // }, function (msg) {
+                    //
+                    // });
 
-                        $scope.openToast('success', '删除成功', '您已成功停止转运');
 
-                        $scope.deleteModal();
-                        //刷新界面
+
+                    var xmlHttp;
+                    if (window.XMLHttpRequest) {
+                        xmlHttp = new XMLHttpRequest();
+                        if (xmlHttp.overrideMimeType)
+                            xmlHttp.overrideMimeType('text/xml');
+                    } else if (window.ActiveXObject) {
+                        try {
+                            xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                        } catch (e) {
+                            try {
+                                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                            } catch (e) {
+                            }
+                        }
+                    }
+                    var url = "http://127.0.0.1:8080/transbox/transfer.do?action=shutDownTransfer&organSeg="+$scope.data.organSeg+"&boxNo="+$scope.data.boxNo;
+                    xmlHttp.open("GET", url, true);// 异步处理返回
+                    //xmlHttp.onreadystatechange = callback;
+                    xmlHttp.setRequestHeader("Content-Type",
+                        "application/x-www-form-urlencoded;");
+                    xmlHttp.send();
+                    $scope.deleteModal();
+                    setTimeout(function(){
+
+                        //     //刷新界面
                         $scope.refreshTable();
-                    }, function (msg) {
+                    },2500)
 
-                    });
+                      
+
                 } else {
                     $scope.openToast('warning', '温馨提醒', '密码错误!!!');
                 }
@@ -792,6 +832,83 @@
         $scope.getDateString = function (obj) {
             return Config.getDateStringFromObject(obj);
         }
+        $scope.sortBySql1 = function (propertyName) {
+            //排序的符号
+            $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+            $scope.propertyName = propertyName;
+
+            var tableStateParam = $scope.tableStateParam;
+            $scope.data.selectAll = false;
+            $scope.data.pagination.isLoading = true;
+            //排序的类型
+            $scope.dataType = propertyName;
+            var pagination = tableStateParam.pagination;
+            $scope.tableStateParam.pagination.start = 0;
+            var start = pagination.start || 0;
+            start = 0;
+
+            // This is NOT the page number, but the index of item in the list that you want to use to display the table.
+            var number = pagination.number || $scope.data.pagination.maxSize;
+            // Number of entries showed per page.
+
+            var params = {
+                start: start,
+                number: number,
+                type: propertyName
+            }
+            params.reverse = $scope.reverse;
+            if (Config.userInfo.type === 'hospital' && Config.userInfo.hospitalInfo) {
+                params.hospitalid = Config.userInfo.hospitalInfo.hospitalid;
+            }
+
+            if (!$.isEmptyObject($scope.data.searchOptions.transferNumber)) {
+                params.transferNumber = $scope.data.searchOptions.transferNumber
+            }
+
+            if (!$.isEmptyObject($scope.data.searchOptions.organSegNumber)) {
+                params.organSegNumber = $scope.data.searchOptions.organSegNumber
+            }
+
+            if (!$.isEmptyObject($scope.data.searchOptions.organType)) {
+                params.organType = $scope.data.searchOptions.organType
+            }
+
+            if (!$.isEmptyObject($scope.data.searchOptions.transferPersonName)) {
+                params.transferPersonName = $scope.data.searchOptions.transferPersonName
+            }
+
+            if (!$.isEmptyObject($scope.data.searchOptions.fromCity)) {
+                params.fromCity = $scope.data.searchOptions.fromCity
+            }
+
+            if (!$.isEmptyObject($scope.data.searchOptions.toHospitalName)) {
+                params.toHospitalName = $scope.data.searchOptions.toHospitalName
+            }
+
+
+            if ($scope.data.searchOptions.beginDate) {
+                params.beginDate = moment($scope.data.searchOptions.beginDate).format('YYYY-MM-DD');
+            }
+
+            if ($scope.data.searchOptions.endDate) {
+                params.endDate = moment($scope.data.searchOptions.endDate).format('YYYY-MM-DD');
+            }
+
+
+            Http.get(Config.apiPath.transfersSql, params).then(function (data) {
+                $scope.data.pageData = data;
+                tableStateParam.pagination.numberOfPages = data.numberOfPages;
+                $scope.data.pageData.displayedPages = Math.ceil(parseFloat(data.totalItems) / parseInt(data.numberOfPages));
+                $scope.data.pageData.tableState = tableStateParam;
+                $scope.data.pagination.isLoading = false;
+                //$scope.openToast('warning', '温馨提示', 's:'+data.numberOfPages+","+$scope.data.pageData.displayedPages);
+            }, function (msg) {
+                console.log(msg);
+                $scope.data.pagination.isLoading = false;
+                //$scope.openToast('warning', '温馨提示', msg);
+            });
+
+        }
 
         //get all transfers that status is not 'done'
         $scope.getTransfers = function (tableState) {
@@ -810,9 +927,9 @@
             var params = {
                 start: start,
                 number: number,
-                type: 'transfering'
-            }
 
+            }
+            params.type = $scope.dataType;
             if (Config.userInfo.type === 'hospital' && Config.userInfo.hospitalInfo) {
                 params.hospitalid = Config.userInfo.hospitalInfo.hospitalid;
             }
@@ -857,8 +974,8 @@
             // if (Config.getFormatStringFromDate(endDate)) {
             //     params.endDate = Config.getFormatStringFromDate(endDate);
             // }
-
-            Http.get(Config.apiPath.transfers, params).then(function (data) {
+            params.status = "transfering";
+            Http.get(Config.apiPath.transfersSql, params).then(function (data) {
                 $scope.data.pageData = data;
                 tableState.pagination.numberOfPages = data.numberOfPages;
                 $scope.data.pageData.displayedPages = Math.ceil(parseFloat(data.totalItems) / parseInt(data.numberOfPages));
@@ -909,28 +1026,32 @@
         /* ================= create a new box begin  ================= */
         $scope.pickTransfer = function (transfer) {
             var params = {
-                transferId: transfer.transferid,
-                organSegNumber: transfer.organInfo.segNumber,
+
+
+                transferId:transfer.transferid,
+                organSegNumber: transfer.organNum,
                 //transferNumber: transfer.transferNumber,
-                deviceId: transfer.boxInfo.deviceId,
-                segNumber: transfer.organInfo.segNumber,
-                type: transfer.organInfo.type,
+                deviceId: transfer.deviceId,
+                segNumber: transfer.segNumber,
+                type: transfer.type,
                 organCount: transfer.organCount,
-                bloodType: transfer.organInfo.bloodType,
-                bloodSampleCount: transfer.organInfo.bloodSampleCount,
-                organizationSampleCount: transfer.organInfo.organizationSampleCount,
-                getOrganAt: transfer.getOrganAt,
+                bloodType: transfer.blood,
+                bloodSampleCount: transfer.bloodNum,
+                sampleOrgan:transfer.sampleOrgan,
+                organizationSampleCount: transfer.sampleOrganNum,
+                getOrganAt: transfer.startAt,
                 transferNumber: transfer.transferNumber,
                 fromCity: transfer.fromCity,
-                h_name: transfer.toHospitalInfo.name,
+                h_name: transfer.hospitalName,
                 tracfficType: transfer.tracfficType,
                 tracfficNumber: transfer.tracfficNumber,
-                tp_name: transfer.transferPersonInfo.name,
-                phone: transfer.transferPersonInfo.phone,
-                o_name: transfer.opoInfo.name,
-                contactPerson: transfer.opoInfo.contactPerson,
-                contactPhone: transfer.opoInfo.contactPhone,
-                boxPin: transfer.boxPin
+                tp_name: transfer.name,
+                phone: transfer.phone,
+                o_name: transfer.opoName,
+                contactPerson: transfer.contactName,
+                contactPhone: transfer.contactPhone,
+                boxPin:transfer.boxPin
+
                 //organSegNumber:"1354",
 
             };

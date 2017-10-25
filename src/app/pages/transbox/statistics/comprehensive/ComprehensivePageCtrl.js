@@ -5,11 +5,18 @@
         .controller('ComprehensivePageCtrl', ComprehensivePageCtrl);
 
     function ComprehensivePageCtrl($scope, $filter, editableOptions, editableThemes, Http, Config, $uibModal, toastr, toastrConfig) {
+        $scope.username=Config.getCookie("account");
         $scope.openInfoForWindow = function (transferId) {
             // localStorage.transferInfo = transferInfo;
-            var url ='http://116.62.28.28:8888/WebReport/ReportServer?formlet=LED.frm';
+            var url ='http://116.62.28.28:8888/WebReport/ReportServer?formlet=LED.frm&username='+$scope.username;
             window.open(url,'_self');
+
         }
+
+        $scope.iframeUrl = "http://localhost:8075/WebReport/ReportServer?formlet=LED.frm&username="+$scope.username;
+        var external_frame = document.getElementById("external_frame");
+
+        external_frame.src = "http://localhost:8075/WebReport/ReportServer?formlet=LED.frm&username="+$scope.username;
 
         <!-- 地图-->
 
@@ -319,7 +326,7 @@
             myChart.setOption(option);
         }
 
-        main1();
+        //main1();
 
 
         function main2() {
@@ -377,7 +384,7 @@
             myChart2.setOption(option);
         }
 
-        main2();
+       // main2();
 
 
         function main3() {
@@ -477,7 +484,7 @@
             myChart3.setOption(option)
         }
 
-        main3();
+        //main3();
 
 
         function main4() {
@@ -544,7 +551,7 @@
             myChart4.setOption(option)
         }
 
-        main4()
+        //main4()
 
 
         function main5() {
@@ -652,7 +659,7 @@
             myChart5.setOption(option)
         }
 
-        main5();
+        //main5();
 
     }
 

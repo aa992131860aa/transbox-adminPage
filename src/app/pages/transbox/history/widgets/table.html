@@ -4,29 +4,29 @@
             <th>
                 <input ng-click="switchSelectAll()" type="checkbox">
             </th>
-            <th ng-click="sortBySql('t.transferNumber')">转运单号
-                <span class="sortorder" ng-show="propertyName === 't.transferNumber'" ng-class="{reverse: reverse}"></span>
+            <th ng-click="sortBySql('t.id')">转运单号
+                <span class="sortorder" ng-show="propertyName === 't.id'" ng-class="{reverse: reverse}"></span>
             </th>
-            <th ng-click="sortBySql('o.segNumber')">器官段号
-                <span class="sortorder" ng-show="propertyName === 'o.segNumber'" ng-class="{reverse: reverse}"></span>
+            <th ng-click="sortBySql('t.transferNumber')">器官段号
+                <span class="sortorder" ng-show="propertyName === 't.transferNumber'" ng-class="{reverse: reverse}"></span>
             </th>
             <th ng-click="sortBySql('b.deviceId')">转运箱编号
                 <span class="sortorder" ng-show="propertyName === 'b.deviceId'" ng-class="{reverse: reverse}"></span>
             </th>
-            <th ng-click="sortBySql('o.type')">器官种类
-                <span class="sortorder" ng-show="propertyName === 'o.type'" ng-class="{reverse: reverse}"></span>
+            <th ng-click="sortBySql('t.organ')">器官种类
+                <span class="sortorder" ng-show="propertyName === 't.organ'" ng-class="{reverse: reverse}"></span>
             </th>
-            <th ng-click="sortBySql('t.organCount')">数量
-                <span class="sortorder" ng-show="propertyName === 't.organCount'" ng-class="{reverse: reverse}"></span>
+            <th ng-click="sortBySql('t.organNum')">数量
+                <span class="sortorder" ng-show="propertyName === 't.organNum'" ng-class="{reverse: reverse}"></span>
             </th>
-            <th ng-click="sortBySql('tp.name')">转运人
-                <span class="sortorder" ng-show="propertyName === 'tp.name'" ng-class="{reverse: reverse}"></span>
+            <th ng-click="sortBySql('t.trueName')">转运人
+                <span class="sortorder" ng-show="propertyName === 't.trueName'" ng-class="{reverse: reverse}"></span>
             </th>
             <th ng-click="sortBySql('t.fromCity')">转运起始地
                 <span class="sortorder" ng-show="propertyName === 't.fromCity'" ng-class="{reverse: reverse}"></span>
             </th>
             <th ng-click="sortBySql('h.name')">转运目的地
-                <span class="sortorder" ng-show="propertyName === 'th.name'" ng-class="{reverse: reverse}"></span>
+                <span class="sortorder" ng-show="propertyName === 'h.name'" ng-class="{reverse: reverse}"></span>
             </th>
             <th ng-click="sortBySql('t.startAt')">转运日期
                 <span class="sortorder" ng-show="propertyName === 't.startAt'" ng-class="{reverse: reverse}"></span>
@@ -42,14 +42,15 @@
                 <input ng-model="transfer.checked" type="checkbox">
             </td>
             <td><span ng-bind="transfer.transferNumber"></span></td>
-            <td><span ng-bind="transfer.organInfo.segNumber"></span></td>
-            <td><span ng-bind="transfer.boxInfo.deviceId"></span></td>
-            <td><span ng-bind="transfer.organInfo.type"></span> </td>
+            <td><span ng-bind="transfer.segNumber"></span></td>
+            <td><span ng-bind="transfer.deviceId"></span></td>
+            <td><span ng-bind="transfer.type"></span> </td>
             <td><span ng-bind="transfer.organCount"></span></td>
-            <td><span ng-bind="transfer.transferPersonInfo.name"></span></td>
+            <td><span ng-bind="transfer.name"></span></td>
             <td><span ng-bind="transfer.fromCity"></span></td>
-            <td><span ng-bind="transfer.toHospitalInfo.name"></span></td>
-            <td><span ng-bind="getDateString(transfer.startAt)"></span></td>
+            <td><span ng-bind="transfer.hospitalName"></span></td>
+            <td><span ng-bind="transfer.startAt"></span></td>
+            <!--getDateString-->
         </tr>
     </tbody>
     <tbody ng-show="data.pagination.isLoading">

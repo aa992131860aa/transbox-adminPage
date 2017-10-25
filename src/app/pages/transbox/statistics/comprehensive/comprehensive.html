@@ -19,18 +19,25 @@
             -moz-border-radius: 5px;
             -webkit-border-radius: 5px;
         }
+        #external_frame{
+            min-height: 600px;
+        }
+
     </style>
 
 </head>
 
 <body>
+<button id="nav" ng-click="openInfoForWindow()">大屏显示 </button>
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
 
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
 
+  <div id="username">{{username}}1</div>
+  <iframe width="100%" scrolling="no" id="external_frame" onload="iFrameHeight()"  frameborder="0"  />
 
-
-<div class="row">
+<div style="display: none">
+<div class="row" >
     <div class="col-sm-12 col-md-12 col-lg-12" id="main1" style="width: 1280px;height: 600px;"></div>
 
 </div>
@@ -43,7 +50,8 @@
     <div class="col-sm-12 col-md-6 col-lg-6" id="main4" style="width: 650px;height: 400px;"></div>
     <div class="col-sm-12 col-md-6 col-lg-6" id="main5" style="width: 650px;height: 400px;"></div>
 </div>
+</div>
 
-<button id="nav" ng-click="openInfoForWindow()">大屏显示</button>
 </body>
+
 </html>

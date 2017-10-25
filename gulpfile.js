@@ -23,7 +23,7 @@ wrench.readdirSyncRecursive('./gulp').filter(function(file) {
 gulp.task('default', ['clean'], function () {
     gulp.start('build');
     // console.log('111start watch?111');
-    //gulp.start('watch');
+    //gulp.start('serve');
 });
 
 

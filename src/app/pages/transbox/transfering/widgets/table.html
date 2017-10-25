@@ -5,35 +5,35 @@
         <th>
             <input ng-click="switchSelectAll()" type="checkbox">
         </th>
-        <th ng-click="sortBy('transferNumber')">转运单号
-            <span class="sortorder" ng-show="propertyName === 'transferNumber'" ng-class="{reverse: reverse}"></span>
+        <th ng-click="sortBySql('t.id')">转运单号
+            <span class="sortorder" ng-show="propertyName === 't.id'" ng-class="{reverse: reverse}"></span>
         </th>
-        <th ng-click="sortBy('organInfo.segNumber')">器官段号
-            <span class="sortorder" ng-show="propertyName === 'organInfo.segNumber'"
+        <th ng-click="sortBySql('t.segNumber')">器官段号
+            <span class="sortorder" ng-show="propertyName === 't.segNumber'"
                   ng-class="{reverse: reverse}"></span>
         </th>
-        <th ng-click="sortBy('boxInfo.deviceId')">转运箱编号
-            <span class="sortorder" ng-show="propertyName === 'boxInfo.deviceId'" ng-class="{reverse: reverse}"></span>
+        <th ng-click="sortBySql('b.deviceId')">转运箱编号
+            <span class="sortorder" ng-show="propertyName === 'b.deviceId'" ng-class="{reverse: reverse}"></span>
         </th>
-        <th ng-click="sortBy('organInfo.type')">器官种类
-            <span class="sortorder" ng-show="propertyName === 'organInfo.type'" ng-class="{reverse: reverse}"></span>
+        <th ng-click="sortBySql('t.type')">器官种类
+            <span class="sortorder" ng-show="propertyName === 't.type'" ng-class="{reverse: reverse}"></span>
         </th>
-        <th ng-click="sortBy('organCount')">数量
-            <span class="sortorder" ng-show="propertyName === 'organCount'" ng-class="{reverse: reverse}"></span>
+        <th ng-click="sortBySql('t.organCount')">数量
+            <span class="sortorder" ng-show="propertyName === 't.organCount'" ng-class="{reverse: reverse}"></span>
         </th>
-        <th ng-click="sortBy('transferPersonInfo.name')">转运人
-            <span class="sortorder" ng-show="propertyName === 'transferPersonInfo.name'"
+        <th ng-click="sortBySql('t.name')">转运人
+            <span class="sortorder" ng-show="propertyName === 't.name'"
                   ng-class="{reverse: reverse}"></span>
         </th>
-        <th ng-click="sortBy('fromCity')">转运起始地
-            <span class="sortorder" ng-show="propertyName === 'fromCity'" ng-class="{reverse: reverse}"></span>
+        <th ng-click="sortBySql('t.fromCity')">转运起始地
+            <span class="sortorder" ng-show="propertyName === 't.fromCity'" ng-class="{reverse: reverse}"></span>
         </th>
-        <th ng-click="sortBy('toHospitalInfo.name')">转运目的地
-            <span class="sortorder" ng-show="propertyName === 'toHospitalInfo.name'"
+        <th ng-click="sortBySql('t.hospitalName')">转运目的地
+            <span class="sortorder" ng-show="propertyName === 't.hospitalName'"
                   ng-class="{reverse: reverse}"></span>
         </th>
-        <th width="100px" ng-click="sortBy('transfer.startAt')">转运日期
-            <span class="sortorder" ng-show="propertyName === 'transfer.startAt'" ng-class="{reverse: reverse}"></span>
+        <th width="100px" ng-click="sortBySql('t.startAt')">转运日期
+            <span class="sortorder" ng-show="propertyName === 't.startAt'" ng-class="{reverse: reverse}"></span>
         </th>
         <th width="125px" ><span >操作</span> </th>
     </tr>
@@ -45,27 +45,27 @@
             <input ng-model="transfer.checked" type="checkbox">
         </td>
         <td><span ng-bind="transfer.transferNumber"></span></td>
-        <td><span ng-bind="transfer.organInfo.segNumber"></span></td>
-        <td><span ng-bind="transfer.boxInfo.deviceId"></span></td>
-        <td><span ng-bind="transfer.organInfo.type"></span></td>
+        <td><span ng-bind="transfer.segNumber"></span></td>
+        <td><span ng-bind="transfer.deviceId"></span></td>
+        <td><span ng-bind="transfer.type"></span></td>
         <td><span ng-bind="transfer.organCount"></span></td>
-        <td><span ng-bind="transfer.transferPersonInfo.name"></span></td>
+        <td><span ng-bind="transfer.name"></span></td>
         <td><span ng-bind="transfer.fromCity"></span></td>
-        <td><span ng-bind="transfer.toHospitalInfo.name"></span></td>
-        <td><span ng-bind="getDateString(transfer.startAt)"></span></td>
-        <td ng-click="tdClick($event)"><span style="color: #ff0000;" ng-click="openNewModal($event, $index,transfer.transferid)">停止</span>
-           |
-            <span ng-click="createNewModal($event, $index,transfer.transferid,transfer.boxInfo.boxid,transfer)">完善信息</span></td>
+        <td><span ng-bind="transfer.hospitalName"></span></td>
+        <td><span ng-bind="transfer.startAt"></span></td>
+        <td ng-click="tdClick($event)"><span style="color: #ff0000;" ng-click="openNewModal($event, $index,transfer.transferid,transfer.segNumber,transfer.deviceId)">停止</span>
+
+            <span style="display: none" ng-click="createNewModal($event, $index,transfer.transferid,transfer.boxInfo.boxid,transfer)">完善信息</span></td>
     </tr>
     </tbody>
     <tbody ng-show="data.pagination.isLoading">
     <tr>
-        <td colspan="9" class="text-center">加载中 ...</td>
+        <td colspan="11" class="text-center">加载中 ...</td>
     </tr>
     </tbody>
     <tfoot>
     <tr>
-        <td id="transferTablePagination" colspan="9" class="text-center" st-pagination=""
+        <td id="transferTablePagination" colspan="11" class="text-center" st-pagination=""
             st-items-by-page="data.pagination.maxSize" st-displayed-pages="data.pageData.displayedPages">
         </td>
     </tr>

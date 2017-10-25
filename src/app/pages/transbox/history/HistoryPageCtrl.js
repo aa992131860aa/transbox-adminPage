@@ -236,7 +236,7 @@
             if ($scope.data.searchOptions.endDate) {
                 params.endDate = moment($scope.data.searchOptions.endDate).format('YYYY-MM-DD');
             }
-
+              params.status = "done";
             Http.get(Config.apiPath.transfersSql, params).then(function (data) {
                 $scope.data.pageData = data;
                 tableState.pagination.numberOfPages = data.numberOfPages;
@@ -437,26 +437,27 @@
             console.log(transfer);
             var params = {
                 transferId:transfer.transferid,
-                organSegNumber: transfer.organInfo.segNumber,
+                organSegNumber: transfer.organNum,
                 //transferNumber: transfer.transferNumber,
-                deviceId: transfer.boxInfo.deviceId,
-                segNumber: transfer.organInfo.segNumber,
-                type: transfer.organInfo.type,
+                deviceId: transfer.deviceId,
+                segNumber: transfer.segNumber,
+                type: transfer.type,
                 organCount: transfer.organCount,
-                bloodType: transfer.organInfo.bloodType,
-                bloodSampleCount: transfer.organInfo.bloodSampleCount,
-                organizationSampleCount: transfer.organInfo.organizationSampleCount,
-                getOrganAt: transfer.getOrganAt,
+                bloodType: transfer.blood,
+                bloodSampleCount: transfer.bloodNum,
+                sampleOrgan:transfer.sampleOrgan,
+                organizationSampleCount: transfer.sampleOrganNum,
+                getOrganAt: transfer.startAt,
                 transferNumber: transfer.transferNumber,
                 fromCity: transfer.fromCity,
-                h_name: transfer.toHospitalInfo.name,
+                h_name: transfer.hospitalName,
                 tracfficType: transfer.tracfficType,
                 tracfficNumber: transfer.tracfficNumber,
-                tp_name: transfer.transferPersonInfo.name,
-                phone: transfer.transferPersonInfo.phone,
-                o_name: transfer.opoInfo.name,
-                contactPerson: transfer.opoInfo.contactPerson,
-                contactPhone: transfer.opoInfo.contactPhone,
+                tp_name: transfer.name,
+                phone: transfer.phone,
+                o_name: transfer.opoName,
+                contactPerson: transfer.contactName,
+                contactPhone: transfer.contactPhone,
                 boxPin:transfer.boxPin
                 //organSegNumber:"1354",
 
@@ -560,10 +561,16 @@
 
         $scope.exportTransfers = function () {
             var transferIds = [];
+            var organSegs = [];
+            var phones = [];
+            var organs = [];
             for (var i = 0; i < $scope.data.pageData.transfers.length; i++) {
                 var trans = $scope.data.pageData.transfers[i];
                 if (trans.checked) {
                     transferIds.push(trans.transferid);
+                    organSegs.push(trans.segNumber);
+                    phones.push(trans.phone);
+                    organs.push(trans.type);
                 }
             }
 
@@ -571,12 +578,41 @@
 
                 for (var i = 0; i < transferIds.length; i++) {
                     var transferid = transferIds[i];
+                    var organSeg = organSegs[i];
+                    var phone = phones[i];
+                    var organ = organs[i];
+
                     var strWindowFeatures = "location=yes,height=570,width=520,scrollbars=yes,status=yes";
                     //local
                     //var URL = 'http://116.62.28.28:8080/transbox/api/export/' + transferid;
-                    var URL = 'http://116.62.28.28:8080/transbox/download.do?transfer_id=' + transferid;
+                    var URL = 'http://116.62.28.28:8080/transbox/downloadPdf.do?action=pdf&organSeg=' + organSeg+'&phone='+phone+'&organ='+organ;
+
                     //release
                     //var URL = 'http://www.lifeperfusor.com/transbox/api/export/' + transferid;
+
+                    // var xmlHttp;
+                    // if (window.XMLHttpRequest) {
+                    //     xmlHttp = new XMLHttpRequest();
+                    //     if (xmlHttp.overrideMimeType)
+                    //         xmlHttp.overrideMimeType('text/xml');
+                    // } else if (window.ActiveXObject) {
+                    //     try {
+                    //         xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                    //     } catch (e) {
+                    //         try {
+                    //             xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    //         } catch (e) {
+                    //         }
+                    //     }
+                    // }
+                    // //var url = "http://127.0.0.1:8080/transbox/transfer.do?action=shutDownTransfer&organSeg="+$scope.data.organSeg+"&boxNo="+$scope.data.boxNo;
+                    // xmlHttp.open("GET", URL, true);// 异步处理返回
+                    // //xmlHttp.onreadystatechange = callback;
+                    // xmlHttp.setRequestHeader("Content-Type",
+                    //     "application/x-www-form-urlencoded;");
+                    // xmlHttp.send();
+
+
                     var win = window.open(URL, "_blank", strWindowFeatures);
 
                 }
